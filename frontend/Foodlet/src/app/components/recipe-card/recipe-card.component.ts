@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Recipe} from "../../../domain/Recipe";
-import {Nutrient} from "../../../domain/Nutrient";
+
 
 @Component({
   selector: 'app-recipe-card',
@@ -13,11 +13,9 @@ export class RecipeCardComponent {
     4,
     ["Cook the chicken", "Cook the rice", "Mix them together"],
     [
-      {name: "Chicken", calories: 100, quantityGrams:100,
-        nutrients: [new Nutrient('protein', 10)] },
-      {name: "Rice", calories: 200, quantityGrams:100,
-        nutrients: [new Nutrient('carbs', 10),
-          new Nutrient('protein', 10)] }
+      {name: "Chicken", calories: 100, quantityGrams:100, fat: 11, carbohydrates: 1, category: "poultry", fiber: 1, protein: 20, saturatedFat: 1 },
+      {name: "Rice", calories: 200, quantityGrams:200, fat: 1, carbohydrates: 20, category: "poultry", fiber: 5, protein: 2, saturatedFat: 1 },
+
     ]
   )
 
