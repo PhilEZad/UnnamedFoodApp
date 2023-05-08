@@ -1,11 +1,10 @@
-<table mat-table [dataSource]="">
+<table class="mat-table" mat-table [dataSource]="nutrients">
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
 
-  <!-- Name Column -->
   <ng-container matColumnDef="amount">
     <th mat-header-cell *matHeaderCellDef> Amount </th>
     <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
