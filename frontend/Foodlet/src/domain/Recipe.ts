@@ -1,11 +1,9 @@
-import {Nutrient} from "./Nutrient";
-
 export class Recipe {
 
   id: string = ""
   title: string = ""
   description: string = ""
-  ingredients: FoodItem[] = [] // for calculation
+  ingredients: FoodItem[] = []
   servings: number = 0
   instructions: string[] = []
 
@@ -21,15 +19,6 @@ export class Recipe {
     return new Recipe("", 0, [], [])
   }
 
-  static fromJSON(json: any): Recipe {
-    let recipe = this.emptyRecipe()
-    recipe.title = json.title
-    recipe.servings = json.servings
-
-    recipe.instructions = json.instructions.split(".")
-
-    return recipe
-  }
 
 }
 
@@ -38,7 +27,12 @@ export interface FoodItem {
   name: string
   quantityGrams: number
   calories: number
-  nutrients: Nutrient[]
+  protein: number
+  fat: number
+  saturatedFat: number
+  fiber: number
+  carbohydrates: number
+  category: string
 }
 
 

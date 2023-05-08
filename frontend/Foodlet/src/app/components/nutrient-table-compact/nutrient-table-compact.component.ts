@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {FoodItem} from "../../../domain/Recipe";
-import {Nutrient} from "../../../domain/Nutrient";
 import {sumNutrients} from "../../../domain/converters";
 
 @Component({
@@ -11,16 +10,12 @@ import {sumNutrients} from "../../../domain/converters";
 export class NutrientTableCompactComponent {
   @Input() foodItems: FoodItem[] = []
 
-  totalNutrients: Nutrient[] = []
+  totalNutrients: Map<string, number> = new Map<string, number>()
   displayedColumns: string[] = ['name', 'amount'];
 
 
   ngOnInit(): void {
-    this.totalNutrients = sumNutrients(
-      this.foodItems.map(
-        (foodItem: { nutrients: Nutrient[]; }
-        ) => foodItem.nutrients).flat()
-    )
+
   }
 
   constructor() { }
