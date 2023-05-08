@@ -1,21 +1,30 @@
+import {Nutrient} from "./Nutrient";
+
 export class Recipe {
 
   id: string = ""
   title: string = ""
+  description: string = ""
   ingredients: FoodItem[] = [] // for calculation
-  rawIngredients: string[] = [] // for display due to ingridents like "1 Ripe mango (1 lb), halved,|Pitted peeled & cut in small|Pieces|
-  servings: string = ""
+  servings: number = 0
   instructions: string[] = []
 
+
+  constructor(title: string, servings: number, instructions: string[], ingredients: FoodItem[]) {
+    this.title = title
+    this.servings = servings
+    this.instructions = instructions
+    this.ingredients = ingredients
+  }
+
+  static emptyRecipe(): Recipe {
+    return new Recipe("", 0, [], [])
+  }
+
   static fromJSON(json: any): Recipe {
-    let recipe = new Recipe();
+    let recipe = this.emptyRecipe()
     recipe.title = json.title
     recipe.servings = json.servings
-
-    //for each ingridient, foodItem call
-    //Assuming the nutrion api call has already been made and is in the json object
-
-    recipe.rawIngredients = json.ingredients.split("")
 
     recipe.instructions = json.instructions.split(".")
 
@@ -25,18 +34,33 @@ export class Recipe {
 }
 
 
-interface FoodItem {
+export interface FoodItem {
   name: string
+  quantityGrams: number
   calories: number
-  servingSizeGrams: number
-  totalFatGrams: number
-  saturatedFatGrams: number
-  proteinGrams: number
-  sodiumMg: number
-  potassiumMg: number
-  cholesterolMg: number
-  carbsTotalGrams: number
-  fiberGrams: number
-  sugarGrams: number
+  nutrients: Nutrient[]
+}
+
+
+enum FoodRestrictionCompatibility {
+  NO_RESTRICTION,
+  VEGAN,
+  VEGETARIAN,
+  DIABETIC,
+  GLUTEN_FREE,
+  KETO,
+  PALEO,
+  PESCATARIAN,
+  DAIRY_FREE,
+  LOW_FAT,
+  LOW_SODIUM,
+  LOW_SUGAR,
+  LOW_CARB,
+  LOW_CHOLESTEROL,
+  LOW_CALORIE,
+  LOW_PROTEIN,
+  LOW_FIBER,
+  LOW_POTASSIUM,
+  LOW_SATURATED_FAT,
 
 }
