@@ -1,7 +1,9 @@
 <mat-card>
-    <mat-card-title> {{ title }} </mat-card-title>
+    <mat-card-title> {{ recipe.title }} </mat-card-title>
+    <mat-card-subtitle> {{ "servings" }} </mat-card-subtitle>
     <mat-card-content>
-        <p> {{ content }} </p>
+        <app-nutrient-table-compact [foodItems]="recipe.ingredients">
+        </app-nutrient-table-compact>
     </mat-card-content>
     <mat-card-actions>
         <button mat-button> View recipe </button>
