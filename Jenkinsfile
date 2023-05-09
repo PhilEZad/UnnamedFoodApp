@@ -26,7 +26,7 @@ pipeline {
     }
     post {
         always {
-            sh 'docker compose down --remove-orphans -v'
+            sh 'docker system prune -a --volumes -f'
             sh 'docker compose ps'
         }
     }
