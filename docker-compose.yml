@@ -1,10 +1,7 @@
 version: "3.8"
-
   frontend:
     image: frontend
     ports:
       - "80:80"
     networks:
       - UnnamedFoodApp
-      
-     
