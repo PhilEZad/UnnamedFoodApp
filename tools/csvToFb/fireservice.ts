@@ -31,5 +31,12 @@ export class FireService {
         return this.firestore.collection(collectionName).doc().set(data);
     }
 
-
+    writeMany(collectionName: string, data: any[]) {
+        const batch = this.firestore.batch();
+        data.forEach((d) => {
+            const ref = this.firestore.collection(collectionName).doc();
+            batch.set(ref, d);
+        });
+        return batch.commit();
+    }
 }
