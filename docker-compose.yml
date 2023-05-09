@@ -1,0 +1,14 @@
+version: '3.8'
+
+networks:
+    UnnamedFoodApp:
+        name: UnnamedFoodAppNetwork
+
+services:
+  frontend:
+    image: frontend
+    ports:
+      - "4200"
+    networks:
+        UnnamedFoodApp:
+      
