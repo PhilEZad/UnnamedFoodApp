@@ -10,12 +10,18 @@ import {MatButtonModule} from "@angular/material/button";
 import { NutrientTableCompactComponent } from './components/nutrient-table-compact/nutrient-table-compact.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
+import { RecipeCreatorComponent } from './screens/recipe-creator/recipe-creator.component';
+import {FormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipeCardComponent,
-    NutrientTableCompactComponent
+    NutrientTableCompactComponent,
+    RecipeCreatorComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +30,11 @@ import {MatIconModule} from "@angular/material/icon";
     MatCardModule,
     MatButtonModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

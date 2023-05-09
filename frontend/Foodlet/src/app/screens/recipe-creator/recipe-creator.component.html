@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-title>
+    <mat-form-field>
+      <input matInput placeholder="Title" [(ngModel)]="recipe.title">
+    </mat-form-field>
+  </mat-card-title>
+    <mat-card-subtitle>
+      <mat-form-field>
+        <mat-label>
+          Description
+        </mat-label>
+        <textarea
+          matInput placeholder="Description" [(ngModel)]="recipe.description">
+        </textarea>
+      </mat-form-field>
+    </mat-card-subtitle>
+  <mat-card-content>
+  <mat-list>
+    <mat-list-item *ngFor="let ingredient of recipe.ingredients">
+      <span>
+        <span>
+          <input type="number" name="Qty" [(ngModel)]="ingredient.quantityGrams" placeholder="Qty in grams">{{ ingredient }}>
+          <label>g</label>
+        </span>
+        <input type="text" [(ngModel)]="ingredient.name" placeholder="Qty in grams">{{ ingredient }}>
+        <!--
+        TODO: Autocomplete ingridents with fooditems from firebase.
+      -->
+      </span>
+    </mat-list-item>
+  </mat-list>
+    <button mat-button (click)="addIngredient()">Add Ingredient</button>
+    <mat-list>
+      <mat-list-item *ngFor="let step of recipe.instructions">
+      <span>
+        <input type="text" [(ngModel)]="recipe.instructions" placeholder="Next step in instructions">
+      </span>
+      </mat-list-item>
+    </mat-list>
+    <button mat-button (click)="addStep()">Add Step</button>
+  </mat-card-content>
+
+</mat-card>
