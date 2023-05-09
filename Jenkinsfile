@@ -17,16 +17,17 @@ pipeline {
                 sh 'docker system prune -a --volumes -f'
             }
         }
-        stage('Deploy') {
+        stage('Boot Container') {
             steps {
-                echo 'Hello world!'
+                sh 'docker compose up -d --no-color --wait'
+                sh 'docker compose ps'
             }
         }
        
     }
     post {
         always {
-            sh 'docker compose ps'
+            echo 'Post Actions'
         }
     }
 }
