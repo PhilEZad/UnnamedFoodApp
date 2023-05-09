@@ -9,5 +9,4 @@ services:
       - UnnamedFoodApp
       
  networks:
-    UnnamedFoodApp:
-      name: UnnamedFoodApp
+      - UnnamedFoodApp
