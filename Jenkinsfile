@@ -19,6 +19,7 @@ pipeline {
         }
         stage('Boot Container') {
             steps {
+                sh 'docker-compose build frontend/Foodlet/Dockerfile'
                 sh 'docker compose up -d --no-color --wait'
                 sh 'docker compose ps'
             }
