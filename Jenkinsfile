@@ -12,9 +12,9 @@ pipeline {
                 '''
             }
         }
-        stage('Test') {
+        stage('Purge') {
             steps {
-                echo 'Hello world!'
+                sh 'docker system prune -a --volumes -f'
             }
         }
         stage('Deploy') {
@@ -22,5 +22,12 @@ pipeline {
                 echo 'Hello world!'
             }
         }
+       
+    }
+    pose {
+        always {
+            sh 'docker compose down --remove-orphans -v'
+            sh 'docker compose ps'
         }
     }
+}
