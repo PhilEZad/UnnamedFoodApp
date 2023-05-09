@@ -1,17 +1,17 @@
 pipeline {
     agent any
     stages {
-        stage('Clone') {
+        stage('Build') {
             steps {
                 echo 'Hello world!'
             }
         }
-        stage('Pull') {
+        stage('Test') {
             steps {
                 echo 'Hello world!'
             }
         }
-        stage('Check') {
+        stage('Deploy') {
             steps {
                 echo 'Hello world!'
             }
