@@ -1,20 +1,34 @@
 pipeline {
     agent any
     stages {
-        stage('Clone') {
+        stage('Verify Toolset') {
             steps {
-                echo 'Hello world!'
+                sh '''
+                docker version
+                docker info
+                docker compose version
+                curl --version
+                jq --version
+                '''
             }
         }
-        stage('Pull') {
+        stage('Purge') {
             steps {
-                echo 'Hello world!'
+                sh 'docker system prune -a --volumes -f'
             }
         }
-        stage('Check') {
+        stage('Boot Container') {
             steps {
-                echo 'Hello world!'
+                sh 'docker compose up -d --no-color --wait'
+                sh 'docker compose ps'
             }
         }
+       
+    }
+    post {
+        always {
+            echo 'Post Actions'
         }
     }
+}
+
