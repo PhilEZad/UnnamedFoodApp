@@ -1,10 +1,15 @@
 pipeline {
-    agent { dockerfile true }
+    agent any
     stages {
-        stage('Build') {
+        stage('Verify Toolset') {
             steps {
-                echo 'Hello world!'
-                sh 'echo myCustomEnvVar = #myCustomEnvVar'
+                sh '''
+                docker version
+                docker info
+                docker compose version
+                curl --version
+                jq --version
+                '''
             }
         }
         stage('Test') {
