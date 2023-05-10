@@ -21,7 +21,6 @@ pipeline {
             steps {
                 sh 'docker build -t frontend frontend/Foodlet'
                 sh 'docker compose up -d --no-color --wait'
-                sh 'docker compose ps'
             }
         }
        
