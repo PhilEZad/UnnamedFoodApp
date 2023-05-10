@@ -4,4 +4,4 @@ WORKDIR /app
 COPY . .
 RUN npm install
 RUN npm run build --prod
-ENTRYPOINT ["ng", "serve"]
+ENTRYPOINT ["npm", "run", "start"]
