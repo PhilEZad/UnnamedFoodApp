@@ -1,6 +1,6 @@
 import {Nutrients} from "./Nutrients";
 
-interface FoodItem {
+export interface FoodItem {
   id: string
   name: string
   quantityGrams: number
