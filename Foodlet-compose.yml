@@ -4,5 +4,6 @@ services:
   frontend:
     container_name: foodlet-frontend
     build: .
+    command: sh -c "npm start"
     ports:
       - "4200:8080"

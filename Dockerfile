@@ -2,4 +2,4 @@
 FROM node:latest as node
 WORKDIR /frontend/Foodlet/src/app
 COPY . .
-RUN npm install
+RUN npm ci --quiet
