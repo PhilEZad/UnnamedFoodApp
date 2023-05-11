@@ -13,8 +13,11 @@ export class RecipeCardComponent {
     4,
     ["Cook the chicken", "Cook the rice", "Mix them together"],
     [
-      {name: "Chicken", calories: 100, quantityGrams:100, fat: 11, carbohydrates: 1, category: "poultry", fiber: 1, protein: 20, saturatedFat: 1 },
-      {name: "Rice", calories: 200, quantityGrams:200, fat: 1, carbohydrates: 20, category: "poultry", fiber: 5, protein: 2, saturatedFat: 1 },
+      {id: "0", name: "Chicken", category: "", quantityGrams: 100, nutrients: {
+        protein: 20, carbohydrates: 20, fat: 20, saturatedFat: 20, fiber: 20,
+        calories: 0
+      } },
+      {id: "1", name: "Rice", quantityGrams: 200, category:"", nutrients: {calories: 200, fat: 1, carbohydrates: 20, fiber: 5, protein: 2, saturatedFat: 1 }},
 
     ]
   )
