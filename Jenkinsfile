@@ -14,9 +14,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'docker system prune -a --volumes -f'
-                sh 'docker build -t frontend frontend/Foodlet'
-                sh 'docker compose up -d --no-color --wait'
+				sh "docker-compose -f Foodlet-compose.yml up -d
             }
         }
         stage('Test') {
