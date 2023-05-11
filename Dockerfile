@@ -1,5 +1,5 @@
 # Stage 1
 FROM node:latest as node
-WORKDIR /app
+WORKDIR \frontend\Foodlet\src\app
 COPY . .
 RUN npm install
