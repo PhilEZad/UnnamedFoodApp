@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FoodItem} from "../../../domain/Recipe";
+import {FoodItem} from "../../../domain/FoodItem";
 
 @Component({
   selector: 'app-nutrient-table-compact',
@@ -24,11 +24,11 @@ export class NutrientTableCompactComponent {
 
     this.foodItems.forEach(
      (value) => {
-       this.nutrientsMap.set('Protein', value.protein + this.nutrientsMap.get('Protein')!)
-       this.nutrientsMap.set('Carbohydrates', value.carbohydrates + this.nutrientsMap.get('Carbohydrates')!)
-       this.nutrientsMap.set('Fats', value.fat + this.nutrientsMap.get('Fats')!)
-       this.nutrientsMap.set('Saturated Fats', value.saturatedFat + this.nutrientsMap.get('Saturated Fats')!)
-       this.nutrientsMap.set('Fiber', this.nutrientsMap.get('Fiber')! + value.fiber)
+       this.nutrientsMap.set('Protein', value.nutrients.protein + this.nutrientsMap.get('Protein')!)
+       this.nutrientsMap.set('Carbohydrates', value.nutrients.carbohydrates + this.nutrientsMap.get('Carbohydrates')!)
+       this.nutrientsMap.set('Fats', value.nutrients.fat + this.nutrientsMap.get('Fats')!)
+       this.nutrientsMap.set('Saturated Fats', value.nutrients.saturatedFat + this.nutrientsMap.get('Saturated Fats')!)
+       this.nutrientsMap.set('Fiber', this.nutrientsMap.get('Fiber')! + value.nutrients.fiber)
      }
     )
 

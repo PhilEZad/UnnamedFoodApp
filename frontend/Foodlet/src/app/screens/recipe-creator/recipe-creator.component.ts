@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {FoodItem, Recipe} from "../../../domain/Recipe";
+import {FoodItem} from "src/domain/FoodItem";
+import { Recipe } from 'src/domain/Recipe';
 
 @Component({
   selector: 'app-recipe-creator',
@@ -20,16 +21,19 @@ export class RecipeCreatorComponent {
   addIngredient() {
     this.recipe.ingredients.push(
       {
+        id: "",
         name: "",
         amount: 0,
+        quantityGrams: 0,
+        category: "",
+        nutrients: {
         protein: 0,
         fat: 0,
         saturatedFat: 0,
         fiber: 0,
-        category: '',
         carbohydrates: 0,
         calories: 0,
-        quantityGrams: 0,
+        }
       } as FoodItem);
   }
 
