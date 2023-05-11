@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-				sh "docker-compose -f Foodlet-compose.yml up -d
+				sh "docker-compose -f Foodlet-compose.yml up -d"
             }
         }
         stage('Test') {
