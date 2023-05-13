@@ -24,6 +24,38 @@
         }
       },
       "command": "echo invalid operating system"
+    },
+    {
+      "presentation": {
+        "echo": false,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "label": "Continous build angular",
+      "type": "shell",
+      "linux": {
+        "command": "cd ${cwd}/frontend/Foodlet && ng build --watch",
+        "problemMatcher": ["$eslint-stylish"]
+      }
+    },
+    {
+      "presentation": {
+        "echo": false,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "label": "Continous serve firebase",
+      "type": "shell",
+      "linux": {
+        "command": "cd ${cwd}/frontend/Foodlet && firebase emulators:start --project foodlet-a2c4b",
+        "problemMatcher": ["$eslint-stylish"]
+      }
     }
   ]
 }

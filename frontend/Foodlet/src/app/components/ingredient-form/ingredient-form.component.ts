@@ -53,7 +53,7 @@ export class IngredientFormComponent {
         this.ingredient.value.nutrients!.carbohydrates!
       )
     );
-
+    console.log(this.selected);
     this.service.addEditIngredient(this.selected);
   }
 }
