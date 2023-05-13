@@ -18,6 +18,7 @@ import { MatListModule } from '@angular/material/list';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { HomeComponent } from './screens/home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MatMenuModule } from '@angular/material/menu';
     NutrientTableCompactComponent,
     RecipeCreatorComponent,
     NavigationBarComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
