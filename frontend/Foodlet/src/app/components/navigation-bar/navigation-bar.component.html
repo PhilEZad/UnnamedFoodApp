@@ -1,0 +1,25 @@
+<div class="flex-toolbar">
+  <mat-toolbar class="mat-toolbar-single-row" color="primary">
+    <span>Foodlet</span>
+    <span class="small-spacer"></span>
+    <button mat-button routerLink="/home">Home</button>
+    <button mat-button routerLink="/recipes">Recipes</button>
+    <button mat-button routerLink="/plan">Planner</button>
+    <span class="spacer"></span>
+    <div *ngIf="true; then isUser; else anonymous"></div>
+    <!-- TODO: FireAuth query -->
+  </mat-toolbar>
+</div>
+
+<ng-template #isUser>
+  <button mat-button [matMenuTriggerFor]="menu">Profile</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/settings">Preferences</button>
+    <button mat-menu-item routerLink="/Logout">Logout</button>
+  </mat-menu>
+</ng-template>
+
+<ng-template #anonymous>
+  <button mat-button routerLink="/login">Login</button>
+  <button mat-button routerLink="/register">Register</button>
+</ng-template>
