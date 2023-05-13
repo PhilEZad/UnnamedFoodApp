@@ -9,8 +9,6 @@ import { Recipe } from 'src/domain/Recipe';
 })
 export class RecipeCreatorComponent {
 
-
-
   recipe: Recipe = Recipe.emptyRecipe();
 
   constructor() { }
