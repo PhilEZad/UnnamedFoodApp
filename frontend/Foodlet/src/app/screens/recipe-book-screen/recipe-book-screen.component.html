@@ -1,9 +1,36 @@
-<div class="centered">
+<div class="parentContainer">
   <div class="flexContainer">
-    <div *ngFor="let recipe of recipes" >
+    <div [@inOutAnimation] *ngFor="let recipe of recipes" >
       <app-recipe-card [recipeNumber]="recipeIndex(recipe)" [recipe]="recipe"></app-recipe-card>
     </div>
-    <button mat-fab (click)="newRecipe()">+</button>
-  </div>
+   <!-- <button mat-fab class="fab-add-recipe-btn" (click)="newRecipe()">+</button> -->
+</div>
 
+  <div class="dockToBottom">
+    <button
+      mat-fab
+      class="matFabAddBtn"
+      style="margin-left: 12px"
+    >
+      <mat-icon class="icon-display">add</mat-icon>
+    </button>
+<!--
+    <div
+      class="crudActionsContainer">
+      <button
+        mat-mini-fab
+        class="matFabMiniBtn">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-mini-fab class="matFabDeleteBtn">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+      <button mat-mini-fab  class="matFabMiniBtn">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+    -->
+  </div>
 </div>

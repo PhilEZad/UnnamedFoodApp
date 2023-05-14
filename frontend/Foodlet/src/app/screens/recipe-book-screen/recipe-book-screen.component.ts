@@ -1,10 +1,39 @@
 import { Component } from '@angular/core';
 import {Recipe} from "../../../domain/Recipe";
+import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-recipe-book-screen',
   templateUrl: './recipe-book-screen.component.html',
-  styleUrls: ['./recipe-book-screen.component.scss']
+  styleUrls: ['./recipe-book-screen.component.scss'],
+  animations: [trigger('inOutAnimation', [
+    state('in', style({ opacity: 1 })),
+    transition(':enter', [
+      animate(
+        300,
+        keyframes([
+          style({ opacity: 0, offset: 0 }),
+          style({ opacity: 0.25, offset: 0.25 }),
+          style({ opacity: 0.5, offset: 0.5 }),
+          style({ opacity: 0.75, offset: 0.75 }),
+          style({ opacity: 1, offset: 1 }),
+        ])
+      ),
+    ]),
+    transition(':leave', [
+      animate(
+        300,
+        keyframes([
+          style({ opacity: 1, offset: 0 }),
+          style({ opacity: 0.75, offset: 0.25 }),
+          style({ opacity: 0.5, offset: 0.5 }),
+          style({ opacity: 0.25, offset: 0.75 }),
+          style({ opacity: 0, offset: 1 }),
+        ])
+      ),
+    ]),
+  ]),
+  ],
 })
 export class RecipeBookScreenComponent {
 
@@ -34,6 +63,6 @@ export class RecipeBookScreenComponent {
   }
 
   newRecipe() {
-
+    this.recipes.push(new Recipe("New Recipe", 1, [], []));
   }
 }

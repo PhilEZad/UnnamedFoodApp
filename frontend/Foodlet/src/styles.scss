@@ -49,13 +49,15 @@ $warn-map: ngx-mtc.create-theme-map('warn');
 
   // Creates theme colors
   @include ngx-mtc.create-variables-from-color('primary', #039be5, 38%); // can update
-  @include ngx-mtc.create-variables-from-color('accent', #4e03e5, 57%); // can update
+  @include ngx-mtc.create-variables-from-color('accent', #026FA6, 57%); // can update
   @include ngx-mtc.create-variables-from-map('warn', mat.$red-palette); // can not update this theme
+
 }
 
 $primary-palette: mat.define-palette($primary-map);
 $accent-palette: mat.define-palette($accent-map);
 $warn-palette: mat.define-palette($warn-map);
+
 
 // Custom theme
 $theme: ngx-mtc.custom-theme($primary-palette, $accent-palette, $warn-palette);
