@@ -33,4 +33,7 @@ export class RecipeBookScreenComponent {
     return this.recipes.indexOf(recipe) + 1;
   }
 
+  newRecipe() {
+
+  }
 }

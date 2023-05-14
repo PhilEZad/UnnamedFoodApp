@@ -3,9 +3,7 @@
     <div *ngFor="let recipe of recipes" >
       <app-recipe-card [recipeNumber]="recipeIndex(recipe)" [recipe]="recipe"></app-recipe-card>
     </div>
+    <button mat-fab (click)="newRecipe()">+</button>
   </div>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-icon name="add"></ion-icon>
-  </ion-fab>
 
 </div>
