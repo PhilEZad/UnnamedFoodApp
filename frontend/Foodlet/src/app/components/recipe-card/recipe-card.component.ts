@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Recipe} from "../../../domain/Recipe";
 
 
@@ -8,7 +8,10 @@ import {Recipe} from "../../../domain/Recipe";
   styleUrls: ['./recipe-card.component.scss']
 })
 export class RecipeCardComponent {
-  recipe: Recipe = new Recipe(
+
+  @Input() recipeNumber: number = 1;
+
+  @Input() recipe: Recipe = new Recipe(
     "Chicken and Rice",
     4,
     ["Cook the chicken", "Cook the rice", "Mix them together"],
@@ -26,4 +29,11 @@ export class RecipeCardComponent {
   constructor() { }
 
 
+  deleteRecipe() {
+
+  }
+
+  editRecipe() {
+
+  }
 }

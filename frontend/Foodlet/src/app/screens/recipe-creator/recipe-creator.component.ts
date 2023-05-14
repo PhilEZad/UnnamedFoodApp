@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FoodItem} from "src/domain/FoodItem";
 import { Recipe } from 'src/domain/Recipe';
 
@@ -8,7 +8,6 @@ import { Recipe } from 'src/domain/Recipe';
   styleUrls: ['./recipe-creator.component.scss']
 })
 export class RecipeCreatorComponent {
-
 
 
   recipe: Recipe = Recipe.emptyRecipe();

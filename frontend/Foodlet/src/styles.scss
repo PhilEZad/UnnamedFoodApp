@@ -13,7 +13,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $Foodlet-primary: mat.define-palette(mat.$indigo-palette);
-$Foodlet-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$Foodlet-accent: mat.define-palette(mat.$light-blue-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $Foodlet-warn: mat.define-palette(mat.$red-palette);
@@ -25,7 +25,7 @@ $Foodlet-theme: mat.define-light-theme((
     primary: $Foodlet-primary,
     accent: $Foodlet-accent,
     warn: $Foodlet-warn,
-  )
+  ),
 ));
 
 // Include theme styles for core and each component used in your app.
