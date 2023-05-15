@@ -1,36 +1,74 @@
+<div class="menuContainer" xmlns="http://www.w3.org/1999/html">
+  <div class="menuContents">
+
+    <div class="pageTitle">
+     <span>
+       <mat-icon class="recipeIcon">book</mat-icon>
+       <label
+         class="menuLabel">Recipe Book
+       </label>
+     </span>
+    </div>
+
+    <input type="text">
+    <button mat-button class="matFabSearchBtn">
+      <mat-icon>search</mat-icon> <!-- filter with autocomplete -->
+    </button>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="more-button">
+      <mat-icon>
+        sort
+      </mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item >
+        <mat-icon>food</mat-icon>
+        <span> Calories </span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>alphabet</mat-icon>
+        <span> Alphabetical </span>
+      </button>
+    </mat-menu>
+
+  </div>
+</div>
+
 <div class="parentContainer">
+
   <div class="flexContainer">
     <div [@inOutAnimation] *ngFor="let recipe of recipes" >
       <app-recipe-card [recipeNumber]="recipeIndex(recipe)" [recipe]="recipe"></app-recipe-card>
     </div>
    <!-- <button mat-fab class="fab-add-recipe-btn" (click)="newRecipe()">+</button> -->
-</div>
-
-  <div class="dockToBottom">
-    <button
-      mat-fab
-      class="matFabAddBtn"
-      style="margin-left: 12px"
-    >
-      <mat-icon class="icon-display">add</mat-icon>
-    </button>
-<!--
-    <div
-      class="crudActionsContainer">
-      <button
-        mat-mini-fab
-        class="matFabMiniBtn">
-        <mat-icon>edit</mat-icon>
-      </button>
-
-      <button mat-mini-fab class="matFabDeleteBtn">
-        <mat-icon>delete</mat-icon>
-      </button>
-
-      <button mat-mini-fab  class="matFabMiniBtn">
-        <mat-icon>clear</mat-icon>
-      </button>
-    </div>
-    -->
   </div>
+
+</div>
+<div class="dockToBottom">
+  <button
+    mat-fab
+    class="matFabAddBtn"
+    style="margin-left: 12px"
+    (click)="newRecipe()"
+  >
+    <mat-icon class="icon-display">add</mat-icon>
+  </button>
+  <!--
+      <div
+        class="crudActionsContainer">
+        <button
+          mat-mini-fab
+          class="matFabMiniBtn">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-mini-fab class="matFabDeleteBtn">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+        <button mat-mini-fab  class="matFabMiniBtn">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </div>
+      -->
 </div>

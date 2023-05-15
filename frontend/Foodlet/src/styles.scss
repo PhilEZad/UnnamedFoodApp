@@ -62,6 +62,7 @@ $warn-palette: mat.define-palette($warn-map);
 // Custom theme
 $theme: ngx-mtc.custom-theme($primary-palette, $accent-palette, $warn-palette);
 
+
 // Creates Angular Material Theme
 @include mat.all-component-themes($theme);
 
@@ -70,3 +71,10 @@ $theme: ngx-mtc.custom-theme($primary-palette, $accent-palette, $warn-palette);
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 //@include mat.all-component-themes($Foodlet-theme);
+
+
+//Global styles
+
+.mat-icon {
+  vertical-align: middle;
+}
