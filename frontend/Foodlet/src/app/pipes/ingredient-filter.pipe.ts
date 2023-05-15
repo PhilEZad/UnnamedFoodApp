@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { FoodItem } from 'src/domain/FoodItem';
 @Pipe({
-  name: 'filter',
+  name: 'IngredientFilter',
 })
 export class IngredientFilterPipe implements PipeTransform {
   transform(items: FoodItem[], searchText: string): any[] {
