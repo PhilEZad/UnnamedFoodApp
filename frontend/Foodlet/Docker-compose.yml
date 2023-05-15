@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: foodlet-frontend
+    build: .
+    ports:
+      - "4200:8080"
