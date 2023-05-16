@@ -15,27 +15,33 @@ import {FormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatListModule} from "@angular/material/list";
+import {MatMenuModule} from "@angular/material/menu";
+import { RecipeBookScreenComponent } from './screens/recipe-book-screen/recipe-book-screen.component';
+import {IonicModule} from "@ionic/angular";
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipeCardComponent,
     NutrientTableCompactComponent,
-    RecipeCreatorComponent
+    RecipeCreatorComponent,
+    RecipeBookScreenComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatTableModule,
-    MatIconModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatListModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatButtonModule,
+        MatTableModule,
+        MatIconModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatListModule,
+        MatMenuModule,
+        IonicModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

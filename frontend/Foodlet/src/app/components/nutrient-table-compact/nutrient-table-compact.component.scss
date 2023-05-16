@@ -1,14 +1,29 @@
 .mat-table {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   background-color: transparent;
   border-collapse: collapse;
   border-spacing: 0;
   display: table;
   overflow: auto;
   font-size: 0.875rem;
-  line-height: 1.5rem;
+  line-height: 1rem;
   color: rgba(0, 0, 0, 0.87);
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  white-space: unset !important;
+}
+
+
+.table-row {
+  height: 35px !important;
+}
+
+.table-header-row {
+  height: 35px !important;
+}
+
+.mat-header-row {
+  height: 35px !important;
+  max-height: 10px;
 }
