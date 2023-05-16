@@ -19,6 +19,15 @@ import { MatListModule } from '@angular/material/list';
 import { IngredientSearchComponent } from './components/ingredient-search/ingredient-search.component';
 import { IngredientFormComponent } from './components/ingredient-form/ingredient-form.component';
 import { IngredientFilterPipe } from './pipes/ingredient-filter.pipe';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { HomeComponent } from './screens/home/home.component';
+import { RecipeBookScreenComponent } from './screens/recipe-book-screen/recipe-book-screen.component';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -29,6 +38,9 @@ import { IngredientFilterPipe } from './pipes/ingredient-filter.pipe';
     IngredientSearchComponent,
     IngredientFormComponent,
     IngredientFilterPipe,
+    RecipeBookScreenComponent,
+    NavigationBarComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +55,9 @@ import { IngredientFilterPipe } from './pipes/ingredient-filter.pipe';
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
+    MatMenuModule,
+    IonicModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
