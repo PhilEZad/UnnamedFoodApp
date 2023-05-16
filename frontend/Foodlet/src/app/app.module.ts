@@ -19,13 +19,8 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { HomeComponent } from './screens/home/home.component';
-import {FormsModule} from "@angular/forms";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatListModule} from "@angular/material/list";
-import {MatMenuModule} from "@angular/material/menu";
 import { RecipeBookScreenComponent } from './screens/recipe-book-screen/recipe-book-screen.component';
-import {IonicModule} from "@ionic/angular";
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -33,25 +28,12 @@ import {IonicModule} from "@ionic/angular";
     RecipeCardComponent,
     NutrientTableCompactComponent,
     RecipeCreatorComponent,
-    RecipeBookScreenComponent
-       NavigationBarComponent,
+    RecipeBookScreenComponent,
+    NavigationBarComponent,
     HomeComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatButtonModule,
-        MatTableModule,
-        MatIconModule,
-        FormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatListModule,
-        MatMenuModule,
-        IonicModule,
-        BrowserModule,
+  imports: [
+    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
@@ -62,9 +44,10 @@ import {IonicModule} from "@ionic/angular";
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
-    MatToolbarModule,
     MatMenuModule,
-    ],
+    IonicModule,
+    MatToolbarModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
