@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@import "styles.scss";
+@import "src/styles.scss";
 @import "/src/assets/externalColorConstants";
 
 
@@ -190,4 +190,25 @@
 .recipeIcon {
   transform: scale(1.2);
   padding: 1px;
+}
+
+.searchContainer {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  align-self: center;
+  height: 3em;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+
+.sortContainer {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: right;
 }
