@@ -1,8 +1,9 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
+
 @use '@angular/material' as mat;
 @use "material-theme-creator/ngx-mtc" as ngx-mtc;
+
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -25,6 +26,7 @@ $Foodlet-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
+
 $Foodlet-theme: mat.define-light-theme((
   color: (
     primary: $Foodlet-primary,
@@ -65,7 +67,6 @@ $theme: ngx-mtc.custom-theme($primary-palette, $accent-palette, $warn-palette);
 
 // Creates Angular Material Theme
 @include mat.all-component-themes($theme);
-
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
