@@ -12,9 +12,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { RecipeCreatorComponent } from './screens/recipe-creator/recipe-creator.component';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { IngredientSearchComponent } from './components/ingredient-search/ingredient-search.component';
+import { IngredientFormComponent } from './components/ingredient-form/ingredient-form.component';
+import { IngredientFilterPipe } from './pipes/ingredient-filter.pipe';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -28,6 +32,9 @@ import { IonicModule } from '@ionic/angular';
     RecipeCardComponent,
     NutrientTableCompactComponent,
     RecipeCreatorComponent,
+    IngredientSearchComponent,
+    IngredientFormComponent,
+    IngredientFilterPipe,
     RecipeBookScreenComponent,
     NavigationBarComponent,
     HomeComponent,
@@ -41,6 +48,7 @@ import { IonicModule } from '@ionic/angular';
     MatTableModule,
     MatIconModule,
     FormsModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
