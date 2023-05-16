@@ -1,0 +1,193 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@import "styles.scss";
+@import "/src/assets/externalColorConstants";
+
+
+.centered {
+  top: 50%;
+  left: 50%;
+  overflow-y: scroll;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  max-height: 100%;
+}
+
+.flexContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  flex-grow: 4; /* default 0 */
+}
+
+
+@mixin color($theme) {
+  $color-config: mat.get-color-config($theme);
+
+  // Get the primary color palette from the color-config.
+  $primary-palette: map.get($color-config, 'primary');
+
+  // Get the hue from the primary color palette.
+  $primary-colour: map.get($primary-palette, 500);
+
+  .fab-add-recipe-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100;
+    color: #ECEFF1;
+  }
+
+
+  .crudActionsContainer > * {
+    margin: 0 8px;
+  }
+
+  .matFabAddBtn {
+    position: relative;
+    vertical-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    background-color: map.get($primary-palette, 500);
+    color: map.get($primary-palette, 100);
+    transition: 0.3s;
+  }
+
+  .icon-display {
+    transform: scale(1.5);
+  }
+
+  .matFabAddBtn:hover {
+    background-color: map.get($primary-palette, 500);
+  }
+
+  .matFabAddBtn:active {
+    background-color: map.get($primary-palette, 100);
+    color: map.get($primary-palette, 500);
+  }
+
+  @keyframes leaveToBottom {
+    from {
+      transform: translate(0);
+    }
+    to {
+      transform: translateY(50%);
+    }
+  }
+
+  @keyframes returnFromBottom {
+    from {
+      transform: translateY(50%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .animateOutOfFrame {
+    animation: leaveToBottom 0.5s ease-in-out;
+    transition: 0.5s;
+    opacity: 0;
+  }
+
+  .animateIntoFrame {
+    animation: returnFromBottom 0.5s ease-in-out;
+    transition: 0.5s;
+    opacity: 1;
+  }
+
+  .hidden {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+  }
+
+
+}
+
+.menuContainer {
+  background-color: #e7e7e7;
+  width: 100%;
+  left: 0;
+  top: 0;
+  min-height: 5em;
+  height: 10em;
+  position: fixed;
+  border-width: 0 0 4px 0;
+  border-style: solid;
+  border-color: $primary-colour;
+  z-index: 3;
+  font-family: Helvetica,serif;
+}
+
+
+
+
+
+.parentContainer {
+  max-width: 100%;
+  height: 100%;
+  top: 200px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dockToBottom {
+  width: 99%;
+  max-width: 99%;
+  position: fixed;
+  display: inline-flex;
+  flex-direction: row-reverse;
+  justify-content: right;
+  align-items: center;
+  bottom: 0;
+  z-index: 110;
+  margin: 0;
+  height: 5em;
+}
+
+.dockToBottom > * {
+  margin: 0 8px;
+  color: #ECEFF1;
+}
+
+.crudActionsContainer {
+  display: inline-flex;
+  flex-direction: row-reverse;
+}
+
+.crudActionsContainer > * {
+  margin: 0 8px;
+}
+
+.menuContents {
+  display: inline-flex;
+  position: absolute;
+  bottom: 0;
+}
+
+.pageTitle {
+  font-size: 1.5em;
+  font-weight: 400;
+  margin: 0;
+  padding: 5px;
+  color: #000000;
+  align-items: center;
+}
+
+.recipeIcon {
+  transform: scale(1.2);
+  padding: 1px;
+}
