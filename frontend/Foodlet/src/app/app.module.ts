@@ -5,19 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
-import {MatCardModule} from "@angular/material/card";
-import {MatButtonModule} from "@angular/material/button";
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { NutrientTableCompactComponent } from './components/nutrient-table-compact/nutrient-table-compact.component';
-import {MatTableModule} from "@angular/material/table";
-import {MatIconModule} from "@angular/material/icon";
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 import { RecipeCreatorComponent } from './screens/recipe-creator/recipe-creator.component';
-import {FormsModule} from "@angular/forms";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatListModule} from "@angular/material/list";
-import {MatMenuModule} from "@angular/material/menu";
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { HomeComponent } from './screens/home/home.component';
 import { RecipeBookScreenComponent } from './screens/recipe-book-screen/recipe-book-screen.component';
-import {IonicModule} from "@ionic/angular";
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -25,24 +28,27 @@ import {IonicModule} from "@ionic/angular";
     RecipeCardComponent,
     NutrientTableCompactComponent,
     RecipeCreatorComponent,
-    RecipeBookScreenComponent
+    RecipeBookScreenComponent,
+    NavigationBarComponent,
+    HomeComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatButtonModule,
-        MatTableModule,
-        MatIconModule,
-        FormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatListModule,
-        MatMenuModule,
-        IonicModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatTableModule,
+    MatIconModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    IonicModule,
+    MatToolbarModule,
+  ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
