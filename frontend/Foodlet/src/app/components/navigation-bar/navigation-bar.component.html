@@ -1,6 +1,9 @@
-<div class="flex-toolbar">
-  <mat-toolbar class="mat-toolbar-single-row" color="primary">
-    <span>Foodlet</span>
+<div class="toolbar">
+  <div class="toolbar__logo">
+    <a routerLink="/home">
+      <img src="src/assets/logo.png" alt="logo" />
+    </a>
+  </div>
     <span class="small-spacer"></span>
     <button mat-button routerLink="/home">Home</button>
     <button mat-button routerLink="/recipes">Recipes</button>
@@ -8,7 +11,6 @@
     <span class="spacer"></span>
     <div *ngIf="true; then isUser; else anonymous"></div>
     <!-- TODO: FireAuth query -->
-  </mat-toolbar>
 </div>
 
 <ng-template #isUser>

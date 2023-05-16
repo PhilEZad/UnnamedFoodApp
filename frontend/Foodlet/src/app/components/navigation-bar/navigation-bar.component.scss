@@ -1,3 +1,9 @@
+@import "src/styles.scss";
+
+$gradientColors: #039be5, #026FA6;
+
+
+
 .spacer {
   flex: 1 1 auto;
 }
@@ -5,4 +11,26 @@
 .small-spacer {
   flex: 0 0 auto;
   margin-left: 10%;
+}
+
+.toolbar {
+  background-color: map-get($primary-map, 500);
+  left: 0;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: inline-flex;
+}
+
+.toolbar > * {
+  color: white;
+  font-family: Helvetica, serif;
+}
+
+.toolbar__logo {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-left: 10%;
+
 }

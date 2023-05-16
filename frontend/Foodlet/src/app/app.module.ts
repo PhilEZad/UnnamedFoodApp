@@ -25,6 +25,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HomeComponent } from './screens/home/home.component';
 import { RecipeBookScreenComponent } from './screens/recipe-book-screen/recipe-book-screen.component';
 import { IonicModule } from '@ionic/angular';
+import { RecipeViewComponent } from './components/recipe-view/recipe-view.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { IonicModule } from '@ionic/angular';
     RecipeBookScreenComponent,
     NavigationBarComponent,
     HomeComponent,
+    RecipeViewComponent,
   ],
   imports: [
     BrowserModule,
