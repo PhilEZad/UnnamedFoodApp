@@ -9,7 +9,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { MatDialog } from '@angular/material/dialog';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-recipe-book-screen',
@@ -92,7 +92,7 @@ export class RecipeBookScreenComponent {
   ];
 
   constructor(
-    private dialog: MatDialog,
+    //private dialog: MatDialog,
     ) {}
 
   recipeIndex(recipe: Recipe): number {
@@ -103,11 +103,13 @@ export class RecipeBookScreenComponent {
     this.recipes.push(new Recipe('New Recipe', 1, [], []));
   }
 
-
+/*
   openRecipe(recipe: Recipe) {
-    this.dialog.open(RecipeViewComponent, {
-      data: recipe,
+    const dialogRef = this.dialog.open(RecipeViewComponent, {
+      data: {recipe},
     });
   }
+*/
+
 
 }
