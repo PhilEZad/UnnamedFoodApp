@@ -19,6 +19,7 @@ export class RecipeCardComponent {
         isPublic: true,
         name: 'Chicken',
         category: '',
+        dateAdded: new Date(),
         quantityGrams: 100,
         nutrients: {
           protein: 20,
@@ -35,6 +36,7 @@ export class RecipeCardComponent {
         name: 'Rice',
         quantityGrams: 200,
         category: '',
+        dateAdded: new Date(),
         nutrients: {
           calories: 200,
           fat: 1,

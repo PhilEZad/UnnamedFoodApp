@@ -10,6 +10,7 @@ export class Recipe {
   servings: number = 0
   instructions: string[] = []
   dietCompatibility: FoodRestrictionCompatibility[] = []
+  dateAdded: Date = new Date()
 
 
   constructor(title: string, servings: number, instructions: string[], ingredients: FoodItem[]) {

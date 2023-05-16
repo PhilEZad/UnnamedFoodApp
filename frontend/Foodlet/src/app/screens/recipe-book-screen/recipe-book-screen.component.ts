@@ -1,3 +1,4 @@
+import { RecipeViewComponent } from './../../components/recipe-view/recipe-view.component';
 import { Component } from '@angular/core';
 import { Recipe } from '../../../domain/Recipe';
 import {
@@ -8,6 +9,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-recipe-book-screen',
@@ -44,6 +46,9 @@ import {
   ],
 })
 export class RecipeBookScreenComponent {
+
+  currentSorting: string = 'Alphabetical';
+
   recipes: Recipe[] = [
     new Recipe(
       'Chicken and Rice',
@@ -56,6 +61,7 @@ export class RecipeBookScreenComponent {
           name: 'Chicken',
           category: '',
           quantityGrams: 100,
+          dateAdded: new Date(),
           nutrients: {
             protein: 20,
             carbohydrates: 20,
@@ -71,6 +77,7 @@ export class RecipeBookScreenComponent {
           name: 'Rice',
           quantityGrams: 200,
           category: '',
+          dateAdded: new Date(),
           nutrients: {
             calories: 200,
             fat: 1,
@@ -84,7 +91,9 @@ export class RecipeBookScreenComponent {
     ),
   ];
 
-  constructor() {}
+  constructor(
+    private dialog: MatDialog,
+    ) {}
 
   recipeIndex(recipe: Recipe): number {
     return this.recipes.indexOf(recipe) + 1;
@@ -93,4 +102,12 @@ export class RecipeBookScreenComponent {
   newRecipe() {
     this.recipes.push(new Recipe('New Recipe', 1, [], []));
   }
+
+
+  openRecipe(recipe: Recipe) {
+    this.dialog.open(RecipeViewComponent, {
+      data: recipe,
+    });
+  }
+
 }

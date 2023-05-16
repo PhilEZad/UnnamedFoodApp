@@ -1,1 +1,34 @@
-<p>recipe-view works!</p>
+<mat-label> Recipe View </mat-label>
+
+<mat-label>
+  {{ recipe.title }}
+</mat-label>
+
+<mat-label> {{ recipe.servings }} servings </mat-label>
+
+<mat-label>
+  {{ recipe.description }}
+</mat-label>
+
+<mat-label>
+  {{ recipe.dietCompatibility }}
+</mat-label>
+
+<mat-label>
+  {{ recipe.dateAdded }}
+</mat-label>
+
+<div *ngFor="let ingredient of recipe.ingredients">
+  <li>
+    {{ ingredient.name }}
+  </li>
+</div>
+
+<div *ngFor="let step of recipe.instructions">
+  <li>
+    {{ step }}
+  </li>
+</div>
+
+<app-nutrient-table-compact [foodItems]="recipe.ingredients">
+</app-nutrient-table-compact>

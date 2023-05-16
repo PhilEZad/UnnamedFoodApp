@@ -7,6 +7,7 @@ export class FoodItem {
   quantityGrams: number = 0;
   category: string = '';
   nutrients: Nutrients = Nutrients.emptyNutrients();
+  dateAdded: Date = new Date()
 
   constructor(
     name: string,

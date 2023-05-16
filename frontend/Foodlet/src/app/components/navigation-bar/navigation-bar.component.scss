@@ -1,7 +1,8 @@
 @import "src/styles.scss";
 
-$gradientColors: #039be5, #026FA6;
+$gradientColors: #000000, #0000004d, transparent, transparent;
 
+$nav-bar-height: 50px;
 
 
 .spacer {
@@ -14,13 +15,23 @@ $gradientColors: #039be5, #026FA6;
 }
 
 .toolbar {
-  background-color: map-get($primary-map, 500);
+  //background-color: map-get($primary-map, 500);
+  //background: linear-gradient(to bottom, $gradientColors);
+  background: linear-gradient(180deg, rgba(0,0,0,1) 1%, rgba(0,0,0,0.7) 4%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0) 100%);
   left: 0;
   z-index: 10;
   position: fixed;
   top: 0;
   width: 100%;
   display: inline-flex;
+  align-items: center;
+  transition: 0.3s ease-in-out;
+}
+
+.toolbar:hover {
+  background: linear-gradient(180deg, rgba(0,0,0,1) 1%, rgba(0,0,0,0.0) 4%, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0) 100%);
+  background-color: map-get($primary-map, 500);
+  transition: 0.3s ease-in-out;
 }
 
 .toolbar > * {
@@ -28,9 +39,45 @@ $gradientColors: #039be5, #026FA6;
   font-family: Helvetica, serif;
 }
 
-.toolbar__logo {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin-left: 10%;
+
+
+.logo {
+  height: $nav-bar-height;
+  padding-left: 20px;
+  transition: 0.3s;
+}
+
+.logo:hover  {
+  transform: scale(0.9);
+}
+
+.navigation-button {
+  margin-left: 5px;
+  margin-right: 5px;
+  transition: 0.3s ease-in-out;
+  align-items: center;
+  align-content: center;
+  cursor: pointer;
+}
+
+.navigation-button:hover {
+  transform: scale(1.1);
+  transition: 0.3s ease-in-out;
+}
+
+.navigation-button > * {
+  color: white;
+  font-family: Helvetica, serif;
+  cursor: pointer;
+}
+
+.navigation-button > span > mat-icon {
+  padding: 5px;
+  margin: 5px;
+}
+
+.navigation-button > span > label {
+  margin: 2px;
 
 }
+

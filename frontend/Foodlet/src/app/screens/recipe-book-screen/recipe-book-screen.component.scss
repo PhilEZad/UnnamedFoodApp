@@ -120,7 +120,7 @@
   left: 0;
   top: 0;
   min-height: 5em;
-  height: 10em;
+  height: 7em;
   position: fixed;
   border-width: 0 0 4px 0;
   border-style: solid;
@@ -172,6 +172,7 @@
 .menuContents {
   display: inline-flex;
   position: absolute;
+  width: 100%;
   bottom: 0;
 }
 
@@ -192,20 +193,60 @@
 .searchContainer {
   display: inline-flex;
   flex-direction: row;
+  right: 10%;
   align-items: center;
-  justify-content: right;
-  align-self: center;
+  justify-content: center;
+  min-width: 300px;
   height: 3em;
   margin: 0;
   padding: 0;
-  position: relative;
+  position: absolute;
   z-index: 1;
 }
 
+.searchContainer > input {
+  width: 40%;
+  min-width: 150px;
+  height: 18px;
+  background-color: transparent;
+  border: solid;
+  border-width: 0 0 2px 0;
+}
 
-.sortContainer {
-  display: inline-flex;
-  flex-direction: row-reverse;
+.searchContainer > input:hover {
+
+  border: solid;
+  border-width: 0 0 2px 0;
+  border-color: $primary-colour;
+}
+
+.searchContainer > input:focus {
+  outline: none;
+  border: solid;
+  border-width: 0 0 2px 0;
+  border-color: $primary-colour;
+}
+
+
+
+
+.searchContainer > button {
+  height: 28px;
+}
+
+
+.sort-button > mat-icon {
+  vertical-align: top;
+}
+
+
+
+.sortLabel {
+  font-size: 1em;
+  font-weight: 400;
+  margin: 0;
+  padding: 5px;
+  color: #000000;
+  text-align: right;
   align-items: center;
-  justify-content: right;
 }
