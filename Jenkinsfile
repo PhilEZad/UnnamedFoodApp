@@ -1,26 +1,30 @@
 pipeline {
-    agent { 
-        dockerfile {
-            dir 'frontend/Foodlet/'
-        }
-    }
+    agent none
     stages {
-        stage('verify firebase token') {
+        stage('Create docker image') {
+            agent any
             steps {
-                sh ls
-                sh action="firebase_check"
-                sh "./entrypoint.sh"
+                sh "docker build -t foodlet ./frontend/Foodlet/"
+            }
+        }
+        stage('verify firebase token') {
+            agent {
+                docker {
+                    image 'foodlet'
+                }
+            }
+            steps {
+                sh "ls"
             }
         }
         stage('Build') {
             steps {
-                sh action="build"
-                sh "./entrypoint.sh"
+                sh "docker run foodlet -e action=build"
             }
         }
         stage('Test') {
             steps {
-                sh "docker run -e action=test foodlet"
+                echo 'TBD'
             }
         }
         stage('Release') {
