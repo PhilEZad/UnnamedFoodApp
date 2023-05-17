@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    
     stages {
         stage('Verify Toolset') {
             steps {
@@ -12,10 +13,14 @@ pipeline {
                 '''
             }
         }
+        stage('Create docker image') {
+            steps {
+                sh "docker build -f /app/dockerfile -t foodlet"
+            }
+        }
         stage('Build') {
             steps {
-		    		sh "docker-compose build"
-				sh "docker-compose -f Foodlet-compose.yml up -d"
+                sh "docker run foodlet -e action=\"build\""
             }
         }
         stage('Test') {
@@ -28,11 +33,7 @@ pipeline {
                 echo 'TBD'
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'TBD'
-            }
-        }
+
     }
     post {
         always {
