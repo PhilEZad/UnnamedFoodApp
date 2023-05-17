@@ -12,15 +12,24 @@ pipeline {
                 '''
             }
         }
+        stage('Create docker image') {
+            steps {
+                sh "docker build -t foodlet ./frontend/Foodlet/"
+            }
+        }
+        stage('verify firebase token') {
+            steps {
+                sh "docker run -e action=firebase_check foodlet"
+            }
+        }
         stage('Build') {
             steps {
-		    		sh "docker-compose build"
-				sh "docker-compose -f Foodlet-compose.yml up -d"
+                sh "docker run -e action=build foodlet"
             }
         }
         stage('Test') {
             steps {
-                echo 'TBD'
+                sh "docker run -e action=test foodlet"
             }
         }
         stage('Release') {
@@ -28,11 +37,7 @@ pipeline {
                 echo 'TBD'
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'TBD'
-            }
-        }
+
     }
     post {
         always {
