@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'TBD'
+                sh "docker run -e action=test foodlet"
             }
         }
         stage('Release') {

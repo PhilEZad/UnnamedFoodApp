@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "$firebase_token"
-
 if [ "$action" == "test" ]
 then
     npm run test
@@ -32,7 +30,7 @@ then
 
     result=$(firebase deploy --non-interactive --token "$firebase_token" | grep "Error" | head -c1 | wc -c)
     if [[ $result -ne 0 ]]; then
-      exit 1
+      exit 126
     fi
     exit $?
 
@@ -42,9 +40,10 @@ if [ "$action" == "firebase_check" ]
 then
     result=$(firebase use "foodlet-a2c4b" --token "$firebase_token" | grep "Error" | head -c1 | wc -c)
     if [[ $result -ne 0 ]]; then
-      exit 1
+      exit 126
     fi
     exit $?
 fi
 
 echo "invalid action environment variable [$action]"
+exit 127
