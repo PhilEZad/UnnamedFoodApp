@@ -1,17 +1,11 @@
 pipeline {
-    agent any
-    stages {
-        stage('Verify Toolset') {
-            steps {
-                sh '''
-                docker version
-                docker info
-                docker compose version
-                curl --version
-                jq --version
-                '''
-            }
+    agent { 
+        dockerfile {
+            dir 'frontend/Foodlet/'
+            label 'foodlet'
         }
+    }
+    stages {
         stage('Create docker image') {
             steps {
                 sh "docker build -t foodlet ./frontend/Foodlet/"
