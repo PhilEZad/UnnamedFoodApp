@@ -48,7 +48,7 @@ pipeline {
     }
     post {
         always {
-            echo 'Post Actions'
+            sh 'whoami'
         }
     }
 }
