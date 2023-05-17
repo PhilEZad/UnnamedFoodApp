@@ -22,14 +22,14 @@ pipeline {
         {
             steps {
                 withCredentials([string(credentialsId: 'foodlet_firebase_token', variable: 'SECRET')]) { 
-                    sh "docker run foodlet -e action=\"firebase_check\" -e firebase_token=\""
+                    sh 'docker run foodlet -e action="firebase_check" -e firebase_token=""'
                 }
             }
         }
         stage('Build') {
             steps {
                 withCredentials([string(credentialsId: 'foodlet_firebase_token', variable: 'SECRET')]) { 
-                    sh "docker run foodlet -e action=\"build\" -e firebase_token=\"$SECRET\""
+                    sh 'docker run foodlet -e action="build" -e firebase_token="$SECRET"'
                 }
             }
         }
