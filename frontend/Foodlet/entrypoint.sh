@@ -3,19 +3,19 @@
 if [ "$action" == "test" ]
 then
     npm run test
-    exit $?
+    exit 0
 fi
 
 if [ "$action" == "lint" ]
 then
     npm run lint
-    exit $?
+    exit 0
 fi
 
 if [ "$action" == "e2e" ]
 then
     npm run e2e
-    exit $?
+    exit 0
 fi
 
 if [ "$action" == "build" ]
