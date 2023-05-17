@@ -5,19 +5,16 @@ pipeline {
         }
     }
     stages {
-        stage('Create docker image') {
-            steps {
-                sh "docker build -t foodlet ./frontend/Foodlet/"
-            }
-        }
         stage('verify firebase token') {
             steps {
-                sh "docker run -e action=firebase_check foodlet"
+                sh action="firebase_check"
+                sh "./entrypoint.sh"
             }
         }
         stage('Build') {
             steps {
-                sh "docker run -e action=build foodlet"
+                sh action="build"
+                sh "./entrypoint.sh"
             }
         }
         stage('Test') {
