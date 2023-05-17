@@ -38,6 +38,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MealPlanScreenComponent } from './screens/meal-plan-screen/meal-plan-screen.component';
 import { RecipeCardCompactComponent } from './components/recipe-card-compact/recipe-card-compact.component';
 import { RecipePickerComponent } from './components/recipe-picker/recipe-picker.component';
+import { LoginMenuComponent } from './components/login-menu/login-menu.component';
 
 @NgModule({
   exports: [
@@ -77,6 +78,7 @@ import { RecipePickerComponent } from './components/recipe-picker/recipe-picker.
     MealPlanScreenComponent,
     RecipeCardCompactComponent,
     RecipePickerComponent,
+    LoginMenuComponent,
   ],
   imports: [
     MatSelectModule,
