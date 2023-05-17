@@ -21,7 +21,7 @@ pipeline {
         stage('Build') {
             steps {
                 withCredentials([string(credentialsId: 'foodlet_firebase_token', variable: 'SECRET')]) { 
-                    echo '${SECRET}'
+                    echo ${SECRET}
                 }
                 sh "docker run foodlet -e action=\"build\""
             }
