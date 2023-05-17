@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+echo $action
+echo "$action"
+
 if [ "$action" == "test" ]
 then
     npm run test
