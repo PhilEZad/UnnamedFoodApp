@@ -11,10 +11,10 @@ pipeline {
             agent {
                 docker {
                     image 'foodlet'
+                    args '-e action=firebase_check'
                 }
             }
             steps {
-                sh "action=firebase_check"
                 sh "cd /app && ./entrypoint.sh"
             }
         }
