@@ -41,12 +41,12 @@ pipeline {
                 sh "cd /app && ./entrypoint.sh"
             }
         }
+        }
         stage('Release') {
             steps {
                 echo 'TBD'
             }
         }
-
     }
     post {
         always {
