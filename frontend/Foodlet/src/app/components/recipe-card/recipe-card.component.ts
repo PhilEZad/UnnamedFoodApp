@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Recipe } from '../../../domain/Recipe';
+import {RecipeViewComponent} from "../recipe-view/recipe-view.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-recipe-card',
@@ -49,6 +51,18 @@ export class RecipeCardComponent {
     ]
   );
 
+  constructor(
+    private dialog: MatDialog,
+    )
+  { }
+
   deleteRecipe() {}
   editRecipe() {}
+
+  openRecipe(recipe: Recipe) {
+    const dialogRef = this.dialog.open(RecipeViewComponent, {
+      data: {recipe},
+    });
+  }
 }
+

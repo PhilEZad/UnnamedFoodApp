@@ -8,26 +8,26 @@
     </div>
 
     <div class="searchContainer">
-      <input placeholder="Search" type="text" />
-      <button mat-button class="matFabSearchBtn">
+      <input placeholder="Search" type="text" [(ngModel)]="searchText"/>
+     <!-- <button mat-button class="matFabSearchBtn">
         <mat-icon>search</mat-icon>
-        <!-- filter with autocomplete -->
-      </button>
+        filter with autocomplete
+      </button> -->
       <div style="padding: 20px;"></div>
-      <label class="sortLabel">Alphabetical </label>
+      <label class="sortLabel" [(ngModel)]="currentSortingLabel"> </label>
         <button mat-button [matMenuTriggerFor]="menu" class="sort-button">
           <mat-icon> sort </mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <mat-icon>restaurant_menu</mat-icon>
-            <span> Calories </span>
-          </button>
-          <button mat-menu-item>
+          <button mat-menu-item (click)="sortRecipes(sortingTypes.Alphabetical)">
             <mat-icon>sort_by_alpha</mat-icon>
             <span> Alphabetical </span>
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item (click)="sortRecipes(sortingTypes.Calories)">
+            <mat-icon>restaurant_menu</mat-icon>
+            <span> Calories </span>
+          </button>
+          <button mat-menu-item (click)="sortRecipes(sortingTypes.Date)">
             <mat-icon>date_range</mat-icon>
             <span> Date Added </span>
           </button>
@@ -41,7 +41,7 @@
 
 <div class="parentContainer">
   <div class="flexContainer">
-    <div [@inOutAnimation] *ngFor="let recipe of recipes">
+    <div [@inOutAnimation] *ngFor="let recipe of recipes | recipeFilter : searchText | sorting : currentSorting">
       <app-recipe-card
         [recipeNumber]="recipeIndex(recipe)"
         [recipe]="recipe"

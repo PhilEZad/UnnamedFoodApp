@@ -10,13 +10,13 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class RecipeViewComponent {
 
   recipe: Recipe = Recipe.emptyRecipe();
-/*
+
   constructor(
     public dialogRef: MatDialogRef<RecipeViewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.recipe = data.recipe;
   }
-*/
+
 
 }

@@ -26,6 +26,9 @@ import { HomeComponent } from './screens/home/home.component';
 import { RecipeBookScreenComponent } from './screens/recipe-book-screen/recipe-book-screen.component';
 import { IonicModule } from '@ionic/angular';
 import { RecipeViewComponent } from './components/recipe-view/recipe-view.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { RecipeFilterPipe } from './pipes/recipe-filter.pipe';
+import { SortingPipe } from './pipes/sorting-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ import { RecipeViewComponent } from './components/recipe-view/recipe-view.compon
     NavigationBarComponent,
     HomeComponent,
     RecipeViewComponent,
+    RecipeFilterPipe,
+    SortingPipe,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +62,7 @@ import { RecipeViewComponent } from './components/recipe-view/recipe-view.compon
     MatMenuModule,
     IonicModule,
     MatToolbarModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

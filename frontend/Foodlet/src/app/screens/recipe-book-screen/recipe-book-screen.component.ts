@@ -1,15 +1,9 @@
-import { RecipeViewComponent } from './../../components/recipe-view/recipe-view.component';
-import { Component } from '@angular/core';
-import { Recipe } from '../../../domain/Recipe';
-import {
-  animate,
-  keyframes,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {Component} from '@angular/core';
+import {Recipe} from '../../../domain/Recipe';
+import {ESortingTypes} from "../../../domain/ESortingTypes";
+
+import {animate, keyframes, state, style, transition, trigger,} from '@angular/animations';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-recipe-book-screen',
@@ -47,7 +41,9 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog
 })
 export class RecipeBookScreenComponent {
 
-  currentSorting: string = 'Alphabetical';
+  currentSorting: ESortingTypes = ESortingTypes.Alphabetical;
+  searchText: string = "";
+  currentSortingLabel: string = "Alphabetical"
 
   recipes: Recipe[] = [
     new Recipe(
@@ -91,9 +87,12 @@ export class RecipeBookScreenComponent {
     ),
   ];
 
+
   constructor(
-    //private dialog: MatDialog,
-    ) {}
+    private dialog: MatDialog,
+  ) {
+    this.sortRecipes(ESortingTypes.Alphabetical);
+  }
 
   recipeIndex(recipe: Recipe): number {
     return this.recipes.indexOf(recipe) + 1;
@@ -103,13 +102,31 @@ export class RecipeBookScreenComponent {
     this.recipes.push(new Recipe('New Recipe', 1, [], []));
   }
 
-/*
-  openRecipe(recipe: Recipe) {
-    const dialogRef = this.dialog.open(RecipeViewComponent, {
-      data: {recipe},
-    });
+  sortRecipes(sortingType: ESortingTypes) {
+    switch (sortingType) {
+      case ESortingTypes.Alphabetical:
+        this.currentSorting = ESortingTypes.Alphabetical
+        this.currentSortingLabel = "Alphabetical"
+        break;
+      case ESortingTypes.Date:
+        this.currentSorting = ESortingTypes.Date
+        this.currentSortingLabel = "Date"
+        break;
+      case ESortingTypes.Calories:
+        this.currentSorting = ESortingTypes.Calories
+        this.currentSortingLabel = "Calories"
+        break;
+      default:
+        this.currentSorting = ESortingTypes.Alphabetical
+        this.currentSortingLabel = "Alphabetical"
+    }
   }
-*/
+
+  get sortingTypes() {
+    return ESortingTypes
+  }
 
 
 }
+
+
