@@ -30,8 +30,7 @@ pipeline {
             }
         }
         stage('Test') {
-            steps {
-             agent {
+            agent {
                 docker {
                     image 'foodlet'
                     args '-e action=test'
@@ -40,7 +39,6 @@ pipeline {
             steps {
                 sh "cd /app && ./entrypoint.sh"
             }
-        }
         }
         stage('Release') {
             steps {
