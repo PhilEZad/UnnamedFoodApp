@@ -1,14 +1,5 @@
-def get_credential(name) {
-  def v;
-  withCredentials([[$class: 'StringBinding', credentialsId: name, variable: 'foo']]) {
-      v = env.foo;
-  }
-  return v
-}
-
 pipeline {
     agent any
-    
     stages {
         stage('Verify Toolset') {
             steps {
@@ -26,17 +17,15 @@ pipeline {
                 sh "docker build -t foodlet ./frontend/Foodlet/"
             }
         }
-        stage('verify firebase-token')
+        stage('verify firebase token')
         {
             steps {
-                sh 'docker run foodlet -e action="firebase_check" -e firebase_token="get_credential('foodlet_firebase_token')"'
+                sh "docker run foodlet -e action=\"firebase_check\" -e firebase_token=\"1//09FDXWImVkzGICgYIARAAGAkSNwF-L9Ir5IS7SHqIvetURTqAhpQ5Dn8UCPpunta4XrlKxfJrUqg7gq7ZfHZ_BCoqUWsg8kBHoiE\""
             }
         }
         stage('Build') {
             steps {
-                withCredentials([string(credentialsId: 'foodlet_firebase_token', variable: 'SECRET')]) { 
-                    sh 'docker run foodlet -e action="build" -e firebase_token="$SECRET"'
-                }
+                sh "docker run foodlet -e action=\"build\""
             }
         }
         stage('Test') {
