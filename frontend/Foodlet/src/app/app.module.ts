@@ -26,6 +26,7 @@ import { HomeComponent } from './screens/home/home.component';
 import { RecipeBookScreenComponent } from './screens/recipe-book-screen/recipe-book-screen.component';
 import { IonicModule } from '@ionic/angular';
 import { LoginMenuComponent } from './components/login-menu/login-menu.component';
+import { CreateMenuComponent } from './components/create-menu/create-menu.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { LoginMenuComponent } from './components/login-menu/login-menu.component
     NavigationBarComponent,
     HomeComponent,
     LoginMenuComponent,
+    CreateMenuComponent,
   ],
   imports: [
     BrowserModule,
