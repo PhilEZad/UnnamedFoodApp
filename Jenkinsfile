@@ -2,7 +2,6 @@ pipeline {
     agent { 
         dockerfile {
             dir 'frontend/Foodlet/'
-            label 'foodlet'
         }
     }
     stages {
