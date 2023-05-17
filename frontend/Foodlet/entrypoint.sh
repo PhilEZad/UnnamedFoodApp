@@ -22,5 +22,5 @@ fi
 
 if [ "$action" == "deploy" ]
 then
-    firebase deploy --token "1//09FDXWImVkzGICgYIARAAGAkSNwF-L9Ir5IS7SHqIvetURTqAhpQ5Dn8UCPpunta4XrlKxfJrUqg7gq7ZfHZ_BCoqUWsg8kBHoiE"
+    firebase deploy --token $firebase_token
 fi

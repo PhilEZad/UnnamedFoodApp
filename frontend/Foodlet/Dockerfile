@@ -11,5 +11,6 @@ RUN chmod +x entrypoint.sh
 
 RUN npm install
 ENV action="build"
+ENV firebase_token=""
 # run main script
 ENTRYPOINT ["./entrypoint.sh"]
