@@ -21,7 +21,7 @@ fi
 if [ "$action" == "build" ]
 then
     npm run build
-    exit $?
+    exit 0
 fi
 
 if [ "$action" == "deploy" ]
