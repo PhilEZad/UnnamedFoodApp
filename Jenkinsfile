@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Create docker image') {
             steps {
-                sh "docker build -f fronted/Foodlet/dockerfile -t foodlet"
+                sh "docker build -t foodlet ./frontend/Foodlet/"
             }
         }
         stage('Build') {
