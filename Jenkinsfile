@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo '$TOKEN'
+                echo '${TOKEN}'
                 sh "docker run foodlet -e action=\"build\" -e token=\"${TOKEN}\""
             }
         }
