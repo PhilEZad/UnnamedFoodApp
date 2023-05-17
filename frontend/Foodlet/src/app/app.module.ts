@@ -40,6 +40,7 @@ import { RecipeCardCompactComponent } from './components/recipe-card-compact/rec
 import { RecipePickerComponent } from './components/recipe-picker/recipe-picker.component';
 import { LoginMenuComponent } from './components/login-menu/login-menu.component';
 import { CreateMenuComponent } from './components/create-menu/create-menu.component';
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   exports: [

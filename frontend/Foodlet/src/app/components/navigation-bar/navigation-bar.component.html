@@ -1,47 +1,25 @@
-<div class="toolbar">
-  <div class="toolbar__logo">
-    <a [routerLink]="['/home']">
-      <img src=".\assets\logo.png" class="logo" alt="logo" />
-    </a>
-  </div>
-  <span class="small-spacer"></span>
-  <button mat-button class="navigation-button" [routerLink]="['/home']">
-    <span>
-      <mat-icon class="mat-18">home</mat-icon>
-      <label>Home</label>
-    </span>
-  </button>
-  <button mat-button class="navigation-button" [routerLink]="['/recipes']">
-    <span>
-      <mat-icon class="mat-18">book</mat-icon>
-      <label>Recipe Book</label>
-    </span>
-  </button>
-  <button mat-button class="navigation-button" [routerLink]="['/plan']">
-    <span>
-      <mat-icon class="mat-18">restaurant_menu</mat-icon>
-      <label>Meal Plan</label>
-    </span>
-  </button>
-  <span class="spacer"></span>
-  <div *ngIf="true; then isUser; else anonymous"></div>
-  <!-- TODO: FireAuth query -->
+<div class="flex-toolbar">
+  <mat-toolbar class="mat-toolbar-single-row" color="primary">
+    <span>Foodlet</span>
+    <span class="small-spacer"></span>
+    <button mat-button routerLink="/home">Home</button>
+    <button mat-button routerLink="/recipes">Recipes</button>
+    <button mat-button routerLink="/plan">Planner</button>
+    <span class="spacer"></span>
+    <div *ngIf="false; then isUser; else anonymous"></div>
+    <!-- TODO: FireAuth query -->
+  </mat-toolbar>
 </div>
 
 <ng-template #isUser>
-  <button mat-button class="navigation-button" [matMenuTriggerFor]="menu">
-    <span>
-      <mat-icon class="mat-18">person</mat-icon>
-      <label>Profile</label>
-    </span>
-  </button>
+  <button mat-button [matMenuTriggerFor]="menu">Profile</button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="/settings">Preferences</button>
-    <button mat-menu-item routerLink="/Logout">Logout</button>
+    <button mat-menu-item (click)="signOut()">Logout</button>
   </mat-menu>
 </ng-template>
 
 <ng-template #anonymous>
-  <button mat-button routerLink="/login">Login</button>
-  <button mat-button routerLink="/register">Register</button>
+  <button mat-button (click)="loginMenu()">Login</button>
+  <button mat-button (click)="registerMenu()">Register</button>
 </ng-template>

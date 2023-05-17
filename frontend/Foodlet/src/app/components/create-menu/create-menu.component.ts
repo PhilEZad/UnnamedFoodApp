@@ -10,6 +10,7 @@ export class CreateMenuComponent {
   registerEmail: any;
   registerPassword: any;
   registerPasswordConfirm: any;
+  registerName: any;
 
   constructor(private authService: FireAuthService) {
   }

@@ -1,5 +1,8 @@
-<p>create-menu works!</p>
+<p>Register Account</p>
 <div>
+  <div>
+    <input type="text" name="registerName" placeholder="Full Name" [(ngModel)]="registerName"/>
+  </div>
   <div>
     <input type="email" name="registerEmail" placeholder="Email" [(ngModel)]="registerEmail"/>
   </div>
@@ -10,8 +13,6 @@
     <input type="password" name="confirmPassword" placeholder="Confirm Password" [(ngModel)]="registerPasswordConfirm"/>
   </div>
   <div>
-    <button mat-raised-button type="button" name="buttonLoginMenu">Back</button>
-
-    <button mat-raised-button type="button" name="buttonCreateAccount" (click)="createAccount()">Create</button>
+    <button mat-raised-button type="button" name="buttonCreateAccount" (click)="createAccount()">Register</button>
   </div>
 </div>
