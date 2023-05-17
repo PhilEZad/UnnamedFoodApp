@@ -25,20 +25,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HomeComponent } from './screens/home/home.component';
 import { RecipeBookScreenComponent } from './screens/recipe-book-screen/recipe-book-screen.component';
 import { IonicModule } from '@ionic/angular';
-import { RecipeViewComponent } from './components/recipe-view/recipe-view.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { RecipeFilterPipe } from './pipes/recipe-filter.pipe';
-import { SortingPipe } from './pipes/sorting-pipe.pipe';
-import {CdkAccordionModule} from "@angular/cdk/accordion";
-import { IngredientAccordionComponent } from './components/recipe-view/ingridient-accordion/ingredient-accordion.component';
-import {MatExpansionModule} from "@angular/material/expansion";
-import { MealPlanScreenComponent } from './screens/meal-plan-screen/meal-plan-screen.component';
 import { LoginMenuComponent } from './components/login-menu/login-menu.component';
-import { CreateMenuComponent } from './components/create-menu/create-menu.component';
-import { MatRadioModule } from "@angular/material/radio";
-import { AngularFireModule } from "@angular/fire/compat";
-import { AngularFireAuthModule} from "@angular/fire/compat/auth";
-import {environment} from "../environments/firebaseConfig";
 
 @NgModule({
   declarations: [
@@ -52,20 +39,12 @@ import {environment} from "../environments/firebaseConfig";
     RecipeBookScreenComponent,
     NavigationBarComponent,
     HomeComponent,
-    RecipeViewComponent,
-    RecipeFilterPipe,
-    SortingPipe,
-    IngredientAccordionComponent,
-    MealPlanScreenComponent,
     LoginMenuComponent,
-    CreateMenuComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
     MatCardModule,
     MatButtonModule,
     MatTableModule,
@@ -78,10 +57,6 @@ import {environment} from "../environments/firebaseConfig";
     MatMenuModule,
     IonicModule,
     MatToolbarModule,
-    MatDialogModule,
-    CdkAccordionModule,
-    MatExpansionModule,
-    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
