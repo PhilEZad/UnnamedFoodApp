@@ -43,7 +43,7 @@ export class RecipeBookScreenComponent {
 
   currentSorting: ESortingTypes = ESortingTypes.Alphabetical;
   searchText: string = "";
-  currentSortingLabel: string = "Alphabetical"
+  currentSortingLabel: string = "Alphabetical"  //TODO FIX
 
   recipes: Recipe[] = [
     new Recipe(
