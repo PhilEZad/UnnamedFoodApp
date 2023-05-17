@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('verify firebase token') {
             steps {
-                ls
+                sh ls
                 sh action="firebase_check"
                 sh "./entrypoint.sh"
             }
