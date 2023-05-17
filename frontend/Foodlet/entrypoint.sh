@@ -27,5 +27,5 @@ fi
 
 if [ "$action" == "firebase_check" ]
 then
-    firebase list --token $firebase_token
+    firebase login:list --token $firebase_token
 fi
