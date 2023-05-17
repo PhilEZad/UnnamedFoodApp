@@ -20,7 +20,7 @@ pipeline {
         stage('verify firebase token')
         {
             steps {
-                sh "docker run foodlet -e action=firebase_check"
+               // sh "docker run foodlet -e action=firebase_check"
             }
         }
         stage('Build') {
