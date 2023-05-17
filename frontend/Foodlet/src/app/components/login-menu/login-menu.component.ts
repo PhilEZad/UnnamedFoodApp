@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FireAuthService } from "../../../services/fire-auth.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-login-menu',
@@ -10,10 +11,13 @@ export class LoginMenuComponent {
   loginMail: any;
   loginPassword: any;
 
-  constructor(private authService: FireAuthService) {
+  constructor(
+    private authService: FireAuthService,
+    private dialogRef: MatDialog) {
   }
 
   loginAccount() {
     this.authService.signIn(this.loginMail, this.loginPassword)
+    this.dialogRef.closeAll()
   }
 }
