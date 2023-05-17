@@ -14,7 +14,7 @@ pipeline {
                 }
             }
             steps {
-                sh "ls"
+                sh "cd /app && ls"
             }
         }
         stage('Build') {
