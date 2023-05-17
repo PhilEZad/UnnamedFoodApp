@@ -40,6 +40,7 @@ fi
 
 if [ "$action" == "firebase_check" ]
 then
+    echo "Checking if firebase token is valid."
     # grep      = find lines in output matching regex
     # head -c1  = select first character in stdio
     # wc -c     = true if any character else false
