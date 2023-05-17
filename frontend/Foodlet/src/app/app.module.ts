@@ -27,6 +27,7 @@ import { RecipeBookScreenComponent } from './screens/recipe-book-screen/recipe-b
 import { IonicModule } from '@ionic/angular';
 import { LoginMenuComponent } from './components/login-menu/login-menu.component';
 import { CreateMenuComponent } from './components/create-menu/create-menu.component';
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { CreateMenuComponent } from './components/create-menu/create-menu.compon
     MatMenuModule,
     IonicModule,
     MatToolbarModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
