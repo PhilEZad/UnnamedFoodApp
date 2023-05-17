@@ -29,7 +29,7 @@ pipeline {
         stage('verify firebase-token')
         {
             steps {
-                sh docker run foodlet -e action="firebase_check" -e firebase_token="get_credential('foodlet_firebase_token')"
+                sh 'docker run foodlet -e action="firebase_check" -e firebase_token="get_credential('foodlet_firebase_token')"'
             }
         }
         stage('Build') {
