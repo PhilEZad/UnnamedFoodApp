@@ -10,12 +10,10 @@ export class LoginMenuComponent {
   loginMail: any;
   loginPassword: any;
 
-
-  createAccount() {
-
+  constructor(private authService: FireAuthService) {
   }
 
   loginAccount() {
-
+    this.authService.signIn(this.loginMail, this.loginPassword)
   }
 }

@@ -1,36 +1,28 @@
 import { Injectable } from '@angular/core';
 import firebase from "firebase/compat";
 import 'firebase/compat/auth';
-
-import * as config from '../firebaseConfig.js'
+import {FireService} from "./fire.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FireAuthService {
 
-  auth: firebase.auth.Auth;
-
-  constructor() {
-    this.auth = firebase.auth();
-    this.auth.onAuthStateChanged((user) =>{
-      if (user) {
-
-      }
-    })
+  constructor(private firebase: FireService) {
+    if (firebase.auth.currentUser==null) {}
   }
 
   register(email: string, password: string)
   {
-    this.auth.createUserWithEmailAndPassword(email, password);
+    this.firebase.auth.createUserWithEmailAndPassword(email, password);
   }
 
   signIn(email: string, password: string)
   {
-    this.auth.signInWithEmailAndPassword(email, password)
+    this.firebase.auth.signInWithEmailAndPassword(email, password)
   }
 
   signOut(){
-    this.auth.signOut();
+    this.firebase.auth.signOut();
   }
 }

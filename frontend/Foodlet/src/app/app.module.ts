@@ -39,6 +39,7 @@ import { MealPlanScreenComponent } from './screens/meal-plan-screen/meal-plan-sc
 import { RecipeCardCompactComponent } from './components/recipe-card-compact/recipe-card-compact.component';
 import { RecipePickerComponent } from './components/recipe-picker/recipe-picker.component';
 import { LoginMenuComponent } from './components/login-menu/login-menu.component';
+import { CreateMenuComponent } from './components/create-menu/create-menu.component';
 
 @NgModule({
   exports: [
@@ -79,6 +80,7 @@ import { LoginMenuComponent } from './components/login-menu/login-menu.component
     RecipeCardCompactComponent,
     RecipePickerComponent,
     LoginMenuComponent,
+    CreateMenuComponent,
   ],
   imports: [
     MatSelectModule,

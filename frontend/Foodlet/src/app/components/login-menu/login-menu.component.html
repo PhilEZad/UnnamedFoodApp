@@ -1,13 +1,13 @@
 <p>login-menu works!</p>
 <div>
   <div>
-    <input type="text" [(ngModel)]="loginMail"/>
+    <input placeholder="Email" type="email" [(ngModel)]="loginMail"/>
   </div>
   <div>
-    <input type="text" [(ngModel)]="loginPassword"/>
+    <input placeholder="Password" type="password" [(ngModel)]="loginPassword"/>
   </div>
   <div>
-    <button mat-raised-button type="button" name="buttonCreate" (click)="createAccount()">Create</button>
+    <button mat-raised-button type="button" name="buttonCreateMenu" (click)="createAccount()">Create</button>
 
     <button mat-raised-button type="button" name="buttonLogin" (click)="loginAccount()">Login</button>
   </div>
