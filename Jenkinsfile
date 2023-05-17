@@ -1,12 +1,13 @@
 pipeline {
     agent any
     
-    environment {
-        withCredentials([string(credentialsId: 'foodlet_firebase_token', variable: 'SECRET')]) { 
-            TOKEN = '${SECRET}'
-        }
-    }
     stages {
+        environment {
+            withCredentials([string(credentialsId: 'foodlet_firebase_token', variable: 'SECRET')]) { 
+                TOKEN = '${SECRET}'
+            }
+        }
+
         stage('Verify Toolset') {
             steps {
                 sh '''
