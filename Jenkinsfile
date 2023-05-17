@@ -48,7 +48,6 @@ pipeline {
         }
     }
     post {
-        agent any
         always {
             sh 'whoami'
         }
