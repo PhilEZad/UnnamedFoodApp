@@ -11,15 +11,19 @@ pipeline {
                 curl --version
                 jq --version
                 '''
-
-                withCredentials([string(credentialsId: 'foodlet_firebase_token', variable: 'SECRET')]) { 
-                    sh "docker run foodlet -e action=\"firebase_check\" -e firebase_token=\"\""
-                }
             }
         }
         stage('Create docker image') {
             steps {
                 sh "docker build -t foodlet ./frontend/Foodlet/"
+            }
+        }
+        stage('verify firebase-token')
+        {
+            steps {
+                withCredentials([string(credentialsId: 'foodlet_firebase_token', variable: 'SECRET')]) { 
+                    sh "docker run foodlet -e action=\"firebase_check\" -e firebase_token=\"\""
+                }
             }
         }
         stage('Build') {
