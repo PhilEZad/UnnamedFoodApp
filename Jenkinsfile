@@ -17,15 +17,14 @@ pipeline {
                 sh "docker build -t foodlet ./frontend/Foodlet/"
             }
         }
-        stage('verify firebase token')
-        {
+        stage('verify firebase token') {
             steps {
-               sh "docker run foodlet -e action=firebase_check"
+                sh "docker run -e action=firebase_check foodlet"
             }
         }
         stage('Build') {
             steps {
-                sh "docker run foodlet -e action=build"
+                sh "docker run -e action=build foodlet"
             }
         }
         stage('Test') {
