@@ -41,12 +41,14 @@ pipeline {
             }
         }
         stage('Release') {
+            agent any
             steps {
                 echo 'TBD'
             }
         }
     }
     post {
+        agent any
         always {
             sh 'whoami'
         }
