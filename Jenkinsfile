@@ -14,7 +14,8 @@ pipeline {
                 }
             }
             steps {
-                sh "cd /app && ls"
+                sh "action=firebase_check"
+                sh "cd /app && ./entrypoint.sh"
             }
         }
         stage('Build') {
