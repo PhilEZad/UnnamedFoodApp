@@ -1,6 +1,11 @@
 pipeline {
     agent any
     
+    environment {
+        withCredentials([string(credentialsId: 'foodlet_firebase_token', variable: 'SECRET')]) { 
+            TOKEN = '${SECRET}'
+        }
+    }
     stages {
         stage('Verify Toolset') {
             steps {
@@ -20,7 +25,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh "docker run foodlet -e action=\"build\""
+                echo '$TOKEN'
+                sh "docker run foodlet -e action=\"build\" -e token=\"${TOKEN}\""
             }
         }
         stage('Test') {
