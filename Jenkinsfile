@@ -19,13 +19,26 @@ pipeline {
             }
         }
         stage('Build') {
+            agent {
+                docker {
+                    image 'foodlet'
+                    args '-e action=build'
+                }
+            }
             steps {
-                sh "docker run foodlet -e action=build"
+                sh "cd /app && ./entrypoint.sh"
             }
         }
         stage('Test') {
             steps {
-                echo 'TBD'
+             agent {
+                docker {
+                    image 'foodlet'
+                    args '-e action=test'
+                }
+            }
+            steps {
+                sh "cd /app && ./entrypoint.sh"
             }
         }
         stage('Release') {
