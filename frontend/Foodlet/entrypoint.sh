@@ -22,10 +22,10 @@ fi
 
 if [ "$action" == "deploy" ]
 then
-    firebase deploy --token '$firebase_token'
+    firebase deploy --token $firebase_token
 fi
 
 if [ "$action" == "firebase_check" ]
 then
-    firebase list --token '$firebase_token'
+    firebase list --token $firebase_token
 fi
