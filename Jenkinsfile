@@ -50,9 +50,9 @@ pipeline {
     }
     post {
         always {
-            junit "tests/**/junit-test-results.xml"
-            cobertura coberturaReportFile: 'coverage/cobertura.xml'
             echo 'Post Actions'
+            junit "tests/**/junit-test-results.xml"
+            cobertura coberturaReportFile: 'coverage/cobertura.txt'
         }
     }
 }
