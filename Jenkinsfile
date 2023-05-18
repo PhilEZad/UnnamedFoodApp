@@ -26,7 +26,6 @@ pipeline {
         stage('Test') {
             steps {
                 sh "cd /app && ./entrypoint.sh test"
-                junit "/var/jenkins/artifacts/foodlet/**/junit-test-results.xml"
             }
         }
         stage('Release') {
@@ -38,6 +37,7 @@ pipeline {
     post {
         always {
             echo 'Post Actions'
+            junit "/var/jenkins/artifacts/foodlet/tests/**/junit-test-results.xml"
         }
     }
 }
