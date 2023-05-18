@@ -15,7 +15,7 @@ pipeline {
                 }
             }
             steps {
-                sh whoami
+                sh "whoami"
                 sh "cd /app && ./entrypoint.sh"
             }
         }
