@@ -27,6 +27,7 @@ pipeline {
         }
         stage('Test') {
             steps {
+                echo "${env.WORKSPACE}"
                 sh "export action=test"
                 sh "cd /app && ./entrypoint.sh"
                 junit "/app/artifacts/tests/**/junit-test-results.xml"
