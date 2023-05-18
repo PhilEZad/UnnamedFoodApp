@@ -1,46 +1,32 @@
 pipeline {
-    agent none
-    stages {
-        stage('Create docker image') {
-            agent any
-            steps {
-                sh "docker build -t foodlet ./frontend/Foodlet/"
-            }
+    agent {
+        docker {
+            dockerfile "frontend/Foodlet"
+            args '-u root:root -d -t'
         }
+    }
+    stages {
+        //stage('Create docker image') {
+        //    agent any
+        //    steps {
+        //        sh "docker build -t foodlet ./frontend/Foodlet/"
+        //    }
+        //}
         stage('verify firebase token') {
-            agent {
-                docker {
-                    image 'foodlet'
-                    args '-u root:root -e action=firebase_check'
-                    reuseNode true
-                }
-            }
             steps {
-                sh "whoami"
+                sh "export action=firebase_check"
                 sh "cd /app && ./entrypoint.sh"
             }
         }
         stage('Build') {
-            agent {
-                docker {
-                    image 'foodlet'
-                    args '-u root:root -e action=build'
-                    reuseNode true
-                }
-            }
             steps {
+                sh "export action=build"
                 sh "cd /app && ./entrypoint.sh"
             }
         }
         stage('Test') {
-            agent {
-                docker {
-                    image 'foodlet'
-                    args '-u root:root -e action=test'
-                    reuseNode true
-                }
-            }
             steps {
+                sh "export action=test"
                 sh "cd /app && ./entrypoint.sh"
                 junit "/app/artifacts/tests/**/junit-test-results.xml"
             }
