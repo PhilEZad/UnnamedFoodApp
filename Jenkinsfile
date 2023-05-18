@@ -27,7 +27,7 @@ pipeline {
             steps {
                 echo "${env.WORKSPACE}"
                 sh "cd /app && ./entrypoint.sh test"
-                sh "docker cp foodlet_container:/app/artifacts/. ${env.WORKSPACE}/artifacts/"
+                docker "cp foodlet_container:/app/artifacts/. ${env.WORKSPACE}/artifacts/"
                 junit "${env.WORKSPACE}/artifacts/**/junit-test-results.xml"
             }
         }
@@ -40,7 +40,7 @@ pipeline {
     post {
         always {
             echo 'Post Actions'
-            sh 'docker stop foodlet_container'
+            docker stop foodlet_container
         }
     }
 }
