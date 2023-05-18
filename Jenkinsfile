@@ -4,6 +4,7 @@ pipeline {
         stage('Create docker image') {
             agent any
             steps {
+                sh "whoami"
                 sh "docker build -t foodlet ./frontend/Foodlet/"
             }
         }
@@ -49,7 +50,6 @@ pipeline {
     }
     post {
         always {
-            sh 'whoami'
         }
     }
 }
