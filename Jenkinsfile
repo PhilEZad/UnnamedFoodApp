@@ -20,6 +20,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh "cd /app && ./entrypoint.sh test"
+                sh "docker cp foodlet_container:/app/artifacts/ ."
             }
         }
         stage('Release') {
@@ -30,7 +31,6 @@ pipeline {
     }
     post {
         success {
-            docker cp foodlet_container:/app/artifacts/ .
             junit "junit-test-results.xml"
         }
         always {
