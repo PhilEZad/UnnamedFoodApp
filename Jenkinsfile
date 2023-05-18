@@ -32,7 +32,7 @@ pipeline {
         stage('Test') {
             agent docker {
                 image 'foodlet'
-                args '-u root:root'
+                args '-u root:root -v /var/lib/jenkins/workspace/UnnamedFoodApp:/app/artifacts'
                 reuseNode true
             }
             steps {
