@@ -12,6 +12,7 @@ pipeline {
                 docker {
                     image 'foodlet'
                     args '-u root:root -e action=firebase_check'
+                    reuseNode true
                 }
             }
             steps {
@@ -24,6 +25,7 @@ pipeline {
                 docker {
                     image 'foodlet'
                     args '-u root:root -e action=build'
+                    reuseNode true
                 }
             }
             steps {
@@ -35,6 +37,7 @@ pipeline {
                 docker {
                     image 'foodlet'
                     args '-u root:root -e action=test'
+                    reuseNode true
                 }
             }
             steps {
