@@ -1,30 +1,30 @@
 #!/bin/bash
 
-if [ "$action" == "test" ]
+if [ "$1" == "test" ]
 then
     npm run test
     exit 0
 fi
 
-if [ "$action" == "lint" ]
+if [ "$1" == "lint" ]
 then
     npm run lint
     exit 0
 fi
 
-if [ "$action" == "e2e" ]
+if [ "$1" == "e2e" ]
 then
     npm run e2e
     exit 0
 fi
 
-if [ "$action" == "build" ]
+if [ "$1" == "build" ]
 then
     npm run build
     exit 0
 fi
 
-if [ "$action" == "deploy" ]
+if [ "$1" == "deploy" ]
 then
     # if firebase_check has passed we can assume it is safe to call here
     firebase use "foodlet-a2c4b" --token "$firebase_token"
@@ -38,10 +38,10 @@ then
 fi
 
 
-if [ "$action" == "firebase_check" ]
+if [ "$1" == "firebase_check" ]
 then
     echo "Checking if firebase token is valid."
-    echo "action = $action"
+    echo "1 = $1"
     echo "token = $firebase_token"
 
     ## todo: fix token
@@ -57,5 +57,5 @@ then
     exit $? # reemit current system error code
 fi
 
-echo "invalid action environment variable [$action]"
+echo "invalid 1 environment variable [$1]"
 exit 127 # no program with that name (no valid action is present)

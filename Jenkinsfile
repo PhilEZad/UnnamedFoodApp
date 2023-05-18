@@ -15,21 +15,18 @@ pipeline {
         //}
         stage('verify firebase token') {
             steps {
-                sh "export action=firebase_check"
-                sh "cd /app && ./entrypoint.sh"
+                sh "cd /app && ./entrypoint.sh firebase_check"
             }
         }
         stage('Build') {
             steps {
-                sh "export action=build"
-                sh "cd /app && ./entrypoint.sh"
+                sh "cd /app && ./entrypoint.sh build"
             }
         }
         stage('Test') {
             steps {
                 echo "${env.WORKSPACE}"
-                sh "export action=test"
-                sh "cd /app && ./entrypoint.sh"
+                sh "cd /app && ./entrypoint.sh test"
                 junit "/app/artifacts/tests/**/junit-test-results.xml"
             }
         }
