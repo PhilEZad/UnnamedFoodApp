@@ -7,12 +7,6 @@ pipeline {
         }
     }
     stages {
-        //stage('Create docker image') {
-        //    agent any
-        //    steps {
-        //        sh "docker build -t foodlet ./frontend/Foodlet/"
-        //    }
-        //}
         stage('verify firebase token') {
             steps {
                 sh "cd /app && ./entrypoint.sh firebase_check"
@@ -35,12 +29,13 @@ pipeline {
         }
     }
     post {
+        success {
+            docker cp foodlet_container:/app/artifacts/foodlet/ ${env.WORKSPACE}
+            junit "junit-test-results.xml"
+        }
         always {
             echo 'Post Actions'
-            sh "docker cp foodlet_container:/app/artifacts/foodlet/ ${env.WORKSPACE}"
-            junit "junit-test-results.xml"
-
-            sh "docker rm -f foodlet_container"
+            docker rm -f foodlet_container
         }
     }
 }
