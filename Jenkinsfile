@@ -1,26 +1,45 @@
 pipeline {
     agent any
+
     stages {
-        stage('Verify Toolset') {
+        stage('build image')
+        {
+            agent any
             steps {
-                sh '''
-                docker version
-                docker info
-                docker compose version
-                curl --version
-                jq --version
-                '''
+                sh "docker build -t foodlet frontend/Foodlet"
+            }
+        }
+        stage('verify firebase token') {
+            agent { 
+                docker {
+                    image 'foodlet'
+                    args '-u root:root -v /var/lib/jenkins/workspace/UnnamedFoodApp:/app/artifacts'
+                } 
+            }
+            steps {
+                sh "cd /app && ./entrypoint.sh firebase_check"
             }
         }
         stage('Build') {
+            agent { 
+                docker {
+                    image 'foodlet'
+                    args '-u root:root -v /var/lib/jenkins/workspace/UnnamedFoodApp:/app/artifacts'
+                } 
+            }
             steps {
-		    		sh "docker-compose build"
-				sh "docker-compose -f Foodlet-compose.yml up -d"
+                sh "cd /app && ./entrypoint.sh build"
             }
         }
         stage('Test') {
+            agent { 
+                docker {
+                    image 'foodlet'
+                    args '-u root:root -v /var/lib/jenkins/workspace/UnnamedFoodApp:/app/artifacts'
+                } 
+            }
             steps {
-                echo 'TBD'
+                sh "cd /app && ./entrypoint.sh test"
             }
         }
         stage('Release') {
@@ -28,13 +47,11 @@ pipeline {
                 echo 'TBD'
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'TBD'
-            }
-        }
     }
     post {
+        success {
+            junit "tests/**/junit-test-results.xml"
+        }
         always {
             echo 'Post Actions'
         }

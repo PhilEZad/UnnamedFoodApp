@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "node node_modules/puppeteer/install.js && ng test"
   },
   "private": true,
   "dependencies": {
@@ -23,11 +23,14 @@
     "@ionic/angular": "^7.0.5",
     "@ng-icons/core": "^25.0.1",
     "@ng-icons/material-icons": "^25.0.1",
+    "audit": "^0.0.6",
     "axios": "^1.4.0",
     "firebase": "^9.21.0",
+    "fix": "^0.0.6",
     "lodash": "^4.17.21",
     "material-theme-creator": "^3.2.1",
     "ng2-charts": "^4.1.1",
+    "puppeteer-core": "^20.2.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
@@ -37,12 +40,20 @@
     "@angular/cli": "~15.2.7",
     "@angular/compiler-cli": "^15.2.0",
     "@types/jasmine": "~4.3.0",
+    "@types/karma-chrome-launcher": "^3.1.1",
+    "@types/karma-coverage": "^2.0.1",
+    "@types/karma-jasmine": "^4.0.2",
+    "@types/karma-jasmine-html-reporter": "^1.7.0",
+    "@types/karma-junit-reporter": "^2.0.1",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "karma-junit-reporter": "^2.0.1",
+    "karma-puppeteer-launcher": "^1.0.4",
+    "puppeteer": "^20.2.1",
     "typescript": "~4.9.4"
   }
 }
