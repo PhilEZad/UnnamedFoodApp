@@ -50,8 +50,6 @@ pipeline {
     }
     post {
         success {
-            echo "number: ${env.BUILD_NUMBER}"
-            echo "workspace: ${env.WORKSPACE}"
             junit "tests/**/junit-test-results.xml"
         }
         always {

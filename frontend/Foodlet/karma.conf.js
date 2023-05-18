@@ -26,17 +26,15 @@ module.exports = function (config) {
       suppressAll: true, // removes the duplicated traces
     },
     coverageReporter: {
-      dir: "build/reports/coverage",
+      dir: require("path").join(__dirname, "artifacts/coverage"),
       reporters: [
         { type: "html", subdir: "report-html" },
         { type: "cobertura", subdir: ".", file: "cobertura.txt" },
       ],
-      dir: require("path").join(__dirname, "artifacts/coverage"),
     },
     junitReporter: {
       outputDir: require("path").join(__dirname, "artifacts/tests"),
       outputFile: "junit-test-results.xml",
-      
     },
     reporters: ["coverage", "junit"],
     port: 9876,
