@@ -49,10 +49,8 @@ pipeline {
         }
     }
     post {
-        success {
-            junit "tests/**/junit-test-results.xml"
-        }
         always {
+            junit "tests/**/junit-test-results.xml"
             echo 'Post Actions'
         }
     }
