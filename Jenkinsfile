@@ -3,7 +3,7 @@ pipeline {
         dockerfile {
             filename 'Dockerfile'
             dir 'frontend/Foodlet'
-            args '-u root:root --name foodlet_container -v /var/run/docker.sock:/var/run/docker.sock:rw -v /var/jenkins/artifacts/foodlet/:/app/artifacts/'
+            args '-u root:root --name foodlet_container'
         }
     }
     stages {
@@ -20,7 +20,6 @@ pipeline {
         stage('Test') {
             steps {
                 sh "cd /app && ./entrypoint.sh test"
-                sh "docker cp foodlet_container:/app/artifacts/ ."
             }
         }
         stage('Release') {
