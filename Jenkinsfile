@@ -27,7 +27,8 @@ pipeline {
             steps {
                 echo "${env.WORKSPACE}"
                 sh "cd /app && ./entrypoint.sh test"
-                junit "/app/artifacts/tests/**/junit-test-results.xml"
+                docker cp foodlet:/app/artifacts/tests "${env.WORKSPACE}/artifacts"
+                junit "${env.WORKSPACE}/artifacts/**/junit-test-results.xml"
             }
         }
         stage('Release') {
