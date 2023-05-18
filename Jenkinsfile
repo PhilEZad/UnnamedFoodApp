@@ -30,7 +30,7 @@ pipeline {
     }
     post {
         success {
-            docker cp foodlet_container:/app/artifacts/foodlet/ ${env.WORKSPACE}
+            cp -Rp "/var/jenkins/artifacts/foodlet/" "${WORKSPACE}"
             junit "junit-test-results.xml"
         }
         always {
