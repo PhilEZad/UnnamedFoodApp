@@ -39,8 +39,8 @@ pipeline {
             }
             steps {
                 sh "cd /app && ./entrypoint.sh"
-                sh "ls -R /"
-                junit "/app/artifacts/tests/XXX/junit-test-results.xml"
+                sh cp "/artifacts/tests/XXX/junit-test-results.xml" "junit-test-results.xml"
+                junit "junit-test-results.xml"
             }
         }
         stage('Release') {
