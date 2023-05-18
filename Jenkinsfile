@@ -4,7 +4,6 @@ pipeline {
         stage('Create docker image') {
             agent any
             steps {
-                sh "whoami"
                 sh "docker build -t foodlet ./frontend/Foodlet/"
             }
         }
@@ -12,10 +11,11 @@ pipeline {
             agent {
                 docker {
                     image 'foodlet'
-                    args '-u root:root-e action=firebase_check'
+                    args '-u root:root -e action=firebase_check'
                 }
             }
             steps {
+                sh whoami
                 sh "cd /app && ./entrypoint.sh"
             }
         }
@@ -23,7 +23,7 @@ pipeline {
             agent {
                 docker {
                     image 'foodlet'
-                    args '-u root:root-e action=build '
+                    args '-u root:root -e action=build'
                 }
             }
             steps {
@@ -34,7 +34,7 @@ pipeline {
             agent {
                 docker {
                     image 'foodlet'
-                    args '-u root:root-e action=test'
+                    args '-u root:root -e action=test'
                 }
             }
             steps {
@@ -45,6 +45,11 @@ pipeline {
             steps {
                 echo 'TBD'
             }
+        }
+    }
+    post {
+        always {
+            echo 'Post Actions'
         }
     }
 }
