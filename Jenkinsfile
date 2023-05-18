@@ -3,7 +3,7 @@ pipeline {
         dockerfile {
             filename 'Dockerfile'
             dir 'frontend/Foodlet'
-            args '-u root:root --name foodlet_container --mount src=${env.WORKSPACE},dst=/app/artifacts,type=bind'
+            args '-u root:root --name foodlet_container'
         }
     }
     stages {
