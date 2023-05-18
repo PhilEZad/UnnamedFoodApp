@@ -3,7 +3,7 @@ pipeline {
         dockerfile {
             filename 'Dockerfile'
             dir 'frontend/Foodlet'
-            args '-u root:root --name foodlet_container'
+            args '-u root:root --name foodlet_container -v ${env.WORKSPACE}/artifacts/:/app/artifacts/'
         }
     }
     stages {
@@ -27,7 +27,6 @@ pipeline {
             steps {
                 echo "${env.WORKSPACE}"
                 sh "cd /app && ./entrypoint.sh test"
-                docker "cp foodlet_container:/app/artifacts/. ${env.WORKSPACE}/artifacts/"
                 junit "${env.WORKSPACE}/artifacts/**/junit-test-results.xml"
             }
         }
@@ -40,7 +39,6 @@ pipeline {
     post {
         always {
             echo 'Post Actions'
-            docker stop foodlet_container
         }
     }
 }
