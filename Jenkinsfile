@@ -37,7 +37,10 @@ pipeline {
     post {
         always {
             echo 'Post Actions'
-            junit "/var/jenkins/artifacts/foodlet/tests/**/junit-test-results.xml"
+            sh "docker cp foodlet_container:/app/artifacts/foodlet/ ${env.WORKSPACE}"
+            junit "junit-test-results.xml"
+
+            sh "docker rm -f foodlet_container"
         }
     }
 }
