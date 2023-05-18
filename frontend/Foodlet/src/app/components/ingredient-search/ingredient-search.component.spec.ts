@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { IngredientFilterPipe } from '../../pipes/ingredient-filter.pipe';
 import { IngredientSearchComponent } from './ingredient-search.component';
 
 describe('IngredientSearchComponent', () => {
@@ -8,9 +8,8 @@ describe('IngredientSearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IngredientSearchComponent ]
-    })
-    .compileComponents();
+      declarations: [IngredientSearchComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(IngredientSearchComponent);
     component = fixture.componentInstance;

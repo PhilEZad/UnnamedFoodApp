@@ -56,6 +56,14 @@
         "command": "cd ${cwd}/frontend/Foodlet && firebase emulators:start --project foodlet-a2c4b",
         "problemMatcher": ["$eslint-stylish"]
       }
+    },
+    {
+      "label": "Test",
+      "type": "shell",
+      "linux": {
+        "command": "cd ${cwd}/frontend/Foodlet && sudo npm run test",
+        "problemMatcher": ["$karma-jasmine2"]
+      }
     }
   ]
 }
