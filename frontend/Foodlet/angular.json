@@ -88,6 +88,9 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "karmaConfig": "karma.conf.js",
+            "codeCoverage": true,
+            "sourceMap": true,
+            "reporters": ["progress", "kjhtml", "junit"],
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",

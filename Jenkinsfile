@@ -39,6 +39,8 @@ pipeline {
             }
             steps {
                 sh "cd /app && ./entrypoint.sh"
+
+                junit "/artifacts/tests/XXX/junit-test-results.xml"
             }
         }
         stage('Release') {
