@@ -14,7 +14,6 @@ pipeline {
                 docker {
                     image 'foodlet'
                     args '-u root:root -v /var/lib/jenkins/workspace/UnnamedFoodApp:/app/artifacts'
-                    reuseNode true
                 } 
             }
             steps {
@@ -26,7 +25,6 @@ pipeline {
                 docker {
                     image 'foodlet'
                     args '-u root:root -v /var/lib/jenkins/workspace/UnnamedFoodApp:/app/artifacts'
-                    reuseNode true
                 } 
             }
             steps {
@@ -38,7 +36,6 @@ pipeline {
                 docker {
                     image 'foodlet'
                     args '-u root:root -v /var/lib/jenkins/workspace/UnnamedFoodApp:/app/artifacts'
-                    reuseNode true
                 } 
             }
             steps {
@@ -55,7 +52,7 @@ pipeline {
         success {
             echo "number: ${env.BUILD_NUMBER}"
             echo "workspace: ${env.WORKSPACE}"
-            junit "junit-test-results.xml"
+            junit "tests/**/junit-test-results.xml"
         }
         always {
             echo 'Post Actions'

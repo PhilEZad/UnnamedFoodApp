@@ -36,6 +36,7 @@ module.exports = function (config) {
     junitReporter: {
       outputDir: require("path").join(__dirname, "artifacts/tests"),
       outputFile: "junit-test-results.xml",
+      
     },
     reporters: ["coverage", "junit"],
     port: 9876,
