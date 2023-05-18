@@ -3,7 +3,7 @@ pipeline {
         dockerfile {
             filename 'Dockerfile'
             dir 'frontend/Foodlet'
-            args '-u root:root --name foodlet_container -v /var/jenkins/artifacts/foodlet/:/app/artifacts/'
+            args '-u root:root --name foodlet_container -v /var/run/docker.sock:/var/run/docker.sock:rw -v /var/jenkins/artifacts/foodlet/:/app/artifacts/'
         }
     }
     stages {
@@ -30,7 +30,7 @@ pipeline {
     }
     post {
         success {
-            cp -Rp "/var/jenkins/artifacts/foodlet/" "${WORKSPACE}"
+            docker cp foodlet_container:/app/artifacts/ .
             junit "junit-test-results.xml"
         }
         always {
