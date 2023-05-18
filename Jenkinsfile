@@ -12,7 +12,7 @@ pipeline {
             agent {
                 docker {
                     image 'foodlet'
-                    args '-u root:root -e action=firebase_check'
+                    args '-u root:root-e action=firebase_check'
                 }
             }
             steps {
@@ -23,7 +23,7 @@ pipeline {
             agent {
                 docker {
                     image 'foodlet'
-                    args '-u root:root -e action=build '
+                    args '-u root:root-e action=build '
                 }
             }
             steps {
@@ -34,7 +34,7 @@ pipeline {
             agent {
                 docker {
                     image 'foodlet'
-                    args '-u root:root -e action=test'
+                    args '-u root:root-e action=test'
                 }
             }
             steps {
@@ -42,14 +42,9 @@ pipeline {
             }
         }
         stage('Release') {
-            agent any
             steps {
                 echo 'TBD'
             }
-        }
-    }
-    post {
-        always {
         }
     }
 }
