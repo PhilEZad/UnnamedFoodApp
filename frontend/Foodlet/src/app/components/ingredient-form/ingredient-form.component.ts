@@ -15,6 +15,7 @@ export class IngredientFormComponent {
   @Input() selected: FoodItem | undefined = FoodItem.emptyFoodItem();
 
   ingredient = this.fb.group({
+    id: [this.selected?.id ?? ''],
     title: [this.selected?.name, Validators.required],
     category: [this.selected?.category],
     weight: [this.selected?.quantityGrams, Validators.required],
