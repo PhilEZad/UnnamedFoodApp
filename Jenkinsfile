@@ -1,7 +1,8 @@
 pipeline {
     agent {
-        docker {
-            dockerfile "frontend/Foodlet"
+        dockerfile {
+            filename 'Dockerfile'
+            dir 'frontend/Foodlet'
             args '-u root:root -d -t'
         }
     }
