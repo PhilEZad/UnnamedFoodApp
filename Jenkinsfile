@@ -35,7 +35,6 @@ pipeline {
         }
         always {
             echo 'Post Actions'
-            docker rm -f foodlet_container
         }
     }
 }
