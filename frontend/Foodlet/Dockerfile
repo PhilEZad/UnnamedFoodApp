@@ -26,4 +26,4 @@ ENV action=""
 ENV firebase_token="1//09FDXWImVkzGICgYIARAAGAkSNwF-L9Ir5IS7SHqIvetURTqAhpQ5Dn8UCPpunta4XrlKxfJrUqg7gq7ZfHZ_BCoqUWsg8kBHoiE"
 
 # set main script (starts when a new container instance is started)
-#ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
