@@ -26,12 +26,12 @@ module.exports = function (config) {
       suppressAll: true, // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require("path").join(__dirname, "../../artifacts/coverage/XXX"),
+      dir: require("path").join(__dirname, "artifacts/coverage"),
       subdir: ".",
       reporters: [{ type: "html" }, { type: "text-summary" }],
     },
     junitReporter: {
-      outputDir: require("path").join(__dirname, "../../artifacts/tests/XXX"),
+      outputDir: require("path").join(__dirname, "artifacts/tests"),
       outputFile: "junit-test-results.xml",
       useBrowserName: false,
     },
