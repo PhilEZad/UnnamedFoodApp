@@ -1,16 +1,18 @@
 <p>Register Account</p>
 <div>
   <div>
-    <input type="text" name="registerName" placeholder="Full Name" [(ngModel)]="registerName"/>
+    <input type="text" name="registerFirstName" placeholder="First Name" [(ngModel)]="registerFirstName"/>
+    <input type="text" name="registerSurname" placeholder="Last Name" [(ngModel)]="registerLastName"/>
   </div>
   <div>
     <input type="email" name="registerEmail" placeholder="Email" [(ngModel)]="registerEmail"/>
+
+    <mat-radio-button value="Male" [(ngModel)]="registerGender">Male</mat-radio-button>
+    <mat-radio-button value="Female" [(ngModel)]="registerGender">Female</mat-radio-button>
   </div>
   <div>
     <input type="password" name="registerPassword" placeholder="Password" [(ngModel)]="registerPassword"/>
-  </div>
-  <div>
-    <input type="password" name="confirmPassword" placeholder="Confirm Password" [(ngModel)]="registerPasswordConfirm"/>
+    <input type="password" name="confirmPassword" placeholder="Repeat Password" [(ngModel)]="registerPasswordConfirm"/>
   </div>
   <div>
     <button mat-raised-button type="button" name="buttonCreateAccount" (click)="createAccount()">Register</button>
