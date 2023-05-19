@@ -28,6 +28,7 @@ import { IonicModule } from '@ionic/angular';
 import { LoginMenuComponent } from './components/login-menu/login-menu.component';
 import { CreateMenuComponent } from './components/create-menu/create-menu.component';
 import { MatDialogModule } from "@angular/material/dialog";
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     IonicModule,
     MatToolbarModule,
     MatDialogModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
