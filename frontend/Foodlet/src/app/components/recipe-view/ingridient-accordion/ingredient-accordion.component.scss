@@ -2,16 +2,19 @@
   display: block;
   max-width: 400px;
   font-family: Helvetica, sans-serif;
+  transition: 0.3s;
 }
 
 .accordion-item {
   display: block;
   border: solid 1px #ccc;
   font-family: Helvetica, sans-serif;
+  transition: 0.3s;
 }
 
 .accordion-item + .accordion-item {
   border-top: none;
+  transition: 0.3s;
 }
 
 .accordion-item-header {
@@ -20,6 +23,7 @@
   align-content: center;
   justify-content: space-between;
   font-family: Helvetica, sans-serif;
+  transition: 0.3s;
 }
 
 .accordion-item-description {
@@ -27,6 +31,7 @@
   font-size: 0.85em;
   color: #999;
   font-family: Helvetica, sans-serif;
+  transition: 0.3s;
 }
 
 .accordion-item-header,
@@ -38,6 +43,7 @@
 .accordion-item-header:hover {
   cursor: pointer;
   background-color: #eee;
+  transition: 0.3s;
 }
 
 .accordion-item:first-child {

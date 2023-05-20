@@ -215,16 +215,14 @@
 
 .searchContainer > input:hover {
 
-  border: solid;
-  border-width: 0 0 2px 0;
-  border-color: $primary-colour;
+  border: 0 solid $primary-colour;
+  border-bottom-width: 2px;
 }
 
 .searchContainer > input:focus {
   outline: none;
-  border: solid;
-  border-width: 0 0 2px 0;
-  border-color: $primary-colour;
+  border: 0 solid $primary-colour;
+  border-bottom-width: 2px;
 }
 
 

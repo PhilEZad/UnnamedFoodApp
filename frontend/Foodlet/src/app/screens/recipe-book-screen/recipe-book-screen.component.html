@@ -9,12 +9,8 @@
 
     <div class="searchContainer">
       <input placeholder="Search" type="text" [(ngModel)]="searchText"/>
-     <!-- <button mat-button class="matFabSearchBtn">
-        <mat-icon>search</mat-icon>
-        filter with autocomplete
-      </button> -->
       <div style="padding: 20px;"></div>
-      <label class="sortLabel" [(ngModel)]="currentSortingLabel"> </label>
+      <label class="sortLabel">{{currentSortingLabel}}</label>
         <button mat-button [matMenuTriggerFor]="menu" class="sort-button">
           <mat-icon> sort </mat-icon>
         </button>

@@ -1,34 +1,166 @@
-<mat-label> Recipe View </mat-label>
 
-<mat-label>
+
+<h2 style="font-family: Helvetica, sans-serif">
   {{ recipe.title }}
-</mat-label>
-
+</h2>
 <mat-label> {{ recipe.servings }} servings </mat-label>
+<br>
 
-<mat-label>
+<label style="font-family: Helvetica, sans-serif">
   {{ recipe.description }}
-</mat-label>
+</label>
+<br>
 
+<br>
 <mat-label>
-  {{ recipe.dietCompatibility }}
+  Added: {{ recipe.dateAdded.toDateString() }}
 </mat-label>
 
-<mat-label>
-  {{ recipe.dateAdded }}
-</mat-label>
 
-<div *ngFor="let ingredient of recipe.ingredients">
-  <li>
-    {{ ingredient.name }}
-  </li>
-</div>
+<cdk-accordion class="accordion">
+  <cdk-accordion-item
+    #accordionItemIngredients="cdkAccordionItem"
+    class="accordion-item"
+    role="button"
+    tabindex="0"
+    [attr.id]="'accordion-header-ingredients'"
+    [attr.aria-expanded]="accordionItemIngredients.expanded"
+    [attr.aria-controls]="'accordion-body-ingredients'">
+    <div class="accordion-item-header" (click)="accordionItemIngredients.toggle()">
+      Ingredients
+      <span class="accordion-item-description">
+        <mat-icon *ngIf="accordionItemIngredients.expanded; else elseBlock">
+          expand_more
+        </mat-icon>
+        <ng-template #elseBlock>
+          <mat-icon>
+            chevron_right
+          </mat-icon>
+        </ng-template>
+      </span>
+    </div>
+    <div
+      class="accordion-item-body"
+      role="region"
+      [style.display]="accordionItemIngredients.expanded ? '' : 'none'"
+      [attr.id]="'accordion-body-ingredients'"
+      [attr.aria-labelledby]="'accordion-header-ingredients'"
+      >
+      <app-ingridient-accordion [ingredients]="recipe.ingredients">
+      </app-ingridient-accordion>
+    </div>
+  </cdk-accordion-item>
 
-<div *ngFor="let step of recipe.instructions">
-  <li>
-    {{ step }}
-  </li>
-</div>
+  <cdk-accordion-item
+    #accordionItemInstructions="cdkAccordionItem"
+    class="accordion-item"
+    role="button"
+    tabindex="0"
+    [attr.id]="'accordion-header-nutrients'"
+    [attr.aria-expanded]="accordionItemInstructions.expanded"
+    [attr.aria-controls]="'accordion-body-nutrients'">
+    <div class="accordion-item-header" (click)="accordionItemInstructions.toggle()">
+      Cooking instructions
+      <span class="accordion-item-description">
+        <mat-icon *ngIf="accordionItemInstructions.expanded; else elseBlock">
+          expand_more
+        </mat-icon>
+        <ng-template #elseBlock>
+          <mat-icon>
+            chevron_right
+          </mat-icon>
+        </ng-template>
+      </span>
+    </div>
+    <div
+      class="accordion-item-body"
+      role="region"
+      [style.display]="accordionItemInstructions.expanded ? '' : 'none'"
+      [attr.id]="'accordion-body-ingredients'"
+      [attr.aria-labelledby]="'accordion-header-ingredients'"
+    >
+      <div>
+        <ol>
+          <li *ngFor="let step of recipe.instructions">
+            {{ step }}
+          </li>
+        </ol>
+      </div>
+    </div>
 
-<app-nutrient-table-compact [foodItems]="recipe.ingredients">
-</app-nutrient-table-compact>
+  </cdk-accordion-item>
+
+  <cdk-accordion-item
+    #accordionItemRestrictions="cdkAccordionItem"
+    class="accordion-item"
+    role="button"
+    tabindex="0"
+    [attr.id]="'accordion-header-nutrients'"
+    [attr.aria-expanded]="accordionItemRestrictions.expanded"
+    [attr.aria-controls]="'accordion-body-nutrients'">
+    <div class="accordion-item-header" (click)="accordionItemRestrictions.toggle()">
+      Diet restrictions
+      <span class="accordion-item-description">
+        <mat-icon *ngIf="accordionItemRestrictions.expanded; else elseBlock">
+          expand_more
+        </mat-icon>
+        <ng-template #elseBlock>
+          <mat-icon>
+            chevron_right
+          </mat-icon>
+        </ng-template>
+      </span>
+    </div>
+    <div
+      class="accordion-item-body"
+      role="region"
+      [style.display]="accordionItemRestrictions.expanded ? '' : 'none'"
+      [attr.id]="'accordion-body-ingredients'"
+      [attr.aria-labelledby]="'accordion-header-ingredients'"
+    >
+      <div>
+        <ol>
+          <li *ngFor="let restriction of recipe.dietCompatibility">
+            {{ restriction.toString() }}
+          </li>
+        </ol>
+      </div>
+    </div>
+
+  </cdk-accordion-item>
+
+
+  <cdk-accordion-item
+    #accordionItemAllNutrients="cdkAccordionItem"
+    class="accordion-item"
+    role="button"
+    tabindex="0"
+    [attr.id]="'accordion-header-all'"
+    [attr.aria-expanded]="accordionItemAllNutrients.expanded"
+    [attr.aria-controls]="'accordion-body-all'"
+  >
+    <div class="accordion-item-header" (click)="accordionItemAllNutrients.toggle()">
+      Total nutrients
+      <span class="accordion-item-description">
+        <mat-icon *ngIf="accordionItemAllNutrients.expanded; else elseBlock">
+          expand_more
+        </mat-icon>
+        <ng-template #elseBlock>
+          <mat-icon>
+            chevron_right
+          </mat-icon>
+        </ng-template>
+      </span>
+    </div>
+    <div
+      class="accordion-item-body"
+      role="region"
+      [style.display]="accordionItemAllNutrients.expanded ? '' : 'none'"
+      [attr.id]="'accordion-body-all'"
+      [attr.aria-labelledby]="'accordion-header-all'"
+      >
+      <app-nutrient-table-compact [foodItems]="recipe.ingredients">
+      </app-nutrient-table-compact>
+    </div>
+  </cdk-accordion-item>
+</cdk-accordion>

@@ -20,6 +20,17 @@ export class Recipe {
     this.ingredients = ingredients
   }
 
+  static fullRecipe(id: string, title: string, description:string,
+                    ingredients: FoodItem[], servings: number, instructions: string[],
+                    dietCompatability: FoodRestrictionCompatibility[], dateAdded: Date): Recipe {
+    let recipe = new Recipe(title, servings, instructions, ingredients)
+    recipe.id = id
+    recipe.description = description
+    recipe.dietCompatibility = dietCompatability
+    recipe.dateAdded = dateAdded
+    return recipe
+  }
+
   static emptyRecipe(): Recipe {
     return new Recipe("", 0, [], [])
   }

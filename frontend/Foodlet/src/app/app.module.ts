@@ -29,6 +29,8 @@ import { RecipeViewComponent } from './components/recipe-view/recipe-view.compon
 import { MatDialogModule } from '@angular/material/dialog';
 import { RecipeFilterPipe } from './pipes/recipe-filter.pipe';
 import { SortingPipe } from './pipes/sorting-pipe.pipe';
+import {CdkAccordionModule} from "@angular/cdk/accordion";
+import { IngredientAccordionComponent } from './components/recipe-view/ingridient-accordion/ingredient-accordion.component';
 
 @NgModule({
   declarations: [
@@ -45,25 +47,27 @@ import { SortingPipe } from './pipes/sorting-pipe.pipe';
     RecipeViewComponent,
     RecipeFilterPipe,
     SortingPipe,
+    IngredientAccordionComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatTableModule,
-    MatIconModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    IonicModule,
-    MatToolbarModule,
-    MatDialogModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatButtonModule,
+        MatTableModule,
+        MatIconModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatListModule,
+        MatMenuModule,
+        IonicModule,
+        MatToolbarModule,
+        MatDialogModule,
+        CdkAccordionModule,
+    ],
   providers: [],
   bootstrap: [AppComponent],
 })
