@@ -248,3 +248,17 @@
   text-align: right;
   align-items: center;
 }
+
+.dayContainer {
+  background-color: #999999;
+}
+
+.weekContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  flex-grow: 4; /* default 0 */
+}

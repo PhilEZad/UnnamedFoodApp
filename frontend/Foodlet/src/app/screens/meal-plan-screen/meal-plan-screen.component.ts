@@ -10,12 +10,13 @@ export class MealPlanScreenComponent {
 
   meals: Recipe[] = []
 
-  week: Date[] = [new Date(), new Date()]
+  week: Date[] = []
 
   weekNumber: number = this.getWeekNumber(new Date())
 
 
   constructor() {
+    this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
   }
 
   /**
@@ -56,8 +57,6 @@ export class MealPlanScreenComponent {
     for (let i = 0; i < 7; i++) {
       days.push(new Date(ISOweekStart.valueOf() + i * 86400000)) // 86400000 = 1 day in milliseconds
     }
-
-    days.forEach(day => console.log(day))
 
     return days
   }

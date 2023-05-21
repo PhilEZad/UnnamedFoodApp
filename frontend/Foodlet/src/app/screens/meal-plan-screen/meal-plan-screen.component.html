@@ -10,11 +10,11 @@
     <div class="searchContainer">
 
       <button mat-button class="sort-button">
-        <mat-icon> chevron_left </mat-icon>
+        <mat-icon> chevron_left</mat-icon>
       </button>
       <label class="sortLabel">Week {{weekNumber}}</label>
       <button mat-button class="sort-button">
-        <mat-icon> chevron_right </mat-icon>
+        <mat-icon> chevron_right</mat-icon>
       </button>
 
     </div>
@@ -23,8 +23,37 @@
   </div>
 </div>
 
-<div class="weekContainer">
 
+<div class="parentContainer">
+  <div class="flexContainer">
+    <div class="weekContainer">
 
+      <div *ngFor="let days of week">
+        <div class="dayContainer">
 
+          <div class="dayTitle">
+            <label class="dayLabel">{{days.getDay()}}</label>
+          </div>
+
+          <div class="recipeContainer">
+            <div class="recipe">
+              <div class="recipeTitle">
+                <label class="recipeLabel">Recipe label</label>
+              </div>
+              <div class="recipeDetails">
+                <div class="recipeDescription">
+                  <label class="recipeDescriptionLabel">Description</label>
+                  <label class="recipeDescriptionText">This is a recipe description. It should be a short description of
+                    the
+                    recipe.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 </div>
