@@ -4,6 +4,7 @@
 @use '@angular/material' as mat;
 @use "material-theme-creator/ngx-mtc" as ngx-mtc;
 
+@import "src/assets/externalColorConstants";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -50,8 +51,8 @@ $warn-map: ngx-mtc.create-theme-map('warn');
   @include ngx-mtc.theme-base(); // Creates base colors
 
   // Creates theme colors
-  @include ngx-mtc.create-variables-from-color('primary', #039be5, 38%); // can update
-  @include ngx-mtc.create-variables-from-color('accent', #026FA6, 57%); // can update
+  @include ngx-mtc.create-variables-from-color('primary', $primary-colour, 38%); // can update
+  @include ngx-mtc.create-variables-from-color('accent', $accent-colour, 57%); // can update
   @include ngx-mtc.create-variables-from-map('warn', mat.$red-palette); // can not update this theme
 
 }
@@ -111,4 +112,14 @@ $theme: mat.define-light-theme((
 
 .mat-icon {
   vertical-align: -6px;
+}
+
+.recipe-view-dialog {
+  width: 70%;
+  max-width: 90%;
+  max-height: 90%;
+  font-family: Helvetica, sans-serif;
+  border: solid 4px $primary-colour;
+  border-radius: 10px;
+  background-color: $background-colour-light;
 }

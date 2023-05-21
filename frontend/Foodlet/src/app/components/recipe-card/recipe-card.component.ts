@@ -62,6 +62,7 @@ export class RecipeCardComponent {
   openRecipe(recipe: Recipe) {
     const dialogRef = this.dialog.open(RecipeViewComponent, {
       data: {recipe},
+      panelClass: 'recipe-view-dialog',
     });
   }
 }
