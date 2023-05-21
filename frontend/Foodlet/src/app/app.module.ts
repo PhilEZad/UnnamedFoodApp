@@ -32,7 +32,6 @@ import { SortingPipe } from './pipes/sorting-pipe.pipe';
 import {CdkAccordionModule} from "@angular/cdk/accordion";
 import { IngredientAccordionComponent } from './components/recipe-view/ingridient-accordion/ingredient-accordion.component';
 import {MatExpansionModule} from "@angular/material/expansion";
-import { MealPlanComponent } from './screens/meal-plan/meal-plan.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +49,6 @@ import { MealPlanComponent } from './screens/meal-plan/meal-plan.component';
     RecipeFilterPipe,
     SortingPipe,
     IngredientAccordionComponent,
-    MealPlanComponent,
   ],
   imports: [
     BrowserModule,
