@@ -12,7 +12,10 @@ export class MealPlanScreenComponent {
 
   week: Date[] = []
 
+  currentWeekNumber: number = this.getWeekNumber(new Date())
   weekNumber: number = this.getWeekNumber(new Date())
+
+  daysOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
 
   constructor() {
@@ -59,6 +62,16 @@ export class MealPlanScreenComponent {
     }
 
     return days
+  }
+
+  nextWeek() {
+    this.weekNumber++
+    this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
+  }
+
+  previousWeek() {
+    this.weekNumber--
+    this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
   }
 
 

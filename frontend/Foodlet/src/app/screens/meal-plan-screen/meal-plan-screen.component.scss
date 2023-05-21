@@ -2,30 +2,9 @@
 @use '@angular/material' as mat;
 @import "src/styles.scss";
 @import "/src/assets/externalColorConstants";
+@import "src/app/screens/pageMenuStylesheet.scss";
 
-
-.centered {
-  top: 50%;
-  left: 50%;
-  overflow-y: scroll;
-  max-width: 100%;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  max-height: 100%;
-}
-
-.flexContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  align-content: center;
-  flex-grow: 4; /* default 0 */
-}
-
+$grid-template: 3em 10px repeat(7, 1fr);
 
 @mixin color($theme) {
   $color-config: mat.get-color-config($theme);
@@ -114,151 +93,48 @@
 
 }
 
-.menuContainer {
-  background-color: #e7e7e7;
+
+
+
+.dayCard {
+  background-color: transparent;
+  border-radius: 8px;
+  margin: 8px;
+  padding: 8px;
   width: 100%;
-  left: 0;
-  top: 0;
-  min-height: 5em;
-  height: 7em;
-  position: fixed;
-  border-width: 0 0 4px 0;
-  border-style: solid;
-  border-color: $primary-colour;
-  z-index: 3;
-  font-family: Helvetica,serif;
-}
-
-
-.parentContainer {
-  max-width: 100%;
   height: 100%;
-  top: 200px;
   position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  transition: 0.3s;
 }
 
-.dockToBottom {
-  width: 99%;
-  max-width: 99%;
-  position: fixed;
+.parentContainer {
   display: inline-flex;
-  flex-direction: row-reverse;
-  justify-content: right;
-  align-items: center;
-  bottom: 0;
-  z-index: 110;
-  margin: 0;
-  height: 5em;
-}
-
-.dockToBottom > * {
-  margin: 0 8px;
-  color: #ECEFF1;
-}
-
-.crudActionsContainer {
-  display: inline-flex;
-  flex-direction: row-reverse;
-}
-
-.crudActionsContainer > * {
-  margin: 0 8px;
-}
-
-.menuContents {
-  display: inline-flex;
-  position: absolute;
+  flex-direction: column;
   width: 100%;
-  bottom: 0;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
-.pageTitle {
-  font-size: 1.5em;
-  font-weight: 400;
-  margin: 0;
-  padding: 5px;
-  color: #000000;
-  align-items: center;
-}
-
-.recipeIcon {
-  transform: scale(1.2);
-  padding: 1px;
-}
-
-.searchContainer {
-  display: inline-flex;
-  flex-direction: row;
-  right: 10%;
-  align-items: center;
-  justify-content: center;
-  min-width: 300px;
-  height: 3em;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  z-index: 1;
-}
-
-.searchContainer > input {
-  width: 40%;
-  min-width: 150px;
-  height: 18px;
-  background-color: transparent;
-  border: solid;
-  border-width: 0 0 2px 0;
-}
-
-.searchContainer > input:hover {
-
-  border: 0 solid $primary-colour;
-  border-bottom-width: 2px;
-}
-
-.searchContainer > input:focus {
-  outline: none;
-  border: 0 solid $primary-colour;
-  border-bottom-width: 2px;
-}
-
-
-
-
-.searchContainer > button {
-  height: 28px;
-}
-
-
-.sort-button > mat-icon {
-  vertical-align: top;
-}
-
-
-
-.sortLabel {
-  font-size: 1em;
-  font-weight: 400;
-  margin: 0;
-  padding: 5px;
-  color: #000000;
-  text-align: right;
-  align-items: center;
-}
-
-.dayContainer {
-  background-color: #999999;
+.parentContainer > * {
+  font-family: Helvetica, serif;
 }
 
 .weekContainer {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  align-content: center;
-  flex-grow: 4; /* default 0 */
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
+
+
+
+
+
