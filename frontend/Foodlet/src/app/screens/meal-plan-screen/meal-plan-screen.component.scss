@@ -4,28 +4,7 @@
 @import "/src/assets/externalColorConstants";
 @import "src/app/screens/pageMenuStylesheet.scss";
 
-.centered {
-  top: 50%;
-  left: 50%;
-  overflow-y: scroll;
-  max-width: 100%;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  max-height: 100%;
-}
-
-.flexContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  align-content: center;
-  flex-grow: 4; /* default 0 */
-}
-
+$grid-template: 3em 10px repeat(7, 1fr);
 
 @mixin color($theme) {
   $color-config: mat.get-color-config($theme);
@@ -113,3 +92,49 @@
 
 
 }
+
+
+
+
+.dayCard {
+  background-color: transparent;
+  border-radius: 8px;
+  margin: 8px;
+  padding: 8px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.parentContainer {
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.parentContainer > * {
+  font-family: Helvetica, serif;
+}
+
+.weekContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+
+

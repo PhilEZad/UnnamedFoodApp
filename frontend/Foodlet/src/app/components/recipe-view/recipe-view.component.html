@@ -1,0 +1,84 @@
+<div class="container">
+
+  <div class="titleContainer">
+    <h2 style="font-family: Helvetica, sans-serif">
+      {{ recipe.title }}
+    </h2>
+    <label style="padding: 5px">
+
+    </label>
+    <label class="servings-label">
+      ({{ recipe.servings }} servings)
+    </label>
+  </div>
+
+  <label style="font-family: Helvetica, sans-serif; padding-bottom: 2em;">
+    {{ recipe.description }}
+  </label>
+
+  <mat-accordion class="accordion">
+    <mat-expansion-panel>
+
+      <mat-expansion-panel-header>
+        Ingredients
+      </mat-expansion-panel-header>
+        <app-ingridient-accordion [ingredients]="recipe.ingredients">
+        </app-ingridient-accordion>
+
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+
+      <mat-expansion-panel-header>
+        Instructions
+      </mat-expansion-panel-header>
+      <div>
+        <ol>
+          <li *ngFor="let step of recipe.instructions">
+            {{ step }}
+          </li>
+        </ol>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+
+      <mat-expansion-panel-header>
+        Diet restrictions
+      </mat-expansion-panel-header>
+      <div>
+        <ol>
+          <li *ngFor="let restriction of recipe.dietCompatibility">
+            {{ restriction.toString() }}
+          </li>
+        </ol>
+      </div>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+
+      <mat-expansion-panel-header>
+        Total nutrients
+      </mat-expansion-panel-header>
+      <div>
+        <app-nutrient-table-compact [foodItems]="recipe.ingredients">
+        </app-nutrient-table-compact>
+      </div>
+    </mat-expansion-panel>
+
+
+  </mat-accordion>
+
+  <div class="date-and-back-button-container">
+    <mat-label class="date-label">
+      Added: {{ recipe.dateAdded.toDateString() }}
+    </mat-label>
+    <button class="back-button" mat-raised-button color="primary" (click)="goBack()">
+      <label>
+      Back
+      </label>
+    </button>
+  </div>
+</div>

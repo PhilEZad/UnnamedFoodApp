@@ -24,6 +24,7 @@ export class RecipeCreatorComponent {
       isPublic: false,
       quantityGrams: 0,
       category: '',
+      dateAdded: new Date(),
       nutrients: {
         protein: 0,
         fat: 0,
