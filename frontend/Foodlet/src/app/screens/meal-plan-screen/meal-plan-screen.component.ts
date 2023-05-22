@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MealPlan } from 'src/domain/MealPlan';
 import {Recipe} from "../../../domain/Recipe";
 
 @Component({
@@ -8,13 +9,17 @@ import {Recipe} from "../../../domain/Recipe";
 })
 export class MealPlanScreenComponent {
 
-  meals: Recipe[] = []
+  MealPlan: MealPlan[] = []
+
+
+  //TODO: See if meal-plan array contains a meal-plan for the current day
+  //TODO: Generate meal plan button and add blank meal plans for the next 7 days
+  //TODO Replace meal plan button
 
   week: Date[] = []
 
-  currentWeekNumber: number = this.getWeekNumber(new Date())
-  weekNumber: number = this.getWeekNumber(new Date())
-
+  currentWeekNumber: number = this.getWeekNumber(new Date()) //The current realtime week number
+  weekNumber: number = this.getWeekNumber(new Date()) // The week number of the week that is currently being displayed
   daysOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
 

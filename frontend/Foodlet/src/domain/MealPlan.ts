@@ -1,6 +1,6 @@
 import {Recipe} from "./Recipe";
 
-interface MealPlan {
+export interface MealPlan {
     id: string;
     date: Date;
     recipe: Recipe;
