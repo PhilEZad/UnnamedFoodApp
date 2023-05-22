@@ -13,8 +13,7 @@ export class RecipeCardComponent {
 
   @Input() recipe: Recipe = new Recipe(
     'Chicken and Rice',
-    4,
-    ['Cook the chicken', 'Cook the rice', 'Mix them together'],
+    'A simple recipe for chicken and rice',
     [
       {
         id: '0',
@@ -48,7 +47,11 @@ export class RecipeCardComponent {
           saturatedFat: 1,
         },
       },
-    ]
+    ],
+    4,
+    ['Cook the chicken', 'Cook the rice', 'Mix them together'],
+    [],
+    false
   );
 
   constructor(

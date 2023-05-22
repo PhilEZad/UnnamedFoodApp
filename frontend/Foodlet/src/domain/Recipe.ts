@@ -1,23 +1,33 @@
-import {FoodItem} from "./FoodItem";
-import {FoodRestrictionCompatibility} from "./EFoodRestrictionCompatibility";
+import { FoodItem } from './FoodItem';
+import { FoodRestrictionCompatibility } from './EFoodRestrictionCompatibility';
 
 export class Recipe {
+  id: string = '';
+  title: string = '';
+  description: string = '';
+  ingredients: FoodItem[] = [];
+  servings: number = 0;
+  instructions: string[] = [];
+  dietCompatibility: FoodRestrictionCompatibility[] = [];
+  isPublic: boolean = false;
 
-  id: string = ""
-  title: string = ""
-  description: string = ""
-  ingredients: FoodItem[] = []
-  servings: number = 0
-  instructions: string[] = []
-  dietCompatibility: FoodRestrictionCompatibility[] = []
   dateAdded: Date = new Date()
-
-
-  constructor(title: string, servings: number, instructions: string[], ingredients: FoodItem[]) {
-    this.title = title
-    this.servings = servings
-    this.instructions = instructions
-    this.ingredients = ingredients
+  constructor(
+    title: string,
+    description: string,
+    ingredients: FoodItem[],
+    servings: number,
+    instructions: string[],
+    dietCompatibility: FoodRestrictionCompatibility[],
+    isPublic: boolean
+  ) {
+    this.title = title;
+    this.description = description;
+    this.ingredients = ingredients;
+    this.servings = servings;
+    this.instructions = instructions;
+    this.dietCompatibility = dietCompatibility;
+    this.isPublic = isPublic;
   }
 
   static fullRecipe(id: string, title: string, description:string,
@@ -32,9 +42,6 @@ export class Recipe {
   }
 
   static emptyRecipe(): Recipe {
-    return new Recipe("", 0, [], [])
+    return new Recipe('', '', [], 0, [], [], false);
   }
-
-
-
 }

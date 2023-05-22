@@ -24,7 +24,7 @@ export class FoodItemConverter implements DataConverter<FoodItem> {
 
   fromFirestore(
     snapshot: QueryDocumentSnapshot<DocumentData>,
-    options: SnapshotOptions
+    _: SnapshotOptions
   ): FoodItem {
     let foodItem = FoodItem.emptyFoodItem();
     let data = snapshot.data() as any;

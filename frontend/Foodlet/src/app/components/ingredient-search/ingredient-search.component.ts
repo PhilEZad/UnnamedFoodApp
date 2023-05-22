@@ -1,26 +1,51 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectorRef,
-  ChangeDetectionStrategy,
-} from '@angular/core';
-import { IngredientService } from 'src/services/ingredient.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { map, startWith } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { NEVER, Observable } from 'rxjs';
 import { FoodItem } from 'src/domain/FoodItem';
 
+/**
+ * @title Filter autocomplete
+ */
 @Component({
-  selector: 'app-ingredient-search',
+  selector: 'ingredient-autocomplete',
   templateUrl: './ingredient-search.component.html',
   styleUrls: ['./ingredient-search.component.scss'],
 })
-export class IngredientSearchComponent {
-  searchText: any;
-  owned: FoodItem[] = [];
-  favorite: FoodItem[] = [];
-  others: FoodItem[] = [];
+export class IngredientAutocompleteComponent implements OnInit {
+  ngOnInit() {
+    this.filteredOptions = this.ctl.valueChanges.pipe(
+      startWith(''),
+      map((value) => (typeof value === 'string' ? value : value.address)),
+      map((name) => (name ? this._filter(name) : this.options.slice()))
+    );
+  }
 
-  constructor(private service: IngredientService) {
-    this.service.getIngredients().subscribe((data) => {
-      this.others = data;
-    });
+  @Input() options: FoodItem[] = [];
+  selected: FoodItem = null!;
+
+  filteredOptions: Observable<FoodItem[]> = NEVER;
+  ctl = new FormControl();
+
+  get value() {
+    return this.selected;
+  }
+
+  private _filter(value: string) {
+    return this.options.filter((option) =>
+      option.name.toLowerCase().includes(value.toLowerCase())
+    );
+  }
+
+  displayFn(selected: FoodItem) {
+    return selected ? selected.name : 'undefined';
+  }
+
+  onAutoCompleteClosed(event: any) {
+    console.log(event);
+  }
+
+  update() {
+    this.selected = this.ctl.value;
   }
 }

@@ -1,6 +1,20 @@
-import {Component} from '@angular/core';
-import {Recipe} from '../../../domain/Recipe';
 import {ESortingTypes} from "../../../domain/ESortingTypes";
+import {
+  animate,
+  keyframes,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Recipe } from '../../../domain/Recipe';
+import { RecipeCreatorComponent } from '../../components/recipe-creator/recipe-creator.component';
+import { RecipeCardComponent } from '../../components/recipe-card/recipe-card.component';
+import { MatIcon } from '@angular/material/icon';
+import { MatCard, MatCardTitle, MatCardContent } from '@angular/material/card';
+import { RecipeService } from 'src/services/recipe.service';
 
 import {animate, keyframes, state, style, transition, trigger,} from '@angular/animations';
 import {MatDialog} from '@angular/material/dialog';
@@ -41,10 +55,13 @@ import {FoodRestrictionCompatibility} from "../../../domain/EFoodRestrictionComp
   ],
 })
 export class RecipeBookScreenComponent {
+  recipes: Recipe[] = [];
 
-  currentSorting: ESortingTypes = ESortingTypes.Alphabetical;
-  searchText: string = "";
-  currentSortingLabel: string = "Alphabetical"  //TODO FIX
+  constructor(public dialog: MatDialog, private service: RecipeService) {
+    this.service.getRecipes().subscribe((data) => {
+      this.recipes = data;
+    });
+  }
 
   recipes: Recipe[] = recipeMockDate;
 
@@ -60,7 +77,10 @@ export class RecipeBookScreenComponent {
   }
 
   newRecipe() {
-    this.recipes.push(new Recipe('New Recipe', 1, [], []));
+    this.dialog.open(RecipeCreatorComponent, {
+      width: '50%',
+      height: '80%',
+    });
   }
 
   sortRecipes(sortingType: ESortingTypes) {

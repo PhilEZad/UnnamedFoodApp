@@ -1,35 +1,37 @@
-<form [formGroup]="ingredient" (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()">
   <h2>Ingredient</h2>
 
-  <input id="id" type="text" hidden="true" formControlName="id" />
-
   <label for="title">Title: </label>
-  <input id="title" type="text" formControlName="title" />
+  <input id="title" type="text" [(ngModel)]="title" />
 
   <label for="category">Category: </label>
-  <input id="category" type="text" formControlName="category" />
+  <input id="category" type="text" [(ngModel)]="category" />
 
   <label for="weight">Weight: </label>
-  <input id="weight" type="number" formControlName="weight" />
+  <input id="weight" type="number" [(ngModel)]="weight" />
 
   <div formGroupName="nutrients">
     <h2>Nutrients</h2>
 
     <label for="calories">Calories: </label>
-    <input id="calories" type="number" formControlName="calories" />
+    <input id="calories" type="number" [(ngModel)]="nutrients.calories" />
 
     <label for="carbohydrates">Carbohydrates: </label>
-    <input id="carbohydrates" type="number" formControlName="carbohydrates" />
+    <input
+      id="carbohydrates"
+      type="number"
+      [(ngModel)]="nutrients.carbohydrates"
+    />
 
     <label for="fat">Fat: </label>
-    <input id="fat" type="number" formControlName="fat" />
+    <input id="fat" type="number" [(ngModel)]="nutrients.fat" />
 
     <label for="protein">Protein: </label>
-    <input id="protein" type="number" formControlName="protein" />
+    <input id="protein" type="number" [(ngModel)]="nutrients.protein" />
 
     <label for="fiber">Fiber: </label>
-    <input id="fiber" type="number" formControlName="fiber" />
+    <input id="fiber" type="number" [(ngModel)]="nutrients.fiber" />
   </div>
 
-  <button type="submit" [disabled]="!ingredient.valid">Submit</button>
+  <button type="submit">Submit</button>
 </form>

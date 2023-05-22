@@ -1,41 +1,19 @@
-<div class="container">
-  <div class="row">
-    <div class="search-ingredient">
-      <input
-        class="form-control"
-        type="text"
-        name="search"
-        [(ngModel)]="searchText"
-        autocomplete="off"
-        placeholder="&#61442;  Start searching for ingredients by name or category"
-      />
-    </div>
-    {{others.length}}
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>category</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of owned | IngredientFilter : searchText">
-          <td>{{ item.name }}</td>
-          <td>{{ item.category }}</td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr *ngFor="let item of favorite | IngredientFilter : searchText">
-          <td>{{ item.name }}</td>
-          <td>{{ item.category }}</td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr *ngFor="let item of others | IngredientFilter : searchText">
-          <td>{{ item.name }}</td>
-          <td>{{ item.category }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<mat-form-field>
+  <input
+    matInput
+    type="text"
+    class="input"
+    [formControl]="ctl"
+    [matAutocomplete]="auto"
+    forceSelection="name"
+  />
+  <mat-autocomplete
+    class="searchContainer"
+    #auto="matAutocomplete"
+    [displayWith]="displayFn"
+  >
+    <option *ngFor="let option of filteredOptions | async" [value]="option">
+      {{ option.name }}
+    </option>
+  </mat-autocomplete>
+</mat-form-field>
