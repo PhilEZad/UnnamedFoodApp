@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
-import { MealPlan } from 'src/domain/MealPlan';
+import {Component} from '@angular/core';
+import {MealPlan} from 'src/domain/MealPlan';
 import {Recipe} from "../../../domain/Recipe";
+import {FoodItem} from "../../../domain/FoodItem";
+import {Nutrients} from "../../../domain/Nutrients";
+import {FoodRestrictionCompatibility} from "../../../domain/EFoodRestrictionCompatibility";
 
 @Component({
   selector: 'app-meal-plan-screen',
@@ -9,22 +12,66 @@ import {Recipe} from "../../../domain/Recipe";
 })
 export class MealPlanScreenComponent {
 
-  MealPlan: MealPlan[] = []
+  mealPlan: MealPlan[] = [] //All meal plans for the current user
 
-
-  //TODO: See if meal-plan array contains a meal-plan for the current day
-  //TODO: Generate meal plan button and add blank meal plans for the next 7 days
+  //TODO: Get meal plan from database.
+  //TODO: Generate meal plan button
   //TODO: Replace meal plan button
 
-  week: Date[] = []
+  week: Date[] = []  //The dates of the week that is currently being displayed
+
+  mealPlanForWeek: MealPlan[] = []
 
   currentWeekNumber: number = this.getWeekNumber(new Date()) //The current realtime week number
   weekNumber: number = this.getWeekNumber(new Date()) // The week number of the week that is currently being displayed
   daysOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
+  weekHasMealPlan: boolean = false
+
 
   constructor() {
     this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
+    this.mealPlan = mockMealPlan
+    this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
+  }
+
+
+  findMealPlanForWeek(weekNumber: number): MealPlan[] {
+    let mealPlans = this.mealPlan.filter(mealPlan => this.getWeekNumber(mealPlan.date) === weekNumber) //find meal plans for the current week
+
+
+    if (mealPlans.length == 7) { //if there are 7 meal plans for the week, return them
+      this.weekHasMealPlan = true
+      return mealPlans
+    }
+    else if (mealPlans.length > 7) { //if there are more than 7 meal plans for the week, return the first 7
+      this.weekHasMealPlan = true
+      return mealPlans.slice(0, 7)
+    }
+    else if (mealPlans.length === 0) { //if there are no meal plans for the week, return an empty array
+      this.weekHasMealPlan = false
+      return []
+    }
+    else { //else find the missing days
+      let missingDays: Date[] = []
+      this.getDaysOfWeek(new Date().getFullYear(), weekNumber).forEach(day => {
+        if (!mealPlans.find(mealPlan => mealPlan.date.getDay() === day.getDay())) {
+          missingDays.push(day)
+        }
+      })
+
+      missingDays.map(day => {
+        let mealPlan = {
+          id: "-1",
+          recipe: Recipe.emptyRecipe(), //sentinel value
+          date: day,
+        } as MealPlan
+
+        mealPlans.push(mealPlan)
+      })
+      this.weekHasMealPlan = true
+      return mealPlans
+    }
   }
 
   /**
@@ -71,18 +118,136 @@ export class MealPlanScreenComponent {
 
   nextWeek() {
     this.weekNumber++
-    this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
+    this.week.forEach(day => {
+      day.setDate(day.getDate() + 7)
+    })
+    this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
   }
 
   previousWeek() {
     this.weekNumber--
-    this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
+    this.week.forEach(day => {
+      day.setDate(day.getDate() - 7)
+    })
+    this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
   }
 
-  dateHasMealPlan(date: Date): boolean {
-    return this.MealPlan.some(mealPlan => mealPlan.date === date)
+
+
+  generateMealPlan() {
+
   }
 
+  createEmptyMealPlan() {
+    let days: Date[] = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
 
+    days.forEach(day => {
+      let mealPlanDay = {
+        id: "-1",
+        recipe: Recipe.emptyRecipe(), //sentinel value
+        date: day,
+      } as MealPlan
+
+      this.mealPlan.push(mealPlanDay)
+    });
+
+    this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
+  }
+
+  dayHasARecipe(mealPlanDays: MealPlan): boolean {
+    return mealPlanDays.recipe.title !== ""
+  }
+
+  setRecipeForMealPlanDay(mealPlanDays: MealPlan) {
+
+  }
 }
+
+
+const mockMealPlan: MealPlan[] = [
+  {
+    id: "ID",
+    date: new Date(2023, 4, 22),
+    recipe: Recipe.fullRecipe("ID", "Pork and Rice", "A very distinct and unique description of a delicious recipe",
+      [
+        new FoodItem("Pork Sirloin", 400, "Meat",
+          new Nutrients(192, 26, 8.8, 2.8, 0, 0)),
+        new FoodItem("Rice", 200, "Grain", new Nutrients(250, 4, 1.52, 0, 0, 120)),
+      ], 4,
+      ["Step 1", "Step 2", "Step 3", "Step 4"],
+      [FoodRestrictionCompatibility.DAIRY_FREE, FoodRestrictionCompatibility.GLUTEN_FREE, FoodRestrictionCompatibility.VEGAN, FoodRestrictionCompatibility.VEGETARIAN],
+      new Date()
+    )
+  },
+  {
+    id: "ID",
+    date: new Date(2023, 4, 23),
+    recipe: Recipe.fullRecipe("ID", "Recipe Pork and Rice", "A very distinct and unique description of a delicious recipe",
+      [
+        new FoodItem("Pork Sirloin", 400, "Meat",
+          new Nutrients(192, 26, 8.8, 2.8, 0, 0)),
+        new FoodItem("Rice", 200, "Grain", new Nutrients(250, 4, 1.52, 0, 0, 120)),
+      ], 4,
+      ["Step 1", "Step 2", "Step 3", "Step 4"],
+      [FoodRestrictionCompatibility.DAIRY_FREE, FoodRestrictionCompatibility.GLUTEN_FREE, FoodRestrictionCompatibility.VEGAN, FoodRestrictionCompatibility.VEGETARIAN],
+      new Date()
+    )
+  },
+  {
+    id: "ID",
+    date: new Date(2023, 4, 24),
+    recipe: Recipe.fullRecipe("ID", "Pork and Rice Name", "A very distinct and unique description of a delicious recipe",
+      [
+        new FoodItem("Pork Sirloin", 400, "Meat",
+          new Nutrients(192, 26, 8.8, 2.8, 0, 0)),
+        new FoodItem("Rice", 200, "Grain", new Nutrients(250, 4, 1.52, 0, 0, 120)),
+      ], 4,
+      ["Step 1", "Step 2", "Step 3", "Step 4"],
+      [FoodRestrictionCompatibility.DAIRY_FREE, FoodRestrictionCompatibility.GLUTEN_FREE, FoodRestrictionCompatibility.VEGAN, FoodRestrictionCompatibility.VEGETARIAN],
+      new Date()
+    )
+  },
+  {
+    id: "ID",
+    date: new Date(2023, 4, 25),
+    recipe: Recipe.fullRecipe("ID", "RecipePork and Rice Name", "A very distinct and unique description of a delicious recipe",
+      [
+        new FoodItem("Pork Sirloin", 400, "Meat",
+          new Nutrients(192, 26, 8.8, 2.8, 0, 0)),
+        new FoodItem("Rice", 200, "Grain", new Nutrients(250, 4, 1.52, 0, 0, 120)),
+      ], 4,
+      ["Step 1", "Step 2", "Step 3", "Step 4"],
+      [FoodRestrictionCompatibility.DAIRY_FREE, FoodRestrictionCompatibility.GLUTEN_FREE, FoodRestrictionCompatibility.VEGAN, FoodRestrictionCompatibility.VEGETARIAN],
+      new Date()
+    )
+  },
+  {
+    id: "ID",
+    date: new Date(2023, 4, 26),
+    recipe: Recipe.fullRecipe("ID", "Recipe NamePork and Rice", "A very distinct and unique description of a delicious recipe",
+      [
+        new FoodItem("Pork Sirloin", 400, "Meat",
+          new Nutrients(192, 26, 8.8, 2.8, 0, 0)),
+        new FoodItem("Rice", 200, "Grain", new Nutrients(250, 4, 1.52, 0, 0, 120)),
+      ], 4,
+      ["Step 1", "Step 2", "Step 3", "Step 4"],
+      [FoodRestrictionCompatibility.DAIRY_FREE, FoodRestrictionCompatibility.GLUTEN_FREE, FoodRestrictionCompatibility.VEGAN, FoodRestrictionCompatibility.VEGETARIAN],
+      new Date()
+    )
+  },
+  {
+    id: "ID",
+    date: new Date(2023, 4, 27),
+    recipe: Recipe.fullRecipe("ID", "Pork and RiceRecipe Name", "A very distinct and unique description of a delicious recipe",
+      [
+        new FoodItem("Pork Sirloin", 400, "Meat",
+          new Nutrients(192, 26, 8.8, 2.8, 0, 0)),
+        new FoodItem("Rice", 200, "Grain", new Nutrients(250, 4, 1.52, 0, 0, 120)),
+      ], 4,
+      ["Step 1", "Step 2", "Step 3", "Step 4"],
+      [FoodRestrictionCompatibility.DAIRY_FREE, FoodRestrictionCompatibility.GLUTEN_FREE, FoodRestrictionCompatibility.VEGAN, FoodRestrictionCompatibility.VEGETARIAN],
+      new Date()
+    )
+  },
+]
 
