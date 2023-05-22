@@ -34,6 +34,7 @@ import { IngredientAccordionComponent } from './components/recipe-view/ingridien
 import {MatExpansionModule} from "@angular/material/expansion";
 import { MealPlanScreenComponent } from './screens/meal-plan-screen/meal-plan-screen.component';
 import { RecipeCardCompactComponent } from './components/recipe-card-compact/recipe-card-compact.component';
+import { RecipePickerComponent } from './components/recipe-picker/recipe-picker.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { RecipeCardCompactComponent } from './components/recipe-card-compact/rec
     IngredientAccordionComponent,
     MealPlanScreenComponent,
     RecipeCardCompactComponent,
+    RecipePickerComponent,
   ],
   imports: [
     BrowserModule,
