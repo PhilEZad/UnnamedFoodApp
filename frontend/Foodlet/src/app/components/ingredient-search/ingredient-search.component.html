@@ -1,4 +1,4 @@
-<mat-form-field>
+<form (ngSubmit)="update()">
   <input
     matInput
     type="text"
@@ -6,14 +6,16 @@
     [formControl]="ctl"
     [matAutocomplete]="auto"
     forceSelection="name"
+    #text
   />
   <mat-autocomplete
     class="searchContainer"
     #auto="matAutocomplete"
     [displayWith]="displayFn"
   >
-    <option *ngFor="let option of filteredOptions | async" [value]="option">
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
       {{ option.name }}
-    </option>
+    </mat-option>
   </mat-autocomplete>
-</mat-form-field>
+  <button><mat-icon>check</mat-icon></button>
+</form>

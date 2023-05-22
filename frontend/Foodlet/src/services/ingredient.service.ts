@@ -25,6 +25,7 @@ export class IngredientService {
   }
 
   getIngredients(): Observable<FoodItem[]> {
+    console.log(this.data);
     return of(this.data);
   }
 

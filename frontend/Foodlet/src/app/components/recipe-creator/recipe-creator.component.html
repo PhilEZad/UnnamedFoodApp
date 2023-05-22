@@ -2,7 +2,7 @@
 
 <form class="full-width" (ngSubmit)="onSubmit()">
   <div>
-    <table cellspacing="0">
+    <table class="full-width" cellspacing="5">
       <tr>
         <td>
           <mat-form-field class="full-width" floatPlaceholder="auto">
@@ -20,7 +20,7 @@
         </td>
         <td>
           <mat-form-field class="full-width" floatPlaceholder="auto">
-            <label for="servings">Servings: </label>
+            <mat-label for="servings">Servings</mat-label>
             <input required matInput type="number" [(ngModel)]="servings" />
             <mat-error *ngIf="servings <= 0">
               Servings size must be
@@ -45,12 +45,12 @@
   <div
     *ngFor="let _ of ' '.repeat(ingredients.length).split(''); let i = index"
   >
-    <ingredient-autocomplete [options]="availableIngredients" />
-    <span><mat-icon (click)="removeIngredient(i)">remove</mat-icon></span>
+    <span>
+      {{ ingredients[i].name }} <small>{{ ingredients[i].category }}</small>
+      <mat-icon (click)="removeIngredient(i)">remove</mat-icon></span
+    >
   </div>
-  <button type="button" (click)="addIngredient()">
-    + Add another ingredient
-  </button>
+  <ingredient-autocomplete (selected)="addIngredient($event)" />
 
   <div>
     <h2>Instructions</h2>

@@ -44,33 +44,14 @@ export class RecipeCreatorComponent {
   constructor(
     public dialogRef: MatDialogRef<RecipeCreatorComponent>,
     private dialog: MatDialog,
-    private recipeService: RecipeService,
-    private ingredientService: IngredientService
-  ) {
-    this.ingredientService.getIngredients().subscribe((data) => {
-      this.availableIngredients = data;
-    });
-  }
+    private recipeService: RecipeService
+  ) {}
 
   ngOnInit(): void {}
 
-  addIngredient() {
-    this.ingredients.push({
-      id: '',
-      name: '',
-      amount: 0,
-      isPublic: false,
-      quantityGrams: 0,
-      category: '',
-      nutrients: {
-        protein: 0,
-        fat: 0,
-        saturatedFat: 0,
-        fiber: 0,
-        carbohydrates: 0,
-        calories: 0,
-      },
-    } as FoodItem);
+  addIngredient(value: FoodItem) {
+    console.log(value);
+    this.ingredients.push(value);
   }
 
   removeIngredient(index: number) {
@@ -115,13 +96,5 @@ export class RecipeCreatorComponent {
 
     this.recipeService.addEditRecipe(this.selected);
     this.dialogRef.close(this.selected);
-  }
-
-  private _filterStates(value: string): FoodItem[] {
-    const filterValue = value.toLowerCase();
-
-    return this.availableIngredients.filter((item) =>
-      item.name.toLowerCase().includes(filterValue)
-    );
   }
 }

@@ -11,7 +11,7 @@ export class Recipe {
   dietCompatibility: FoodRestrictionCompatibility[] = [];
   isPublic: boolean = false;
 
-  dateAdded: Date = new Date()
+  dateAdded: Date = new Date();
   constructor(
     title: string,
     description: string,
@@ -30,15 +30,28 @@ export class Recipe {
     this.isPublic = isPublic;
   }
 
-  static fullRecipe(id: string, title: string, description:string,
-                    ingredients: FoodItem[], servings: number, instructions: string[],
-                    dietCompatability: FoodRestrictionCompatibility[], dateAdded: Date): Recipe {
-    let recipe = new Recipe(title, servings, instructions, ingredients)
-    recipe.id = id
-    recipe.description = description
-    recipe.dietCompatibility = dietCompatability
-    recipe.dateAdded = dateAdded
-    return recipe
+  static fullRecipe(
+    id: string,
+    title: string,
+    description: string,
+    ingredients: FoodItem[],
+    servings: number,
+    instructions: string[],
+    dietCompatability: FoodRestrictionCompatibility[],
+    dateAdded: Date
+  ): Recipe {
+    let recipe = new Recipe(
+      title,
+      description,
+      ingredients,
+      servings,
+      instructions,
+      dietCompatability,
+      false
+    );
+    recipe.id = id;
+    recipe.dateAdded = dateAdded;
+    return recipe;
   }
 
   static emptyRecipe(): Recipe {

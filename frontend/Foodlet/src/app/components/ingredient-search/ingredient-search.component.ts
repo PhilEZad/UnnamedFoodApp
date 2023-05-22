@@ -1,35 +1,34 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { map, startWith } from 'rxjs/operators';
+import { filter, map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { NEVER, Observable } from 'rxjs';
 import { FoodItem } from 'src/domain/FoodItem';
+import { IngredientService } from 'src/services/ingredient.service';
 
-/**
- * @title Filter autocomplete
- */
 @Component({
   selector: 'ingredient-autocomplete',
   templateUrl: './ingredient-search.component.html',
   styleUrls: ['./ingredient-search.component.scss'],
 })
-export class IngredientAutocompleteComponent implements OnInit {
-  ngOnInit() {
+export class IngredientAutocompleteComponent {
+  constructor(private service: IngredientService) {
+    this.service.getIngredients().subscribe((data) => {
+      this.options = data;
+    });
+
     this.filteredOptions = this.ctl.valueChanges.pipe(
       startWith(''),
-      map((value) => (typeof value === 'string' ? value : value.address)),
+      map((value) => (typeof value === 'string' ? value : value.name)),
       map((name) => (name ? this._filter(name) : this.options.slice()))
     );
   }
 
-  @Input() options: FoodItem[] = [];
-  selected: FoodItem = null!;
+  @Output() selected = new EventEmitter<FoodItem>();
 
-  filteredOptions: Observable<FoodItem[]> = NEVER;
+  options: any[] = null!;
+
+  filteredOptions: Observable<any[]>;
   ctl = new FormControl();
-
-  get value() {
-    return this.selected;
-  }
 
   private _filter(value: string) {
     return this.options.filter((option) =>
@@ -37,8 +36,8 @@ export class IngredientAutocompleteComponent implements OnInit {
     );
   }
 
-  displayFn(selected: FoodItem) {
-    return selected ? selected.name : 'undefined';
+  displayFn(value: any) {
+    return value ? value.name : '';
   }
 
   onAutoCompleteClosed(event: any) {
@@ -46,6 +45,6 @@ export class IngredientAutocompleteComponent implements OnInit {
   }
 
   update() {
-    this.selected = this.ctl.value;
+    this.selected.emit(this.ctl.value);
   }
 }

@@ -20,6 +20,7 @@ export class RecipeConverter implements DataConverter<Recipe> {
       instructions: model.instructions,
       diet: model.dietCompatibility,
       isPublic: model.isPublic,
+      createdAt: model.dateAdded,
     };
   }
 
@@ -38,6 +39,7 @@ export class RecipeConverter implements DataConverter<Recipe> {
     recipe.instructions = data.instructions as string[];
     recipe.dietCompatibility = data.diet as FoodRestrictionCompatibility[];
     recipe.isPublic = data.isPublic as boolean;
+    recipe.dateAdded = data.createdAt as Date;
 
     return recipe;
   }

@@ -38,10 +38,10 @@ export class FireService {
     this.auth = firebase.auth();
     this.storage = firebase.storage();
 
-    // emulators are already set in the firebase.json file (resetting it will produce problems)
-    // this.auth.useEmulator('http://localhost:9099');
-    // this.firestore.useEmulator('localhost', 8080);
-    // this.storage.useEmulator('localhost', 9199);
+    // redefinition: emulators won't work properly without this. (async updates)
+    this.auth.useEmulator('http://localhost:9099');
+    this.firestore.useEmulator('localhost', 8080);
+    this.storage.useEmulator('localhost', 9199);
 
     this.auth.onAuthStateChanged((user) => {
       if (user) {

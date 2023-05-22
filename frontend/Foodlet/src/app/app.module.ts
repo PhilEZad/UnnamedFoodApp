@@ -29,14 +29,12 @@ import { UseEnumValuePipe } from './pipes/use-enum-value.pipe';
 import { HomeComponent } from './screens/home/home.component';
 import { RecipeBookScreenComponent } from './screens/recipe-book-screen/recipe-book-screen.component';
 import { IngredientAutocompleteComponent } from './components/ingredient-search/ingredient-search.component';
-import { IonicModule } from '@ionic/angular';
 import { RecipeViewComponent } from './components/recipe-view/recipe-view.component';
-import { MatDialogModule } from '@angular/material/dialog';
 import { RecipeFilterPipe } from './pipes/recipe-filter.pipe';
 import { SortingPipe } from './pipes/sorting-pipe.pipe';
-import {CdkAccordionModule} from "@angular/cdk/accordion";
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { IngredientAccordionComponent } from './components/recipe-view/ingridient-accordion/ingredient-accordion.component';
-import {MatExpansionModule} from "@angular/material/expansion";
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MealPlanScreenComponent } from './screens/meal-plan-screen/meal-plan-screen.component';
 
 @NgModule({

@@ -19,6 +19,7 @@ export class FoodItemConverter implements DataConverter<FoodItem> {
       fat: model.nutrients.fat,
       carbohydrates: model.nutrients.carbohydrates,
       fiber: model.nutrients.fiber,
+      createdAt: model.dateAdded,
     };
   }
 
@@ -33,13 +34,13 @@ export class FoodItemConverter implements DataConverter<FoodItem> {
     foodItem.name = data.name;
     foodItem.quantityGrams = data.quantityGrams;
     foodItem.category = data.category;
+    foodItem.dateAdded = data.createdAt;
     foodItem.nutrients.calories = data.calories;
     foodItem.nutrients.protein = data.protein;
     foodItem.nutrients.saturatedFat = data.saturatedFat;
     foodItem.nutrients.fat = data.fat;
     foodItem.nutrients.carbohydrates = data.carbohydrates;
     foodItem.nutrients.fiber = data.fiber;
-
     return foodItem;
   }
 }
