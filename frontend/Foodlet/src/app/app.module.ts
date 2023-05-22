@@ -39,6 +39,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatRadioModule } from "@angular/material/radio";
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {environment} from "../environments/firebaseConfig";
 
 @NgModule({
   declarations: [
@@ -64,7 +65,7 @@ import { AngularFireAuthModule} from "@angular/fire/compat/auth";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     MatCardModule,
     MatButtonModule,
