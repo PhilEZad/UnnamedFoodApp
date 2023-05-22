@@ -1,10 +1,18 @@
 <p>Login</p>
 <div>
   <div>
-    <input placeholder="Email" type="email" [(ngModel)]="loginMail"/>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="Example@email.com" [(ngModel)]="loginMail"/>
+      <mat-error>Test</mat-error>
+    </mat-form-field>
   </div>
   <div>
-    <input placeholder="Password" type="password" [(ngModel)]="loginPassword"/>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [(ngModel)]="loginPassword"/>
+      <mat-error>Also a test</mat-error>
+    </mat-form-field>
   </div>
   <div>
     <button mat-raised-button type="button" name="buttonLogin" (click)="loginAccount()">Login</button>

@@ -17,10 +17,12 @@
       <input matInput name="registerEmail" placeholder="example@email.com" [(ngModel)]="registerEmail"/>
     </mat-form-field>
 
-    <mat-radio-group>
-      <mat-radio-button value="Male">Male</mat-radio-button>
-      <mat-radio-button value="Female">Female</mat-radio-button>
-    </mat-radio-group>
+    <label class="mat-radio-label"> Biological Gender
+        <mat-radio-group>
+          <mat-radio-button value="Male">Male</mat-radio-button>
+          <mat-radio-button value="Female">Female</mat-radio-button>
+        </mat-radio-group>
+    </label>
   </div>
 
   <div>
