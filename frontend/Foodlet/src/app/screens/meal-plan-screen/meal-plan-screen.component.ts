@@ -14,7 +14,7 @@ export class MealPlanScreenComponent {
 
   //TODO: See if meal-plan array contains a meal-plan for the current day
   //TODO: Generate meal plan button and add blank meal plans for the next 7 days
-  //TODO Replace meal plan button
+  //TODO: Replace meal plan button
 
   week: Date[] = []
 
@@ -77,6 +77,10 @@ export class MealPlanScreenComponent {
   previousWeek() {
     this.weekNumber--
     this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
+  }
+
+  dateHasMealPlan(date: Date): boolean {
+    return this.MealPlan.some(mealPlan => mealPlan.date === date)
   }
 
 
