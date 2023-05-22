@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FireService } from "./fire.service";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
-import firebase from "firebase/compat";
-import auth = firebase.auth;
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +36,13 @@ export class FireAuthService {
           window.alert(error.message)
         }
       )
+  }
+
+  SignOut() {
+    return this.fbAuth.signOut()
+      .then((result) =>
+      {
+        window.alert('Successfully signed out')
+      })
   }
 }

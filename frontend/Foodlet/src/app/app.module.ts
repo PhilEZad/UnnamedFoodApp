@@ -1,4 +1,4 @@
-simport { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -35,7 +35,6 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import { MealPlanScreenComponent } from './screens/meal-plan-screen/meal-plan-screen.component';
 import { LoginMenuComponent } from './components/login-menu/login-menu.component';
 import { CreateMenuComponent } from './components/create-menu/create-menu.component';
-import { MatDialogModule } from "@angular/material/dialog";
 import { MatRadioModule } from "@angular/material/radio";
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule} from "@angular/fire/compat/auth";
