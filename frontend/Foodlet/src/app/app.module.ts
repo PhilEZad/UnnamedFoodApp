@@ -25,6 +25,14 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HomeComponent } from './screens/home/home.component';
 import { RecipeBookScreenComponent } from './screens/recipe-book-screen/recipe-book-screen.component';
 import { IonicModule } from '@ionic/angular';
+import { RecipeViewComponent } from './components/recipe-view/recipe-view.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { RecipeFilterPipe } from './pipes/recipe-filter.pipe';
+import { SortingPipe } from './pipes/sorting-pipe.pipe';
+import {CdkAccordionModule} from "@angular/cdk/accordion";
+import { IngredientAccordionComponent } from './components/recipe-view/ingridient-accordion/ingredient-accordion.component';
+import {MatExpansionModule} from "@angular/material/expansion";
+import { MealPlanScreenComponent } from './screens/meal-plan-screen/meal-plan-screen.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +46,11 @@ import { IonicModule } from '@ionic/angular';
     RecipeBookScreenComponent,
     NavigationBarComponent,
     HomeComponent,
+    RecipeViewComponent,
+    RecipeFilterPipe,
+    SortingPipe,
+    IngredientAccordionComponent,
+    MealPlanScreenComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +68,9 @@ import { IonicModule } from '@ionic/angular';
     MatMenuModule,
     IonicModule,
     MatToolbarModule,
+    MatDialogModule,
+    CdkAccordionModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

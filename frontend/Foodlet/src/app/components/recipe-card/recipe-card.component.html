@@ -34,7 +34,7 @@
         </app-nutrient-table-compact>
     </mat-card-content>
     <mat-card-actions style="display: inline-block">
-        <button mat-button class="view-recipe-btn" style="vertical-align:middle">
+        <button mat-button class="view-recipe-btn" (click)="openRecipe(recipe)" style="vertical-align:middle">
           <span>View Recipe</span>
         </button>
     </mat-card-actions>

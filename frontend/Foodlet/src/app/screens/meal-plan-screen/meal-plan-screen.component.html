@@ -1,0 +1,53 @@
+
+<div class="menuContainer" xmlns="http://www.w3.org/1999/html">
+  <div class="menuContents">
+    <div class="pageTitle">
+      <span>
+        <mat-icon class="recipeIcon">restaurant_menu</mat-icon>
+        <label class="menuLabel">Meal Plan </label>
+      </span>
+    </div>
+
+    <div class="searchContainer">
+
+      <button mat-button class="sort-button" (click)="previousWeek()">
+        <mat-icon> chevron_left</mat-icon>
+      </button>
+      <label class="sortLabel">Week {{weekNumber}}</label>
+      <button mat-button class="sort-button" (click)="nextWeek()">
+        <mat-icon> chevron_right</mat-icon>
+      </button>
+    </div>
+
+
+  </div>
+</div>
+
+
+<div class="parentContainer">
+  <div class="weekContainer">
+    <mat-card class="dayCard" *ngFor="let days of week">
+
+      <mat-card-title *ngIf="weekNumber == currentWeekNumber; else altDateDisplay">
+        <label class="menuLabel"> {{daysOfWeek[days.getDay()]}} </label>
+      </mat-card-title>
+      <ng-template #altDateDisplay>
+        <mat-card-title>
+        <label class="menuLabel"> {{daysOfWeek[days.getDay()]}} </label>
+        <label class="menuLabel"> {{days.getMonth() + 1}}/{{days.getDate()}} </label>
+        </mat-card-title>
+      </ng-template>
+
+      <mat-card-content>
+        <app-recipe-card>
+        </app-recipe-card>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>
+          Replace
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+

@@ -1,0 +1,19 @@
+
+<mat-accordion class="accordion">
+  <mat-expansion-panel
+    *ngFor="let item of ingredients; let index = index;">
+
+    <mat-expansion-panel-header>
+      {{item.quantityGrams}}g | {{ item.name }}
+      <span class="accordion-item-description">
+        {{item.category}}
+      </span>
+
+    </mat-expansion-panel-header>
+    <div>
+      <app-nutrient-table-compact [foodItems]="[item]">
+      </app-nutrient-table-compact>
+    </div>
+  </mat-expansion-panel>
+
+</mat-accordion>
