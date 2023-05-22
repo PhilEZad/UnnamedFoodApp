@@ -1,19 +1,40 @@
 <p>Register Account</p>
 <div>
   <div>
-    <input type="text" name="registerFirstName" placeholder="First Name" [(ngModel)]="registerFirstName"/>
-    <input type="text" name="registerSurname" placeholder="Last Name" [(ngModel)]="registerLastName"/>
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput name="registerFirstName" placeholder="John" [(ngModel)]="registerFirstName"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput name="registerSurname" placeholder="Doe" [(ngModel)]="registerLastName"/>
+    </mat-form-field>
   </div>
-  <div>
-    <input type="email" name="registerEmail" placeholder="Email" [(ngModel)]="registerEmail"/>
 
-    <mat-radio-button value="Male" [(ngModel)]="registerGender">Male</mat-radio-button>
-    <mat-radio-button value="Female" [(ngModel)]="registerGender">Female</mat-radio-button>
-  </div>
   <div>
-    <input type="password" name="registerPassword" placeholder="Password" [(ngModel)]="registerPassword"/>
-    <input type="password" name="confirmPassword" placeholder="Repeat Password" [(ngModel)]="registerPasswordConfirm"/>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput name="registerEmail" placeholder="example@email.com" [(ngModel)]="registerEmail"/>
+    </mat-form-field>
+
+    <mat-radio-group>
+      <mat-radio-button value="Male">Male</mat-radio-button>
+      <mat-radio-button value="Female">Female</mat-radio-button>
+    </mat-radio-group>
   </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" name="registerPassword" [(ngModel)]="registerPassword"/>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Confirm Password</mat-label>
+      <input matInput type="password" name="confirmPassword" [(ngModel)]="registerPasswordConfirm"/>
+    </mat-form-field>
+  </div>
+
   <div>
     <button mat-raised-button type="button" name="buttonCreateAccount" (click)="createAccount()">Register</button>
   </div>
