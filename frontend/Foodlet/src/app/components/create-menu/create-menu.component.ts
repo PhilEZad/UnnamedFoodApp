@@ -36,7 +36,7 @@ export class CreateMenuComponent implements OnInit {
 
   createAccount() {
     if(this.registerPassword == this.registerPasswordConfirm) {
-      this.authService.register(this.registerEmail, this.registerPassword)
+      this.authService.Register(this.registerEmail, this.registerPassword)
       this.dialogRef.closeAll()
     } else
     {

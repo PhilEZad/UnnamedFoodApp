@@ -36,7 +36,9 @@ import { MealPlanScreenComponent } from './screens/meal-plan-screen/meal-plan-sc
 import { LoginMenuComponent } from './components/login-menu/login-menu.component';
 import { CreateMenuComponent } from './components/create-menu/create-menu.component';
 import { MatDialogModule } from "@angular/material/dialog";
-import {MatRadioModule} from "@angular/material/radio";
+import { MatRadioModule } from "@angular/material/radio";
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireAuthModule} from "@angular/fire/compat/auth";
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import {MatRadioModule} from "@angular/material/radio";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp(),
+    AngularFireAuthModule,
     MatCardModule,
     MatButtonModule,
     MatTableModule,

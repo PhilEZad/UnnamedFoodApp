@@ -17,7 +17,7 @@ export class LoginMenuComponent {
   }
 
   loginAccount() {
-    this.authService.signIn(this.loginMail, this.loginPassword)
+    this.authService.LogIn(this.loginMail, this.loginPassword)
     this.dialogRef.closeAll()
   }
 }
