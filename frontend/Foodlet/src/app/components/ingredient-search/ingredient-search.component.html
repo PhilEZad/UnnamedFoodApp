@@ -1,21 +1,26 @@
-<form (ngSubmit)="update()">
-  <input
-    matInput
-    type="text"
-    class="input"
-    [formControl]="ctl"
-    [matAutocomplete]="auto"
-    forceSelection="name"
-    #text
-  />
-  <mat-autocomplete
-    class="searchContainer"
-    #auto="matAutocomplete"
-    [displayWith]="displayFn"
-  >
-    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-      {{ option.name }}
-    </mat-option>
-  </mat-autocomplete>
-  <button><mat-icon>check</mat-icon></button>
+<form>
+  <mat-form-field>
+    <input
+      matInput
+      type="text"
+      class="input"
+      [formControl]="ctl"
+      [matAutocomplete]="auto"
+      forceSelection="name"
+      #text
+    />
+    <mat-autocomplete
+      class="searchContainer"
+      #auto="matAutocomplete"
+      [displayWith]="displayFn"
+    >
+      <mat-option
+        *ngFor="let option of filteredOptions | async"
+        [value]="option"
+      >
+        {{ option.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-icon (click)="update()">check_box</mat-icon>
 </form>

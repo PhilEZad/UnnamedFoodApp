@@ -1,103 +1,130 @@
-<h2>New Recipe</h2>
+<h2 mat-dialog-title>New Recipe</h2>
+<div mat-dialog-content id="content">
+  <form class="full-width">
+    <div>
+      <table class="full-width" cellspacing="5">
+        <tr>
+          <td>
+            <mat-form-field class="full-width" floatPlaceholder="auto">
+              <mat-label>Title</mat-label>
+              <input
+                required
+                matInput
+                [(ngModel)]="title"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="Ex. Chicken Parmesan"
+              />
+              <mat-error *ngIf="title == ''">
+                Title is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="full-width" floatPlaceholder="auto">
+              <mat-label for="servings">Servings</mat-label>
+              <input
+                required
+                matInput
+                type="number"
+                [(ngModel)]="servings"
+                [ngModelOptions]="{ standalone: true }"
+              />
+              <mat-error *ngIf="servings <= 0">
+                Servings size must be
+                <strong> greater than or equal to 1 </strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
 
-<form class="full-width" (ngSubmit)="onSubmit()">
-  <div>
-    <table class="full-width" cellspacing="5">
-      <tr>
-        <td>
-          <mat-form-field class="full-width" floatPlaceholder="auto">
-            <mat-label>Title</mat-label>
-            <input
-              required
-              matInput
-              [(ngModel)]="title"
-              placeholder="Ex. Chicken Parmesan"
-            />
-            <mat-error *ngIf="title == ''">
-              Title is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field class="full-width" floatPlaceholder="auto">
-            <mat-label for="servings">Servings</mat-label>
-            <input required matInput type="number" [(ngModel)]="servings" />
-            <mat-error *ngIf="servings <= 0">
-              Servings size must be
-              <strong> greater than or equal to 1 </strong>
-            </mat-error>
-          </mat-form-field>
-        </td>
-      </tr>
-    </table>
-
-    <mat-form-field class="full-width" floatPlaceholder="auto">
-      <mat-label>Description</mat-label>
-      <textarea
-        matInput
-        placeholder="Ex. A delicious Italian dish"
-        [(ngModel)]="description"
-      ></textarea>
-    </mat-form-field>
-  </div>
-
-  <h2>Ingredients</h2>
-  <div
-    *ngFor="let _ of ' '.repeat(ingredients.length).split(''); let i = index"
-  >
-    <span>
-      {{ ingredients[i].name }} <small>{{ ingredients[i].category }}</small>
-      <mat-icon (click)="removeIngredient(i)">remove</mat-icon></span
-    >
-  </div>
-  <ingredient-autocomplete (selected)="addIngredient($event)" />
-
-  <div>
-    <h2>Instructions</h2>
-    <div
-      *ngFor="let _ of ' '.repeat(instructions.length).split(''); let i = index"
-    >
-      <span>
-        <input
-          required
+      <mat-form-field class="full-width" floatPlaceholder="auto">
+        <mat-label>Description</mat-label>
+        <textarea
           matInput
-          placeholder="step ({{ i + 1 }})"
-          [name]="'instruction_' + i"
-          [(ngModel)]="instructions[i]"
-        />
-        <mat-icon (click)="removeInstruction(i)">remove</mat-icon>
-      </span>
+          placeholder="Ex. A delicious Italian dish"
+          [(ngModel)]="description"
+          [ngModelOptions]="{ standalone: true }"
+        ></textarea>
+      </mat-form-field>
     </div>
-    <button type="button" (click)="addInstruction()">
-      + Add another instruction
-    </button>
-  </div>
 
-  <div>
-    <h2>Diet restrictions</h2>
+    <h2>Ingredients</h2>
     <div
-      *ngFor="
-        let _ of ' '.repeat(dietCompatibility.length).split('');
-        let i = index
-      "
+      *ngFor="let _ of ' '.repeat(ingredients.length).split(''); let i = index"
     >
-      <span>
-        <select>
-          <option
+      <mat-form-field>
+        <input
+          matInput
+          disabled="true"
+          [name]="'ingredients_' + i"
+          [(ngModel)]="ingredients[i].name"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </mat-form-field>
+      <mat-icon class="space-right2" (click)="removeIngredient(i)"
+        >remove_circle</mat-icon
+      >
+    </div>
+    <ingredient-autocomplete (selected)="addIngredient($event)" />
+
+    <div>
+      <h2>Instructions</h2>
+      <div
+        *ngFor="
+          let _ of ' '.repeat(instructions.length).split('');
+          let i = index
+        "
+      >
+        <mat-form-field>
+          <input
+            required
+            matInput
+            placeholder="step ({{ i + 1 }})"
+            [name]="'instruction_' + i"
+            [(ngModel)]="instructions[i]"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </mat-form-field>
+        <button mat-icon-button (click)="removeInstruction(i)">
+          <mat-icon class="mat-18">remove_circle</mat-icon>
+        </button>
+      </div>
+      <button mat-icon-button (click)="addInstruction()">
+        <mat-icon class="mat-18">add</mat-icon>
+      </button>
+    </div>
+
+    <div>
+      <h2>Diet restrictions</h2>
+      <div
+        *ngFor="
+          let _ of ' '.repeat(dietCompatibility.length).split('');
+          let i = index
+        "
+      >
+        <mat-select
+          style="width: 80%"
+          placeholder="please select at least one dietary category"
+        >
+          <mat-option
             *ngFor="let enum_element of FoodRestrictionCompatibility | keyvalue"
             [value]="enum_element.key"
           >
             {{ enum_element.value }}
-          </option>
-        </select>
-        <mat-icon (click)="removeRestriction(i)">remove</mat-icon>
-      </span>
+          </mat-option>
+        </mat-select>
+        <button mat-icon-button (click)="removeRestriction(i)">
+          <mat-icon class="mat-18">remove_circle</mat-icon>
+        </button>
+      </div>
+      <button type="button" (click)="addRestriction()">
+        + Add another category
+      </button>
     </div>
-    <button type="button" (click)="addRestriction()">
-      + Add another restriction
-    </button>
-  </div>
-
+  </form>
+</div>
+<div mat-dialog-actions align="end">
   <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button type="submit">OK</button>
-</form>
+  <button mat-button (click)="onSubmit()">OK</button>
+</div>

@@ -50,7 +50,6 @@ export class RecipeCreatorComponent {
   ngOnInit(): void {}
 
   addIngredient(value: FoodItem) {
-    console.log(value);
     this.ingredients.push(value);
   }
 

@@ -40,9 +40,7 @@ export class IngredientAutocompleteComponent {
     return value ? value.name : '';
   }
 
-  onAutoCompleteClosed(event: any) {
-    console.log(event);
-  }
+  onAutoCompleteClosed(event: any) {}
 
   update() {
     this.selected.emit(this.ctl.value);
