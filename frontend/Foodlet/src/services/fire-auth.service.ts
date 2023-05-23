@@ -6,6 +6,8 @@ import { AngularFireAuth } from "@angular/fire/compat/auth";
 })
 export class FireAuthService {
 
+  lastError: string = ""
+
   constructor(
     private fbAuth: AngularFireAuth
   )
@@ -17,9 +19,10 @@ export class FireAuthService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         console.log(result)
+
       })
       .catch((error) =>
-      window.alert(error.message))
+        this.lastError = error)
   }
 
   Register(email: string, password: string)
@@ -28,12 +31,12 @@ export class FireAuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) =>
       {
-        window.alert('Registration successful')
-        console.log(result.user)
+
       })
       .catch((error) =>
         {
-          window.alert(error.message)
+          this.lastError = error.code
+          console.log(error.code)
         }
       )
   }
@@ -44,5 +47,9 @@ export class FireAuthService {
       {
         window.alert('Successfully signed out')
       })
+  }
+
+  getError(): any {
+    return this.lastError
   }
 }

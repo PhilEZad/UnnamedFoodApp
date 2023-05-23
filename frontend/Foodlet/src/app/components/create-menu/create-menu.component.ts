@@ -19,9 +19,9 @@ export class CreateMenuComponent implements OnInit {
   registerGender: any;
 
   constructor(
-    private authService: FireAuthService,
+    public authService: FireAuthService,
     private dialogRef: MatDialog,
-  ) {f
+  ) {
   }
 
   ngOnInit(): void {
@@ -40,7 +40,6 @@ export class CreateMenuComponent implements OnInit {
       this.dialogRef.closeAll()
     } else
     {
-
     }
   }
 }
