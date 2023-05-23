@@ -4,7 +4,8 @@
       matInput
       type="text"
       class="input"
-      [formControl]="ctl"
+      placeholder="Search for an ingredient"
+      [formControl]="searchBar"
       [matAutocomplete]="auto"
       forceSelection="name"
       #text
@@ -21,6 +22,16 @@
         {{ option.name }}
       </mat-option>
     </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      type="number"
+      placeholder="Quantity"
+      class="input"
+      [formControl]="quantity"
+      #text
+    />
   </mat-form-field>
   <mat-icon (click)="update()">check_box</mat-icon>
 </form>

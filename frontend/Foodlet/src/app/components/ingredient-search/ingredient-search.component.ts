@@ -16,7 +16,7 @@ export class IngredientAutocompleteComponent {
       this.options = data;
     });
 
-    this.filteredOptions = this.ctl.valueChanges.pipe(
+    this.filteredOptions = this.searchBar.valueChanges.pipe(
       startWith(''),
       map((value) => (typeof value === 'string' ? value : value.name)),
       map((name) => (name ? this._filter(name) : this.options.slice()))
@@ -28,7 +28,8 @@ export class IngredientAutocompleteComponent {
   options: any[] = null!;
 
   filteredOptions: Observable<any[]>;
-  ctl = new FormControl();
+  searchBar = new FormControl();
+  quantity = new FormControl();
 
   private _filter(value: string) {
     return this.options.filter((option) =>
@@ -43,6 +44,7 @@ export class IngredientAutocompleteComponent {
   onAutoCompleteClosed(event: any) {}
 
   update() {
-    this.selected.emit(this.ctl.value);
+    (this.searchBar.value as FoodItem).quantityGrams = this.quantity.value;
+    this.selected.emit(this.searchBar.value);
   }
 }
