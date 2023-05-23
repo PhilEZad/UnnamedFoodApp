@@ -1,0 +1,23 @@
+<mat-card class="mat-card">
+
+  <div class="card-header">
+    <mat-label class="recipe-number">
+      Recipe
+    </mat-label>
+  </div>
+
+  <div class="titleContainer">
+    <mat-card-title> {{ recipe.title }} </mat-card-title>
+    <mat-card-subtitle> {{ recipe.servings }} serving(s) </mat-card-subtitle>
+    <mat-card-subtitle> 200 Calories per serving </mat-card-subtitle>
+  </div>
+  <mat-card-content style="padding: 0;">
+    <app-nutrient-table-compact [foodItems]="recipe.ingredients"></app-nutrient-table-compact>
+  </mat-card-content>
+
+  <mat-card-actions style="display: inline-block">
+    <button mat-button class="view-recipe-btn" (click)="openRecipe(recipe)" style="vertical-align:middle">
+      <span>View Recipe</span>
+    </button>
+  </mat-card-actions>
+</mat-card>

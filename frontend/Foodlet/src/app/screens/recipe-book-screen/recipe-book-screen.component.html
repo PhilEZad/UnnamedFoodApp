@@ -39,7 +39,6 @@
   <div class="flexContainer">
     <div [@inOutAnimation] *ngFor="let recipe of recipes | recipeFilter : searchText | sorting : currentSorting">
       <app-recipe-card
-        [recipeNumber]="recipeIndex(recipe)"
         [recipe]="recipe"
       ></app-recipe-card>
     </div>

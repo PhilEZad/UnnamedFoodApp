@@ -1,3 +1,6 @@
+import {Recipe} from '../../../domain/Recipe';
+import {ESortingTypes} from "../../../domain/ESortingTypes";
+
 import {
   animate,
   keyframes,
@@ -56,11 +59,20 @@ export class RecipeBookScreenComponent {
   currentSortingLabel: string = null!;
 searchText: any;
 
-  constructor(public dialog: MatDialog, private service: RecipeService) {
+  currentSorting: ESortingTypes = ESortingTypes.Alphabetical;
+  searchText: string = "";
+  currentSortingLabel: string = "Alphabetical"
+
+  recipes: Recipe[] = [];
+
+
+  constructor(
+    private dialog: MatDialog,
+    private recipeService: RecipeService
+  ) {
     this.sortRecipes(ESortingTypes.Alphabetical);
-    this.service.getRecipes().subscribe((data) => {
-      this.recipes = data;
-    });
+    this.recipes = recipeService.getRecipes()
+
   }
 
   recipes: Recipe[] = recipeMockDate;
@@ -100,52 +112,3 @@ searchText: any;
     return ESortingTypes;
   }
 }
-
-export const recipeMockDate = [
-  Recipe.fullRecipe(
-    '-1',
-    'Chicken and Rice',
-    'A very tasty meal',
-    [
-      {
-        id: '0',
-        isPublic: false,
-        name: 'Chicken',
-        category: '',
-        quantityGrams: 100,
-        dateAdded: new Date(),
-        nutrients: {
-          protein: 20,
-          carbohydrates: 20,
-          fat: 20,
-          saturatedFat: 20,
-          fiber: 20,
-          calories: 0,
-        },
-      },
-      {
-        id: '1',
-        isPublic: false,
-        name: 'Rice',
-        quantityGrams: 200,
-        category: '',
-        dateAdded: new Date(),
-        nutrients: {
-          calories: 200,
-          fat: 1,
-          carbohydrates: 20,
-          fiber: 5,
-          protein: 2,
-          saturatedFat: 1,
-        },
-      },
-    ],
-    4,
-    ['Cook the chicken', 'Cook the rice', 'Mix them together'],
-    [
-      FoodRestrictionCompatibility.DAIRY_FREE,
-      FoodRestrictionCompatibility.GLUTEN_FREE,
-    ],
-    new Date()
-  ),
-];

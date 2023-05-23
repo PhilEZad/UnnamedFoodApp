@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {MealPlan} from 'src/domain/MealPlan';
 import {Recipe} from "../../../domain/Recipe";
+import {FoodItem} from "../../../domain/FoodItem";
+import {Nutrients} from "../../../domain/Nutrients";
+import {FoodRestrictionCompatibility} from "../../../domain/EFoodRestrictionCompatibility";
+import {MealPlanService} from "../../../services/meal-plan.service";
+import {MatDialog} from "@angular/material/dialog";
+import {RecipePickerComponent} from "../../components/recipe-picker/recipe-picker.component";
 
 @Component({
   selector: 'app-meal-plan-screen',
@@ -8,18 +15,68 @@ import {Recipe} from "../../../domain/Recipe";
 })
 export class MealPlanScreenComponent {
 
-  meals: Recipe[] = []
+  mealPlan: MealPlan[] = [] //All meal plans for the current user
 
-  week: Date[] = []
+  //TODO: Get meal plan from database.
+  //TODO: Generate meal plan button
+  //TODO: Replace meal plan button
 
-  currentWeekNumber: number = this.getWeekNumber(new Date())
-  weekNumber: number = this.getWeekNumber(new Date())
+  week: Date[] = []  //The dates of the week that is currently being displayed
 
+  mealPlanForWeek: MealPlan[] = []
+
+  currentWeekNumber: number = this.getWeekNumber(new Date()) //The current realtime week number
+  weekNumber: number = this.getWeekNumber(new Date()) // The week number of the week that is currently being displayed
   daysOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
+  weekHasMealPlan: boolean = false
 
-  constructor() {
+
+  constructor(
+    private mealPlanService: MealPlanService,
+    private dialog: MatDialog,
+  ){
     this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
+    this.mealPlan = mealPlanService.getMealPlans()
+    this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
+  }
+
+
+  findMealPlanForWeek(weekNumber: number): MealPlan[] {
+    let mealPlans = this.mealPlan.filter(mealPlan => this.getWeekNumber(mealPlan.date) === weekNumber) //find meal plans for the current week
+
+    if (mealPlans.length == 7) { //if there are 7 meal plans for the week, return them
+      this.weekHasMealPlan = true
+      return mealPlans
+    }
+    else if (mealPlans.length > 7) { //if there are more than 7 meal plans for the week, return the first 7
+      this.weekHasMealPlan = true
+      return mealPlans.slice(0, 7)
+    }
+    else if (mealPlans.length === 0) { //if there are no meal plans for the week, return an empty array
+      this.weekHasMealPlan = false
+      return []
+    }
+    else { //else find the missing days
+      let missingDays: Date[] = []
+      this.getDaysOfWeek(new Date().getFullYear(), weekNumber).forEach(day => {
+        if (!mealPlans.find(mealPlan => mealPlan.date.getDay() === day.getDay())) {
+          missingDays.push(day)
+        }
+      })
+
+      missingDays.map(day => {
+        let mealPlan = {
+          id: "-1",
+          recipe: Recipe.emptyRecipe(), //sentinel value
+          date: day,
+        } as MealPlan
+
+        mealPlans.push(mealPlan)
+      })
+      this.weekHasMealPlan = true
+      return mealPlans
+    }
   }
 
   /**
@@ -66,14 +123,59 @@ export class MealPlanScreenComponent {
 
   nextWeek() {
     this.weekNumber++
-    this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
+    this.week.forEach(day => {
+      day.setDate(day.getDate() + 7)
+    })
+    this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
   }
 
   previousWeek() {
     this.weekNumber--
-    this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
+    this.week.forEach(day => {
+      day.setDate(day.getDate() - 7)
+    })
+    this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
   }
 
 
+
+  generateMealPlan() {
+
+  }
+
+  createEmptyMealPlan() {
+    let days: Date[] = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
+
+    days.forEach(day => {
+      let mealPlanDay = {
+        id: "-1",
+        recipe: Recipe.emptyRecipe(), //sentinel value
+        date: day,
+      } as MealPlan
+
+      this.mealPlan.push(mealPlanDay)
+    });
+
+    this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
+  }
+
+  dayHasARecipe(mealPlanDays: MealPlan): boolean {
+    return mealPlanDays.recipe.title !== ""
+  }
+
+  setRecipeForMealPlanDay(mealPlanDays: MealPlan) {
+    let dialogRef = this.dialog.open(RecipePickerComponent, {
+      width: '90%',
+      height: '90%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        mealPlanDays.recipe = result
+        //TODO: Update meal plan in database
+      }
+    });
+  }
 }
+
 

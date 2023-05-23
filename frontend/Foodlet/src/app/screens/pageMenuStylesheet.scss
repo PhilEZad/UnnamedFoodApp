@@ -3,8 +3,10 @@
 @import "src/styles.scss";
 @import "/src/assets/externalColorConstants";
 
+$menu-background: darken($background-colour-light, 10%);
+
 .menuContainer {
-  background-color: #e7e7e7;
+  background-color: $menu-background;
   width: 100%;
   left: 0;
   top: 0;

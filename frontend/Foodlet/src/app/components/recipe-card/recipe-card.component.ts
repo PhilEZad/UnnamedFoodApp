@@ -9,8 +9,6 @@ import {MatDialog} from "@angular/material/dialog";
   styleUrls: ['./recipe-card.component.scss'],
 })
 export class RecipeCardComponent {
-  @Input() recipeNumber: number = 1;
-
   @Input() recipe: Recipe = new Recipe(
     'Chicken and Rice',
     'A simple recipe for chicken and rice',

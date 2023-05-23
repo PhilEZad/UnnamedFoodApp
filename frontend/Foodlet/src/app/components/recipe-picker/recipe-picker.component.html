@@ -1,0 +1,50 @@
+
+
+<div class="floatingSearchContainer">
+  <input placeholder="Search" type="text" [(ngModel)]="searchText"/>
+  <div style="padding: 20px;"></div>
+  <label class="sortLabel">{{currentSortingLabel}}</label>
+  <button mat-button [matMenuTriggerFor]="menu" class="sort-button">
+    <mat-icon> sort </mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="sortRecipes(sortingTypes.Alphabetical)">
+      <mat-icon>sort_by_alpha</mat-icon>
+      <span> Alphabetical </span>
+    </button>
+    <button mat-menu-item (click)="sortRecipes(sortingTypes.Calories)">
+      <mat-icon>restaurant_menu</mat-icon>
+      <span> Calories </span>
+    </button>
+    <button mat-menu-item (click)="sortRecipes(sortingTypes.Date)">
+      <mat-icon>date_range</mat-icon>
+      <span> Date Added </span>
+    </button>
+  </mat-menu>
+
+</div>
+<div class="parentContainer">
+
+  <div class="flexContainer">
+    <div *ngFor="let recipe of recipes | recipeFilter : searchText | sorting : currentSorting">
+      <div [ngClass]="selectedRecipe == recipe ? 'selected-recipe' : 'unselected-recipe'">
+      <app-recipe-card-compact
+        [ngClass]="selectedRecipe == recipe ? 'selected-recipe' : ''"
+        (click)="selectRecipe(recipe)"
+        [recipe]="recipe"
+      ></app-recipe-card-compact>
+      </div>
+    </div>
+    <!-- <button mat-fab class="fab-add-recipe-btn" (click)="newRecipe()">+</button> -->
+  </div>
+  <div class="dockToPage">
+    <button
+      mat-button
+      class="matFabAddBtn"
+      style="margin-left: 12px"
+      (click)="chooseRecipe()"
+    >
+      Choose
+    </button>
+  </div>
+</div>

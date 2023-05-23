@@ -36,6 +36,8 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { IngredientAccordionComponent } from './components/recipe-view/ingridient-accordion/ingredient-accordion.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MealPlanScreenComponent } from './screens/meal-plan-screen/meal-plan-screen.component';
+import { RecipeCardCompactComponent } from './components/recipe-card-compact/recipe-card-compact.component';
+import { RecipePickerComponent } from './components/recipe-picker/recipe-picker.component';
 
 @NgModule({
   exports: [
@@ -73,6 +75,8 @@ import { MealPlanScreenComponent } from './screens/meal-plan-screen/meal-plan-sc
     SortingPipe,
     IngredientAccordionComponent,
     MealPlanScreenComponent,
+    RecipeCardCompactComponent,
+    RecipePickerComponent,
   ],
   imports: [
     MatSelectModule,

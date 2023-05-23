@@ -18,6 +18,7 @@ export class FoodItem {
     this.name = name;
     this.quantityGrams = quantityGrams;
     this.category = category;
+    this.nutrients = nutrients;
   }
 
   static emptyFoodItem(): FoodItem {
