@@ -1,23 +1,23 @@
 <div class="toolbar">
   <div class="toolbar__logo">
-    <a routerLink="/home">
+    <a [routerLink]="['/home']">
       <img src=".\assets\logo.png" class="logo" alt="logo" />
     </a>
   </div>
   <span class="small-spacer"></span>
-  <button mat-button class="navigation-button" routerLink="/home">
+  <button mat-button class="navigation-button" [routerLink]="['/home']">
     <span>
       <mat-icon class="mat-18">home</mat-icon>
-     <label>Home</label>
+      <label>Home</label>
     </span>
   </button>
-  <button mat-button class="navigation-button" routerLink="/recipes">
+  <button mat-button class="navigation-button" [routerLink]="['/recipes']">
     <span>
       <mat-icon class="mat-18">book</mat-icon>
       <label>Recipe Book</label>
     </span>
   </button>
-  <button mat-button class="navigation-button" routerLink="/plan">
+  <button mat-button class="navigation-button" [routerLink]="['/plan']">
     <span>
       <mat-icon class="mat-18">restaurant_menu</mat-icon>
       <label>Meal Plan</label>

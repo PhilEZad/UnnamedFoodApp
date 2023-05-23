@@ -1,12 +1,12 @@
 import { Nutrients } from './Nutrients';
 
 export class FoodItem {
-  isPublic: boolean = false;
   id: string = '';
   name: string = '';
   quantityGrams: number = 0;
   category: string = '';
   nutrients: Nutrients = Nutrients.emptyNutrients();
+  isPublic: boolean = false;
   dateAdded: Date = new Date()
 
   constructor(

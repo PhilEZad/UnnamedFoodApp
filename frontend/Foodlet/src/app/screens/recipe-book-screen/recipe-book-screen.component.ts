@@ -1,10 +1,21 @@
-import {Component} from '@angular/core';
-import {Recipe} from '../../../domain/Recipe';
-import {ESortingTypes} from "../../../domain/ESortingTypes";
-
-import {animate, keyframes, state, style, transition, trigger,} from '@angular/animations';
-import {MatDialog} from '@angular/material/dialog';
-import {FoodRestrictionCompatibility} from "../../../domain/EFoodRestrictionCompatibility";
+import {
+  animate,
+  keyframes,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { Component } from '@angular/core';
+import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
+import { RecipeService } from 'src/services/recipe.service';
+import { FoodRestrictionCompatibility } from '../../../domain/EFoodRestrictionCompatibility';
+import { ESortingTypes } from '../../../domain/ESortingTypes';
+import { Recipe } from '../../../domain/Recipe';
+import { RecipeCardComponent } from '../../components/recipe-card/recipe-card.component';
+import { RecipeCreatorComponent } from '../../components/recipe-creator/recipe-creator.component';
 
 @Component({
   selector: 'app-recipe-book-screen',
@@ -41,60 +52,60 @@ import {FoodRestrictionCompatibility} from "../../../domain/EFoodRestrictionComp
   ],
 })
 export class RecipeBookScreenComponent {
+  currentSorting: ESortingTypes = null!;
+  currentSortingLabel: string = null!;
+searchText: any;
 
-  currentSorting: ESortingTypes = ESortingTypes.Alphabetical;
-  searchText: string = "";
-  currentSortingLabel: string = "Alphabetical"  //TODO FIX
+  constructor(public dialog: MatDialog, private service: RecipeService) {
+    this.sortRecipes(ESortingTypes.Alphabetical);
+    this.service.getRecipes().subscribe((data) => {
+      this.recipes = data;
+    });
+  }
 
   recipes: Recipe[] = recipeMockDate;
-
-
-  constructor(
-    private dialog: MatDialog,
-  ) {
-    this.sortRecipes(ESortingTypes.Alphabetical);
-  }
 
   recipeIndex(recipe: Recipe): number {
     return this.recipes.indexOf(recipe) + 1;
   }
 
   newRecipe() {
-    this.recipes.push(new Recipe('New Recipe', 1, [], []));
+    this.dialog.open(RecipeCreatorComponent, {
+      width: '50%',
+      height: '80%',
+    });
   }
 
   sortRecipes(sortingType: ESortingTypes) {
     switch (sortingType) {
       case ESortingTypes.Alphabetical:
-        this.currentSorting = ESortingTypes.Alphabetical
-        this.currentSortingLabel = "Alphabetical"
+        this.currentSorting = ESortingTypes.Alphabetical;
+        this.currentSortingLabel = 'Alphabetical';
         break;
       case ESortingTypes.Date:
-        this.currentSorting = ESortingTypes.Date
-        this.currentSortingLabel = "Date"
+        this.currentSorting = ESortingTypes.Date;
+        this.currentSortingLabel = 'Date';
         break;
       case ESortingTypes.Calories:
-        this.currentSorting = ESortingTypes.Calories
-        this.currentSortingLabel = "Calories"
+        this.currentSorting = ESortingTypes.Calories;
+        this.currentSortingLabel = 'Calories';
         break;
       default:
-        this.currentSorting = ESortingTypes.Alphabetical
-        this.currentSortingLabel = "Alphabetical"
+        this.currentSorting = ESortingTypes.Alphabetical;
+        this.currentSortingLabel = 'Alphabetical';
     }
   }
 
   get sortingTypes() {
-    return ESortingTypes
+    return ESortingTypes;
   }
-
-
 }
 
 export const recipeMockDate = [
   Recipe.fullRecipe(
-    "-1",
+    '-1',
     'Chicken and Rice',
-    "A very tasty meal",
+    'A very tasty meal',
     [
       {
         id: '0',
@@ -131,10 +142,10 @@ export const recipeMockDate = [
     ],
     4,
     ['Cook the chicken', 'Cook the rice', 'Mix them together'],
-    [FoodRestrictionCompatibility.DAIRY_FREE, FoodRestrictionCompatibility.GLUTEN_FREE],
-    new Date(),
+    [
+      FoodRestrictionCompatibility.DAIRY_FREE,
+      FoodRestrictionCompatibility.GLUTEN_FREE,
+    ],
+    new Date()
   ),
 ];
-
-
-
