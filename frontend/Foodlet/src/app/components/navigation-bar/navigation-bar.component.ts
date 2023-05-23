@@ -26,7 +26,5 @@ export class NavigationBarComponent {
   }
 
   signOut() {
-    this.auth.signOut();
-
   }
 }

@@ -28,7 +28,7 @@ export class RecipePickerComponent {
     private recipeService: RecipeService,
     public dialogRef: MatDialogRef<RecipePickerComponent>,
   ) {
-    this.recipes = recipeService.getRecipes()
+    //this.recipes = recipeService.getRecipes()
     this.sortRecipes(ESortingTypes.Alphabetical);
   }
 

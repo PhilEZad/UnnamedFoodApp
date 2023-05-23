@@ -1,5 +1,5 @@
-import {Recipe} from '../../../domain/Recipe';
-import {ESortingTypes} from "../../../domain/ESortingTypes";
+//import {Recipe} from '../../../domain/Recipe';
+//import {ESortingTypes} from "../../../domain/ESortingTypes";
 
 import {
   animate,
@@ -59,9 +59,9 @@ export class RecipeBookScreenComponent {
   currentSortingLabel: string = null!;
 searchText: any;
 
-  currentSorting: ESortingTypes = ESortingTypes.Alphabetical;
-  searchText: string = "";
-  currentSortingLabel: string = "Alphabetical"
+  //currentSorting: ESortingTypes = ESortingTypes.Alphabetical;
+  //searchText: string = "";
+  //currentSortingLabel: string = "Alphabetical"
 
   recipes: Recipe[] = [];
 
@@ -71,11 +71,11 @@ searchText: any;
     private recipeService: RecipeService
   ) {
     this.sortRecipes(ESortingTypes.Alphabetical);
-    this.recipes = recipeService.getRecipes()
+    //this.recipes = recipeService.getRecipes()
 
   }
 
-  recipes: Recipe[] = recipeMockDate;
+  //recipes: Recipe[] = recipeMockDate;
 
   recipeIndex(recipe: Recipe): number {
     return this.recipes.indexOf(recipe) + 1;
