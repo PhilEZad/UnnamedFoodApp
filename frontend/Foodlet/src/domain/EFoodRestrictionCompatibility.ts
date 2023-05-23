@@ -1,5 +1,3 @@
-
-
 export enum FoodRestrictionCompatibility {
   NO_RESTRICTION= "No restriction",
   VEGAN= "Vegan",

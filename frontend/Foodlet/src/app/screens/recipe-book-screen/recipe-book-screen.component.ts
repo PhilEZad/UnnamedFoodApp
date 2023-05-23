@@ -1,11 +1,24 @@
-import {Component} from '@angular/core';
 import {Recipe} from '../../../domain/Recipe';
 import {ESortingTypes} from "../../../domain/ESortingTypes";
 
-import {animate, keyframes, state, style, transition, trigger,} from '@angular/animations';
-import {MatDialog} from '@angular/material/dialog';
-import {FoodRestrictionCompatibility} from "../../../domain/EFoodRestrictionCompatibility";
-import {RecipeService} from "../../../services/recipe.service";
+import {
+  animate,
+  keyframes,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { Component } from '@angular/core';
+import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
+import { RecipeService } from 'src/services/recipe.service';
+import { FoodRestrictionCompatibility } from '../../../domain/EFoodRestrictionCompatibility';
+import { ESortingTypes } from '../../../domain/ESortingTypes';
+import { Recipe } from '../../../domain/Recipe';
+import { RecipeCardComponent } from '../../components/recipe-card/recipe-card.component';
+import { RecipeCreatorComponent } from '../../components/recipe-creator/recipe-creator.component';
 
 @Component({
   selector: 'app-recipe-book-screen',
@@ -42,6 +55,9 @@ import {RecipeService} from "../../../services/recipe.service";
   ],
 })
 export class RecipeBookScreenComponent {
+  currentSorting: ESortingTypes = null!;
+  currentSortingLabel: string = null!;
+searchText: any;
 
   currentSorting: ESortingTypes = ESortingTypes.Alphabetical;
   searchText: string = "";
@@ -56,43 +72,43 @@ export class RecipeBookScreenComponent {
   ) {
     this.sortRecipes(ESortingTypes.Alphabetical);
     this.recipes = recipeService.getRecipes()
+
   }
+
+  recipes: Recipe[] = recipeMockDate;
 
   recipeIndex(recipe: Recipe): number {
     return this.recipes.indexOf(recipe) + 1;
   }
 
   newRecipe() {
-    this.recipes.push(new Recipe('New Recipe', 1, [], []));
+    this.dialog.open(RecipeCreatorComponent, {
+      width: '50%',
+      height: '80%',
+    });
   }
 
   sortRecipes(sortingType: ESortingTypes) {
     switch (sortingType) {
       case ESortingTypes.Alphabetical:
-        this.currentSorting = ESortingTypes.Alphabetical
-        this.currentSortingLabel = "Alphabetical"
+        this.currentSorting = ESortingTypes.Alphabetical;
+        this.currentSortingLabel = 'Alphabetical';
         break;
       case ESortingTypes.Date:
-        this.currentSorting = ESortingTypes.Date
-        this.currentSortingLabel = "Date"
+        this.currentSorting = ESortingTypes.Date;
+        this.currentSortingLabel = 'Date';
         break;
       case ESortingTypes.Calories:
-        this.currentSorting = ESortingTypes.Calories
-        this.currentSortingLabel = "Calories"
+        this.currentSorting = ESortingTypes.Calories;
+        this.currentSortingLabel = 'Calories';
         break;
       default:
-        this.currentSorting = ESortingTypes.Alphabetical
-        this.currentSortingLabel = "Alphabetical"
+        this.currentSorting = ESortingTypes.Alphabetical;
+        this.currentSortingLabel = 'Alphabetical';
     }
   }
 
   get sortingTypes() {
-    return ESortingTypes
+    return ESortingTypes;
   }
-
-
 }
-
-
-
-

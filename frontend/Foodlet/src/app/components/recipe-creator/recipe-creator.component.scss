@@ -1,0 +1,22 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+@import "src/styles.scss";
+@import "/src/assets/externalColorConstants";
+@import "src/app/screens/pageMenuStylesheet.scss";
+
+.full-width {
+  width: 100%;
+}
+
+#content {
+  margin: 2% 5% 2% 5%;
+  height: 80%;
+  width: 100;
+  align-content: center;
+}
+
+.form_actions {
+  display: block;
+  position: relative;
+  flex-direction: row;
+}

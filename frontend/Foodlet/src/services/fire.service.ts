@@ -21,10 +21,11 @@ export const config = {
   providedIn: 'root',
 })
 export class FireService {
-  firebaseApplication;
+  firebaseApplication: firebase.app.App;
   firestore: firebase.firestore.Firestore;
   auth: firebase.auth.Auth;
   storage: firebase.storage.Storage;
+
   currentlySignedInUserAvatarURL: string =
     'https://wbi.net.au/wp-content/uploads/2019/04/person-icon-silhouette-png-12-1-e1555982192147.png';
   baseUrl: string = 'http://127.0.0.1:5001/fstack23/us-central1/api/';
@@ -32,10 +33,12 @@ export class FireService {
 
   constructor(private toastController: ToastController) {
     this.firebaseApplication = firebase.initializeApp(config);
+
     this.firestore = firebase.firestore();
     this.auth = firebase.auth();
     this.storage = firebase.storage();
 
+    // redefinition: emulators won't work properly without this. (async updates)
     this.auth.useEmulator('http://localhost:9099');
     this.firestore.useEmulator('localhost', 8080);
     this.storage.useEmulator('localhost', 9199);
