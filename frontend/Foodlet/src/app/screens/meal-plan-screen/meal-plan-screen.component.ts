@@ -4,6 +4,9 @@ import {Recipe} from "../../../domain/Recipe";
 import {FoodItem} from "../../../domain/FoodItem";
 import {Nutrients} from "../../../domain/Nutrients";
 import {FoodRestrictionCompatibility} from "../../../domain/EFoodRestrictionCompatibility";
+import {MealPlanService} from "../../../services/meal-plan.service";
+import {MatDialog} from "@angular/material/dialog";
+import {RecipePickerComponent} from "../../components/recipe-picker/recipe-picker.component";
 
 @Component({
   selector: 'app-meal-plan-screen',
@@ -29,16 +32,18 @@ export class MealPlanScreenComponent {
   weekHasMealPlan: boolean = false
 
 
-  constructor() {
+  constructor(
+    private mealPlanService: MealPlanService,
+    private dialog: MatDialog,
+  ){
     this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
-    this.mealPlan = mockMealPlan
+    this.mealPlan = mealPlanService.getMealPlans()
     this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
   }
 
 
   findMealPlanForWeek(weekNumber: number): MealPlan[] {
     let mealPlans = this.mealPlan.filter(mealPlan => this.getWeekNumber(mealPlan.date) === weekNumber) //find meal plans for the current week
-
 
     if (mealPlans.length == 7) { //if there are 7 meal plans for the week, return them
       this.weekHasMealPlan = true
@@ -159,95 +164,18 @@ export class MealPlanScreenComponent {
   }
 
   setRecipeForMealPlanDay(mealPlanDays: MealPlan) {
+    let dialogRef = this.dialog.open(RecipePickerComponent, {
+      width: '90%',
+      height: '90%',
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        mealPlanDays.recipe = result
+        //TODO: Update meal plan in database
+      }
+    });
   }
 }
 
-
-const mockMealPlan: MealPlan[] = [
-  {
-    id: "ID",
-    date: new Date(2023, 4, 22),
-    recipe: Recipe.fullRecipe("ID", "Pork and Rice", "A very distinct and unique description of a delicious recipe",
-      [
-        new FoodItem("Pork Sirloin", 400, "Meat",
-          new Nutrients(192, 26, 8.8, 2.8, 0, 0)),
-        new FoodItem("Rice", 200, "Grain", new Nutrients(250, 4, 1.52, 0, 0, 120)),
-      ], 4,
-      ["Step 1", "Step 2", "Step 3", "Step 4"],
-      [FoodRestrictionCompatibility.DAIRY_FREE, FoodRestrictionCompatibility.GLUTEN_FREE, FoodRestrictionCompatibility.VEGAN, FoodRestrictionCompatibility.VEGETARIAN],
-      new Date()
-    )
-  },
-  {
-    id: "ID",
-    date: new Date(2023, 4, 23),
-    recipe: Recipe.fullRecipe("ID", "Recipe Pork and Rice", "A very distinct and unique description of a delicious recipe",
-      [
-        new FoodItem("Pork Sirloin", 400, "Meat",
-          new Nutrients(192, 26, 8.8, 2.8, 0, 0)),
-        new FoodItem("Rice", 200, "Grain", new Nutrients(250, 4, 1.52, 0, 0, 120)),
-      ], 4,
-      ["Step 1", "Step 2", "Step 3", "Step 4"],
-      [FoodRestrictionCompatibility.DAIRY_FREE, FoodRestrictionCompatibility.GLUTEN_FREE, FoodRestrictionCompatibility.VEGAN, FoodRestrictionCompatibility.VEGETARIAN],
-      new Date()
-    )
-  },
-  {
-    id: "ID",
-    date: new Date(2023, 4, 24),
-    recipe: Recipe.fullRecipe("ID", "Pork and Rice Name", "A very distinct and unique description of a delicious recipe",
-      [
-        new FoodItem("Pork Sirloin", 400, "Meat",
-          new Nutrients(192, 26, 8.8, 2.8, 0, 0)),
-        new FoodItem("Rice", 200, "Grain", new Nutrients(250, 4, 1.52, 0, 0, 120)),
-      ], 4,
-      ["Step 1", "Step 2", "Step 3", "Step 4"],
-      [FoodRestrictionCompatibility.DAIRY_FREE, FoodRestrictionCompatibility.GLUTEN_FREE, FoodRestrictionCompatibility.VEGAN, FoodRestrictionCompatibility.VEGETARIAN],
-      new Date()
-    )
-  },
-  {
-    id: "ID",
-    date: new Date(2023, 4, 25),
-    recipe: Recipe.fullRecipe("ID", "RecipePork and Rice Name", "A very distinct and unique description of a delicious recipe",
-      [
-        new FoodItem("Pork Sirloin", 400, "Meat",
-          new Nutrients(192, 26, 8.8, 2.8, 0, 0)),
-        new FoodItem("Rice", 200, "Grain", new Nutrients(250, 4, 1.52, 0, 0, 120)),
-      ], 4,
-      ["Step 1", "Step 2", "Step 3", "Step 4"],
-      [FoodRestrictionCompatibility.DAIRY_FREE, FoodRestrictionCompatibility.GLUTEN_FREE, FoodRestrictionCompatibility.VEGAN, FoodRestrictionCompatibility.VEGETARIAN],
-      new Date()
-    )
-  },
-  {
-    id: "ID",
-    date: new Date(2023, 4, 26),
-    recipe: Recipe.fullRecipe("ID", "Recipe NamePork and Rice", "A very distinct and unique description of a delicious recipe",
-      [
-        new FoodItem("Pork Sirloin", 400, "Meat",
-          new Nutrients(192, 26, 8.8, 2.8, 0, 0)),
-        new FoodItem("Rice", 200, "Grain", new Nutrients(250, 4, 1.52, 0, 0, 120)),
-      ], 4,
-      ["Step 1", "Step 2", "Step 3", "Step 4"],
-      [FoodRestrictionCompatibility.DAIRY_FREE, FoodRestrictionCompatibility.GLUTEN_FREE, FoodRestrictionCompatibility.VEGAN, FoodRestrictionCompatibility.VEGETARIAN],
-      new Date()
-    )
-  },
-  {
-    id: "ID",
-    date: new Date(2023, 4, 27),
-    recipe: Recipe.fullRecipe("ID", "Pork and RiceRecipe Name", "A very distinct and unique description of a delicious recipe",
-      [
-        new FoodItem("Pork Sirloin", 400, "Meat",
-          new Nutrients(192, 26, 8.8, 2.8, 0, 0)),
-        new FoodItem("Rice", 200, "Grain", new Nutrients(250, 4, 1.52, 0, 0, 120)),
-      ], 4,
-      ["Step 1", "Step 2", "Step 3", "Step 4"],
-      [FoodRestrictionCompatibility.DAIRY_FREE, FoodRestrictionCompatibility.GLUTEN_FREE, FoodRestrictionCompatibility.VEGAN, FoodRestrictionCompatibility.VEGETARIAN],
-      new Date()
-    )
-  },
-]
 
