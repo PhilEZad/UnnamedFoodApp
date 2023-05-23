@@ -21,7 +21,7 @@ export class CreateMenuComponent implements OnInit {
   constructor(
     private authService: FireAuthService,
     private dialogRef: MatDialog,
-  ) {
+  ) {f
   }
 
   ngOnInit(): void {
