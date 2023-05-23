@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import {FireAuthService} from "../../../services/fire-auth.service";
-import {MatDialog} from "@angular/material/dialog";
-import {LoginMenuComponent} from "../login-menu/login-menu.component";
-import {CreateMenuComponent} from "../create-menu/create-menu.component";
+import { FireAuthService } from "../../../services/fire-auth.service";
+import { MatDialog } from "@angular/material/dialog";
+import { LoginMenuComponent } from "../login-menu/login-menu.component";
+import { CreateMenuComponent } from "../create-menu/create-menu.component";
 
 @Component({
   selector: 'app-navigation-bar',
@@ -22,9 +22,13 @@ export class NavigationBarComponent {
   }
 
   registerMenu() {
-    this.dialogRef.open(CreateMenuComponent)
+    this.dialogRef.open(CreateMenuComponent, {
+      height: '400px',
+      width: '500px'
+    })
   }
 
   signOut() {
+    this.auth.signOut()
   }
 }

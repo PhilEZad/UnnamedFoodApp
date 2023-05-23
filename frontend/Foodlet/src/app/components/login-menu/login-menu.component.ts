@@ -12,12 +12,12 @@ export class LoginMenuComponent {
   loginPassword: any;
 
   constructor(
-    private authService: FireAuthService,
+    public authService: FireAuthService,
     private dialogRef: MatDialog) {
   }
 
   loginAccount() {
-    this.authService.LogIn(this.loginMail, this.loginPassword)
+    this.authService.logIn(this.loginMail, this.loginPassword)
     this.dialogRef.closeAll()
   }
 }

@@ -1,45 +1,58 @@
-<p>Register Account</p>
-<div>
-  <div>
+<div class="registerContainer">
+
+  <div class="registerTitle">
+    <h2 mat-dialog-title>Register Account</h2>
+  </div>
+
+  <div div class="defaultContainer">
     <mat-form-field>
       <mat-label>First Name</mat-label>
       <input matInput name="registerFirstName" placeholder="John" [(ngModel)]="registerFirstName"/>
+      <mat-hint class="errorText" *ngIf="registerFirstName == '' || registerFirstName == null">*Field can not be empty</mat-hint>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Last Name</mat-label>
       <input matInput name="registerSurname" placeholder="Doe" [(ngModel)]="registerLastName"/>
+      <mat-hint class="errorText"*ngIf="registerLastName == '' || registerLastName == null">*Field can not be empty</mat-hint>
     </mat-form-field>
   </div>
 
-  <div>
+  <div class="defaultContainer">
     <mat-form-field>
       <mat-label>Email</mat-label>
       <input matInput name="registerEmail" placeholder="example@email.com" [(ngModel)]="registerEmail"/>
+      <mat-hint class="errorText" *ngIf="registerEmail == '' || registerEmail == null">*Field can not be empty</mat-hint>
+      <mat-hint class="errorText" *ngIf="authService.getError() == 'auth/invalid-email'">*Invalid email format</mat-hint>
+      <mat-hint class="errorText" *ngIf="authService.getError() == 'auth/email-already-exists'">*Email already exists</mat-hint>
     </mat-form-field>
 
     <label class="mat-radio-label"> Biological Gender
+      <div>
         <mat-radio-group>
-          <mat-radio-button value="Male">Male</mat-radio-button>
-          <mat-radio-button value="Female">Female</mat-radio-button>
+          <mat-radio-button value="Male" [(ngModel)]="registerGender">Male</mat-radio-button>
+          <mat-radio-button value="Female" [(ngModel)]="registerGender">Female</mat-radio-button>
         </mat-radio-group>
+      </div>
     </label>
   </div>
 
-  <div>
+  <div class="defaultContainer">
     <mat-form-field>
       <mat-label>Password</mat-label>
       <input matInput type="password" name="registerPassword" [(ngModel)]="registerPassword"/>
-      <mat-hint *ngIf="authService.getError() == 'auth/missing-password'">Password</mat-hint>
+      <mat-hint class="errorText" *ngIf="registerPassword == '' || registerPassword == null">*Field can not be empty</mat-hint>
+      <mat-hint class="errorText" *ngIf="authService.getError() == 'auth/missing-password'">*Password can not be empty</mat-hint>
+      <mat-hint class="errorText" *ngIf="authService.getError() == 'auth/invalid-password'">*Password is invalid</mat-hint>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Confirm Password</mat-label>
       <input matInput type="password" name="confirmPassword" [(ngModel)]="registerPasswordConfirm"/>
-      <mat-hint>Test Error</mat-hint>
+      <mat-hint class="errorText" *ngIf="registerPassword != registerPasswordConfirm">*Password does not match</mat-hint>
     </mat-form-field>
   </div>
 
-  <div>
+  <div class="buttonContainer">
     <button mat-raised-button type="button" name="buttonCreateAccount" (click)="createAccount()">Register</button>
   </div>
 </div>

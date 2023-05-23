@@ -1,0 +1,40 @@
+.registerCard
+{
+
+  max-width: 600px;
+  max-height: 600px;
+}
+
+.defaultContainer
+{
+  margin: auto;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+
+.buttonContainer
+{
+  margin: auto;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+
+.mat-radio-label {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.errorText
+{
+  color: red;
+  font-size: 0.8rem;
+}

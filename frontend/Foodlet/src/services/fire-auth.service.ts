@@ -13,39 +13,42 @@ export class FireAuthService {
   )
   {}
 
-  LogIn(email: string, password: string)
+  logIn(email: string, password: string)
   {
     return this.fbAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log(result)
-
+        //TODO: Route to default page
       })
       .catch((error) =>
-        this.lastError = error)
+        {
+          this.lastError = error.code
+          console.log(error.message)
+        }
+      )
   }
 
-  Register(email: string, password: string)
+  register(email: string, password: string)
   {
     return this.fbAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) =>
       {
-
+        this.logIn(email, password)
+        //TODO: Route to usersetting page
       })
       .catch((error) =>
         {
           this.lastError = error.code
-          console.log(error.code)
         }
       )
   }
 
-  SignOut() {
+  signOut() {
     return this.fbAuth.signOut()
       .then((result) =>
       {
-        window.alert('Successfully signed out')
+        //TODO: Route to default page
       })
   }
 

@@ -8,15 +8,14 @@ import { FormControl, FormGroup, Validators} from "@angular/forms";
   templateUrl: './create-menu.component.html',
   styleUrls: ['./create-menu.component.scss']
 })
-export class CreateMenuComponent implements OnInit {
+export class CreateMenuComponent {
 
-  formControlGroup: FormGroup = new FormGroup({})
   registerEmail: any;
   registerPassword: any;
   registerPasswordConfirm: any;
   registerFirstName: any;
   registerLastName: any;
-  registerGender: any;
+  registerGender: string = "Male"
 
   constructor(
     public authService: FireAuthService,
@@ -24,22 +23,10 @@ export class CreateMenuComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-    this.formControlGroup = new FormGroup({
-      registerName: new FormControl([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.pattern('^[a-zA-Z0-9]+$')
-      ])
-    })
-  }
-
   createAccount() {
     if(this.registerPassword == this.registerPasswordConfirm) {
-      this.authService.Register(this.registerEmail, this.registerPassword)
+      this.authService.register(this.registerEmail, this.registerPassword)
       this.dialogRef.closeAll()
-    } else
-    {
     }
   }
 }
