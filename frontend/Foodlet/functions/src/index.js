@@ -16,7 +16,6 @@ const firebaseConfig = {
 };
 
 export const userRecordOnRegister = auth.user().onCreate((user, context) => {
-  logger.log("userRecordOnRegister");
   logger.log(user);
 
   let app = firebaseAdmin.initializeApp(firebaseConfig);
