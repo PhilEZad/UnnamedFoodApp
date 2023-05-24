@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Recipe } from '../../../domain/Recipe';
 import {RecipeViewComponent} from "../recipe-view/recipe-view.component";
 import {MatDialog} from "@angular/material/dialog";
+import { sum } from 'src/utils/math';
 
 @Component({
   selector: 'app-recipe-card',
@@ -65,6 +66,12 @@ export class RecipeCardComponent {
       data: {recipe},
       panelClass: 'recipe-view-dialog',
     });
+  }
+
+  getCalories() {
+    let calories = sum(this.recipe).calories;
+    if (calories < 0) calories = 0;
+    return calories;
   }
 }
 
