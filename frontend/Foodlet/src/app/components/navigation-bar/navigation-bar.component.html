@@ -23,6 +23,12 @@
       <label>Meal Plan</label>
     </span>
   </button>
+  <button mat-button class="navigation-button" [routerLink]="['/fooditem']">
+    <span>
+      <mat-icon class="mat-18">fastfood</mat-icon>
+      <label>Ingredients</label>
+    </span>
+  </button>
   <span class="spacer"></span>
   <div *ngIf="true; then isUser; else anonymous"></div>
   <!-- TODO: FireAuth query -->
