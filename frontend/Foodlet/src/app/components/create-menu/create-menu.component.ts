@@ -25,14 +25,10 @@ export class CreateMenuComponent {
 
   createAccount() {
 
-    console.log(this.registerGender)
-    console.log(this)
-    /*
     if(this.registerPassword == this.registerPasswordConfirm) {
       this.authService.register(this.registerEmail, this.registerPassword)
       this.dialogRef.closeAll()
     }
 
-     */
   }
 }

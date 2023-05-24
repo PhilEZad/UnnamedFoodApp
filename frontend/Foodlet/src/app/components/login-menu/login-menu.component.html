@@ -1,5 +1,5 @@
-<div class="loginContainer">
-  <div>
+<div class="flexContainer">
+  <div style="margin: 20px">
     <h2 mat-dialog-title>Login</h2>
   </div>
   <div>
@@ -19,6 +19,10 @@
     </mat-form-field>
   </div>
   <div>
-    <button mat-raised-button type="button" name="buttonLogin" (click)="loginAccount()">Login</button>
+    <button mat-button type="button" name="buttonLogin" class="login-button" (click)="loginAccount()">
+      <label style="color: #ECEFF1">
+        Login
+      </label>
+    </button>
   </div>
 </div>

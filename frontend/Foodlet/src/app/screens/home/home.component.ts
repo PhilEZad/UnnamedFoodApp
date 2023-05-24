@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {CreateMenuComponent} from "../../components/create-menu/create-menu.component";
 import {MatDialog} from "@angular/material/dialog";
+import {LoginMenuComponent} from "../../components/login-menu/login-menu.component";
 
 @Component({
   selector: 'app-home',
@@ -15,9 +16,17 @@ export class HomeComponent {
 
   registerMenu() {
     this.dialogRef.open(CreateMenuComponent, {
-      height: '400px',
-      width: '500px'
+      height: '55%',
+      width: '40%'
     })
   }
+
+  loginMenu() {
+    this.dialogRef.open(LoginMenuComponent, {
+      height: '40%',
+      width: '20%'
+    })
+  }
+
 
 }

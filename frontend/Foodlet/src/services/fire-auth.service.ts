@@ -49,4 +49,8 @@ export class FireAuthService {
   getError(): any {
     return this.lastError;
   }
+
+  userIsLoggedIn() {
+    return this.auth.currentUser != null;
+  }
 }
