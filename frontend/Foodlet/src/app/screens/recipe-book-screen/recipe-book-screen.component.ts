@@ -1,4 +1,3 @@
-
 import { Recipe } from '../../../domain/Recipe';
 import { ESortingTypes } from '../../../domain/ESortingTypes';
 import {
@@ -57,6 +56,7 @@ export class RecipeBookScreenComponent {
   currentSorting: ESortingTypes = ESortingTypes.Alphabetical;
   searchText: string = '';
   currentSortingLabel: string = 'Alphabetical';
+
 
 
   recipes: Recipe[] = [];

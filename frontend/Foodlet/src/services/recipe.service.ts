@@ -1,26 +1,35 @@
 import { Injectable } from '@angular/core';
-import { FireService } from './fire.service';
 import { Recipe } from 'src/domain/Recipe';
 import { Observable, of } from 'rxjs';
 import { RecipeConverter } from 'src/utils/firebase/RecipeConverter';
+import {
+  Firestore,
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  updateDoc,
+} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
   data: Recipe[] = [];
-  listeners: Function[] = [];
+  firestore: Firestore;
 
-  constructor(private fire: FireService) {
-    this.listeners.push(
-      this.fire.firestore
-        .collection('recipes')
-        .withConverter(new RecipeConverter())
-        .onSnapshot((snapshot) => {
-          snapshot.docChanges().forEach((change) => {
-            this.data.push(change.doc.data());
-          });
-        }, console.error)
+  constructor(private fire: Firestore) {
+    this.firestore = fire;
+
+    onSnapshot(
+      collection(this.fire, 'recipes').withConverter(new RecipeConverter()),
+      (snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          this.data.push(change.doc.data());
+        });
+      },
+      console.error
     );
   }
 
@@ -29,29 +38,27 @@ export class RecipeService {
   }
 
   getRecipe(id: string): Recipe {
-    return this.data.find((recipe) => recipe.id == id) as Recipe;
+    return this.data.find((recipe) => recipe.id == id)!;
   }
 
   addRecipe(recipe: Recipe) {
-    this.fire.firestore
-      .collection('recipes')
-      .withConverter(new RecipeConverter())
-      .add(recipe);
+    addDoc(collection(this.fire, 'recipes'), recipe);
   }
 
   updateRecipe(recipe: Recipe) {
     if (recipe.isPublic == false) {
-      this.fire.firestore
-        .collection('recipes')
-        .doc(recipe.id)
-        .withConverter(new RecipeConverter())
-        .update(recipe);
+      updateDoc(
+        doc(this.fire, 'recipes', recipe.id).withConverter(
+          new RecipeConverter()
+        ),
+        recipe
+      );
     }
   }
 
   deleteRecipe(recipe: Recipe) {
     if (recipe.isPublic == false) {
-      this.fire.firestore.collection('recipes').doc(recipe.id).delete();
+      deleteDoc(doc(this.fire, 'recipes', recipe.id));
     }
   }
 

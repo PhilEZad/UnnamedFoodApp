@@ -33,6 +33,7 @@ export class RecipePickerComponent {
     recipeService.getRecipes().subscribe((recipes) => {
       this.recipes = recipes;
     });
+
     this.sortRecipes(ESortingTypes.Alphabetical);
   }
 

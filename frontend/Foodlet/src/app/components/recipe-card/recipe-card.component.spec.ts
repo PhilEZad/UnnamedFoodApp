@@ -23,7 +23,7 @@ import { HomeComponent } from 'src/app/screens/home/home.component';
 import { RecipeBookScreenComponent } from 'src/app/screens/recipe-book-screen/recipe-book-screen.component';
 import { RecipeCreatorComponent } from 'src/app/screens/recipe-creator/recipe-creator.component';
 import { IngredientFormComponent } from '../ingredient-form/ingredient-form.component';
-import { IngredientSearchComponent } from '../ingredient-search/ingredient-search.component';
+//import { IngredientSearchComponent } from '../ingredient-search/ingredient-search.component';
 import { NavigationBarComponent } from '../navigation-bar/navigation-bar.component';
 
 describe('RecipeCardComponent', () => {

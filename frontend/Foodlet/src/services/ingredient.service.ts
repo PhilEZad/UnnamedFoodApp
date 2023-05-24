@@ -1,26 +1,37 @@
 import { Injectable } from '@angular/core';
-import { FireService } from './fire.service';
+import {
+  Firestore,
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  updateDoc,
+} from '@angular/fire/firestore';
+import { Observable, of } from 'rxjs';
 import { FoodItem } from 'src/domain/FoodItem';
 import { FoodItemConverter } from 'src/utils/firebase/FoodItemConverter';
-import { NEVER, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IngredientService {
   data: FoodItem[] = [];
-  listeners: Function[] = [];
+  fire: Firestore;
 
-  constructor(private fire: FireService) {
-    this.listeners.push(
-      this.fire.firestore
-        .collection('ingredients')
-        .withConverter(new FoodItemConverter())
-        .onSnapshot((snapshot) => {
-          snapshot.docChanges().forEach((change) => {
-            this.data.push(change.doc.data());
-          });
-        }, console.error)
+  constructor(firestore: Firestore) {
+    this.fire = firestore;
+
+    onSnapshot(
+      collection(this.fire, 'ingredients').withConverter(
+        new FoodItemConverter()
+      ),
+      (snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          this.data.push(change.doc.data());
+        });
+      },
+      console.error
     );
   }
 
@@ -29,29 +40,25 @@ export class IngredientService {
   }
 
   getIngredient(id: string): FoodItem {
-    return this.data.find((ingredient) => ingredient.id == id) as FoodItem;
+    return this.data.find((ingredient) => ingredient.id == id)!;
   }
 
   addIngredient(ingredient: FoodItem) {
-    this.fire.firestore
-      .collection('ingredients')
-      .withConverter(new FoodItemConverter())
-      .add(ingredient);
+    addDoc(collection(this.fire, 'ingredients'), ingredient);
   }
 
   updateIngredient(ingredient: FoodItem) {
-    if (ingredient.isPublic == false) {
-      this.fire.firestore
-        .collection('ingredients')
-        .doc(ingredient.id)
-        .withConverter(new FoodItemConverter())
-        .update(ingredient);
-    }
+    updateDoc(
+      doc(this.fire, 'ingredients', ingredient.id).withConverter(
+        new FoodItemConverter()
+      ),
+      ingredient
+    );
   }
 
   deleteIngredient(ingredient: FoodItem) {
     if (ingredient.isPublic == false) {
-      this.fire.firestore.collection('ingredients').doc(ingredient.id).delete();
+      deleteDoc(doc(this.fire, 'ingredients', ingredient.id));
     }
   }
 

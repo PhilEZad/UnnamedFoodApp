@@ -3,7 +3,6 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { FoodItem } from 'src/domain/FoodItem';
-import { FireService } from 'src/services/fire.service';
 import { IngredientService } from 'src/services/ingredient.service';
 
 @Component({
