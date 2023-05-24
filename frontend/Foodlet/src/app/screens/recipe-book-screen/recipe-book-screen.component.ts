@@ -1,6 +1,3 @@
-import {Recipe} from '../../../domain/Recipe';
-import {ESortingTypes} from "../../../domain/ESortingTypes";
-
 import {
   animate,
   keyframes,
@@ -57,11 +54,7 @@ import { RecipeCreatorComponent } from '../../components/recipe-creator/recipe-c
 export class RecipeBookScreenComponent {
   currentSorting: ESortingTypes = null!;
   currentSortingLabel: string = null!;
-searchText: any;
-
-  currentSorting: ESortingTypes = ESortingTypes.Alphabetical;
-  searchText: string = "";
-  currentSortingLabel: string = "Alphabetical"
+  searchText: any;
 
   recipes: Recipe[] = [];
 
@@ -71,11 +64,12 @@ searchText: any;
     private recipeService: RecipeService
   ) {
     this.sortRecipes(ESortingTypes.Alphabetical);
-    this.recipes = recipeService.getRecipes()
+    recipeService.getRecipes().subscribe((recipes) => {
+      this.recipes = recipes;
+    });
 
   }
 
-  recipes: Recipe[] = recipeMockDate;
 
   recipeIndex(recipe: Recipe): number {
     return this.recipes.indexOf(recipe) + 1;

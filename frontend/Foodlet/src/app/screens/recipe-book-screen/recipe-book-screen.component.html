@@ -36,7 +36,7 @@
 </div>
 
 <div class="parentContainer">
-  <div class="flexContainer">
+  <div *ngIf="recipes.length != 0; else noRecipes" class="flexContainer">
     <div [@inOutAnimation] *ngFor="let recipe of recipes | recipeFilter : searchText | sorting : currentSorting">
       <app-recipe-card
         [recipe]="recipe"
@@ -44,6 +44,11 @@
     </div>
     <!-- <button mat-fab class="fab-add-recipe-btn" (click)="newRecipe()">+</button> -->
   </div>
+  <ng-template #noRecipes>
+    <div class="flexContainer">
+        <label class="sortLabel">No Recipes Found</label>
+    </div>
+  </ng-template>
 </div>
 <div class="dockToBottom">
   <button
