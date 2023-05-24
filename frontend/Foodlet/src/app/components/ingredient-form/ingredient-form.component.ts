@@ -2,6 +2,7 @@ import { Nutrients } from './../../../domain/Nutrients';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
+import { MatIcon } from '@angular/material/icon';
 import { FoodItem } from 'src/domain/FoodItem';
 import { IngredientService } from 'src/services/ingredient.service';
 

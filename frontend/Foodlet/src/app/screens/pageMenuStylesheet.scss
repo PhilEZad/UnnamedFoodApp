@@ -79,6 +79,8 @@ $menu-background: darken($background-colour-light, 10%);
 .recipeIcon {
   transform: scale(1.2);
   padding: 1px;
+  display: inline-flex !important;
+  margin-right: 5px;
 }
 
 .searchContainer {

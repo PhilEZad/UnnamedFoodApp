@@ -23,9 +23,10 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field style="width: 180px">
     <input
       matInput
+      style="margin-right: 5px;"
       type="number"
       placeholder="Quantity (grams)"
       class="input"
@@ -33,5 +34,13 @@
       #text
     />
   </mat-form-field>
-  <mat-icon (click)="update()">check_box</mat-icon>
+
+  <button mat-button (click)="update()" class="addButton">
+    <span>
+         <mat-icon class="selectRecipe">check_box</mat-icon>
+      <label>
+        Add
+      </label>
+    </span>
+  </button>
 </form>
