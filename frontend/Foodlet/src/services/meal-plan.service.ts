@@ -105,7 +105,7 @@ export class MealPlanService {
     },
   ];
 
-  generateMealPlan(maxNutrients: number) {
+  generateMealPlan(maxNutrients: number, mealPlans: MealPlan[]) {
 
   }
 }

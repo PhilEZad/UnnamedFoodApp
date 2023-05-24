@@ -1,1 +1,17 @@
-<p>max-nutrients-dialog works!</p>
+
+
+<div>
+
+  <mat-label>
+    Max calories per serving for recipes
+  </mat-label>
+
+  <span>
+  <mat-form-field>
+    <input matInput placeholder="500"  type="number" [(ngModel)]="maxNutrients" (keyup.enter)="closeDialog()">
+  </mat-form-field>
+    <mat-label>
+      Calories
+    </mat-label>
+    </span>
+</div>

@@ -8,11 +8,17 @@ import {MatDialogRef} from "@angular/material/dialog";
 })
 export class MaxNutrientsDialogComponent {
 
+  maxNutrients: number = 0
+
   constructor(
     public dialogRef: MatDialogRef<MaxNutrientsDialogComponent>
   )
   { }
 
+
+  closeDialog() {
+    this.dialogRef.close(this.maxNutrients)
+  }
 
 
 }
