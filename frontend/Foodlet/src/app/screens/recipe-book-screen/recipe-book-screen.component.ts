@@ -1,6 +1,6 @@
+
 import { Recipe } from '../../../domain/Recipe';
 import { ESortingTypes } from '../../../domain/ESortingTypes';
-
 import {
   animate,
   keyframes,
@@ -53,9 +53,11 @@ import { RecipeCreatorComponent } from '../../components/recipe-creator/recipe-c
   ],
 })
 export class RecipeBookScreenComponent {
+
   currentSorting: ESortingTypes = ESortingTypes.Alphabetical;
   searchText: string = '';
   currentSortingLabel: string = 'Alphabetical';
+
 
   recipes: Recipe[] = [];
 
@@ -64,7 +66,9 @@ export class RecipeBookScreenComponent {
     recipeService.getRecipes().subscribe((recipes) => {
       this.recipes = recipes;
     });
+
   }
+
 
   recipeIndex(recipe: Recipe): number {
     return this.recipes.indexOf(recipe) + 1;

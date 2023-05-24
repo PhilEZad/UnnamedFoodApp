@@ -25,7 +25,7 @@
 </div>
 <div class="parentContainer">
 
-  <div class="flexContainer">
+  <div *ngIf="recipes.length != 0; else noRecipes" class="flexContainer">
     <div *ngFor="let recipe of recipes | recipeFilter : searchText | sorting : currentSorting">
       <div [ngClass]="selectedRecipe == recipe ? 'selected-recipe' : 'unselected-recipe'">
       <app-recipe-card-compact
@@ -37,6 +37,11 @@
     </div>
     <!-- <button mat-fab class="fab-add-recipe-btn" (click)="newRecipe()">+</button> -->
   </div>
+  <ng-template #noRecipes>
+    <div class="flexContainer">
+      <label class="sortLabel">No Recipes Found</label>
+    </div>
+  </ng-template>
   <div class="dockToPage">
     <button
       mat-button

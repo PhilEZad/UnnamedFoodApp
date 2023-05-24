@@ -4,7 +4,7 @@ import { RecipeBookScreenComponent } from './recipe-book-screen.component';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { RecipeCardComponent } from 'src/app/components/recipe-card/recipe-card.component';
-import { RecipeCreatorComponent } from '../recipe-creator/recipe-creator.component';
+
 import { MatCard, MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { NutrientTableCompactComponent } from 'src/app/components/nutrient-table-compact/nutrient-table-compact.component';
@@ -20,7 +20,6 @@ import { IonicModule } from '@ionic/angular';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
 import { IngredientFormComponent } from 'src/app/components/ingredient-form/ingredient-form.component';
-import { IngredientSearchComponent } from 'src/app/components/ingredient-search/ingredient-search.component';
 import { NavigationBarComponent } from 'src/app/components/navigation-bar/navigation-bar.component';
 import { IngredientFilterPipe } from 'src/app/pipes/ingredient-filter.pipe';
 import { HomeComponent } from '../home/home.component';
@@ -35,8 +34,6 @@ describe('RecipeBookScreenComponent', () => {
         AppComponent,
         RecipeCardComponent,
         NutrientTableCompactComponent,
-        RecipeCreatorComponent,
-        IngredientSearchComponent,
         IngredientFormComponent,
         IngredientFilterPipe,
         RecipeBookScreenComponent,
