@@ -28,9 +28,9 @@
 
     <label class="mat-radio-label"> Biological Gender
       <div>
-        <mat-radio-group>
-          <mat-radio-button value="Male" [(ngModel)]="registerGender">Male</mat-radio-button>
-          <mat-radio-button value="Female" [(ngModel)]="registerGender">Female</mat-radio-button>
+        <mat-radio-group [(ngModel)]="registerGender">
+          <mat-radio-button value="Male" >Male</mat-radio-button>
+          <mat-radio-button value="Female">Female</mat-radio-button>
         </mat-radio-group>
       </div>
     </label>
