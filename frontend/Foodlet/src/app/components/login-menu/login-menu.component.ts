@@ -17,7 +17,8 @@ export class LoginMenuComponent {
   }
 
   loginAccount() {
-    this.authService.logIn(this.loginMail, this.loginPassword)
-    this.dialogRef.closeAll()
+    let successful = this.authService.logIn(this.loginMail, this.loginPassword)
+    if (successful)
+      this.dialogRef.closeAll()
   }
 }

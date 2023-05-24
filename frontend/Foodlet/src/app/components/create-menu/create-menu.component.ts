@@ -26,8 +26,9 @@ export class CreateMenuComponent {
   createAccount() {
 
     if(this.registerPassword == this.registerPasswordConfirm) {
-      this.authService.register(this.registerEmail, this.registerPassword)
-      this.dialogRef.closeAll()
+      let successful = this.authService.register(this.registerEmail, this.registerPassword)
+      if (successful)
+        this.dialogRef.closeAll()
     }
 
   }
