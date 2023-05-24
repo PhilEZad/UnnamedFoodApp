@@ -16,15 +16,16 @@ export class FireAuthService {
 
   constructor(
     private fbAuth: Auth,
-    public snack: MatSnackBar
+    public snack: MatSnackBar,
+    private router: Router
   ) {
     this.auth = fbAuth;
   }
 
-  logIn(email: string, password: string):boolean {
+  logIn(email: string, password: string):boolean {  //TODO: Strange error here. Fix and consider routing in component
     signInWithEmailAndPassword(this.auth, email, password)
       .then((result) => {
-        new Router().navigate(['/']);
+        this.router.navigate(['/']);
         return true;
       })
       .catch((error) => {
@@ -36,11 +37,22 @@ export class FireAuthService {
     return false;
   }
 
-  register(email: string, password: string): boolean {
+
+  //TODO: Strange error here. Fix and consider routing in component
+  /*
+   inject() must be called from an injection context such as a constructor,
+   a factory function, a field initializer, or
+   a function used with `EnvironmentInjector#runInContext`.
+   Find more at https://angular.io/errors/NG0203
+
+   https://stackoverflow.com/questions/60685286/inject-must-be-called-from-an-injection-context-when-using-angular-library-in
+   https://stackoverflow.com/questions/62764264/error-inject-must-be-called-from-an-injection-context-but-cant-find-origin
+   */
+  register(email: string, password: string): boolean {  //Error (auth/network-request-failed) when trying to register
     createUserWithEmailAndPassword(this.auth, email, password)
       .then((result) => {
         this.logIn(email, password);
-        new Router().navigate(['/']);
+        this.router.navigate(['/']);
         return true;
       })
       .catch((error) => {
@@ -52,9 +64,9 @@ export class FireAuthService {
     return false;
   }
 
-  signOut() {
+  signOut() { //TODO: Fix and consider routing in component. Does not redirect to home page
     this.auth.signOut().then((result) => {
-      new Router().navigate(['/']);
+      this.router.navigate(['/']);
     });
   }
 
