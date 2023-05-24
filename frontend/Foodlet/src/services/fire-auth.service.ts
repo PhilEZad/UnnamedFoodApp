@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from '@angular/fire/auth';
+import { getFunctions, httpsCallable } from '@angular/fire/functions';
 import { Router } from '@angular/router';
 import {MatSnackBar} from "@angular/material/snack-bar";
 
@@ -12,14 +13,12 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class FireAuthService {
   lastError: string = '';
-  auth: Auth;
 
   constructor(
-    private fbAuth: Auth,
+    private auth: Auth,
     public snack: MatSnackBar,
     private router: Router
   ) {
-    this.auth = fbAuth;
   }
 
   logIn(email: string, password: string):boolean {  //TODO: Strange error here. Fix and consider routing in component

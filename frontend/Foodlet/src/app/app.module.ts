@@ -1,8 +1,3 @@
-import {
-  connectFunctionsEmulator,
-  getFunctions,
-  provideFunctions,
-} from '@angular/fire/functions';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -74,6 +69,12 @@ import {
 } from '@angular/fire/storage';
 import { MaxNutrientsDialogComponent } from './components/max-nutrients-dialog/max-nutrients-dialog.component';
 import {MatSnackBar} from "@angular/material/snack-bar";
+
+import {
+  connectFunctionsEmulator,
+  getFunctions,
+  provideFunctions,
+} from '@angular/fire/functions';
 
 @NgModule({
   exports: [
