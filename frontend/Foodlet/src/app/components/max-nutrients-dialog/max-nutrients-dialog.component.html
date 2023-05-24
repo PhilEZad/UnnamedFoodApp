@@ -1,17 +1,21 @@
 
-
-<div>
-
-  <mat-label>
+<div class="container">
+  <mat-label class="dialogTitle">
     Max calories per serving for recipes
   </mat-label>
 
-  <span>
   <mat-form-field>
-    <input matInput placeholder="500"  type="number" [(ngModel)]="maxNutrients" (keyup.enter)="closeDialog()">
+    <mat-label>Max calories</mat-label>
+    <input matInput placeholder="500" type="number" min="1" [(ngModel)]="maxNutrients" (keyup.enter)="closeDialog()">
   </mat-form-field>
-    <mat-label>
-      Calories
-    </mat-label>
-    </span>
+
+  <div class="ActionsButtonsContainer">
+    <button mat-button>
+      Cancel
+    </button>
+    <button mat-button color="primary" (click)="closeDialog()">
+      Proceed
+    </button>
+  </div>
+
 </div>

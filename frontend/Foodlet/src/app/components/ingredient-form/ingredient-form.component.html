@@ -21,39 +21,40 @@
         <mat-label class="subHeader">Base info</mat-label>
 
         <label class="input-label" for="title">Name </label>
-        <input id="title" type="text" [(ngModel)]="title"/>
+        <input id="title" type="text" minlength="1" [(ngModel)]="title"/>
 
         <label class="input-label" for="category">Category </label>
         <input placeholder="E.g. Pork, Grain" id="category" type="text" [(ngModel)]="category"/>
 
         <label class="input-label" for="weight">Weight (grams) </label>
-        <input value="100" id="weight" type="number" [(ngModel)]="weight"/>
+        <input value="100" id="weight" type="number" min="1" [(ngModel)]="weight"/>
       </div>
 
       <div formGroupName="nutrients" style="margin: 1em;">
         <mat-label class="subHeader">Nutrients</mat-label>
 
         <label class="input-label" for="calories">Calories </label>
-        <input id="calories" type="number" [(ngModel)]="nutrients.calories"/>
+        <input id="calories" min="0" type="number" [(ngModel)]="nutrients.calories"/>
 
         <label class="input-label" for="carbohydrates">Carbohydrates (g) </label>
         <input
           id="carbohydrates"
           type="number"
+          min="0"
           [(ngModel)]="nutrients.carbohydrates"
         />
 
         <label class="input-label" for="fat">Fat (g)</label>
-        <input id="fat" type="number" [(ngModel)]="nutrients.fat"/>
+        <input id="fat" type="number" min="0" [(ngModel)]="nutrients.fat"/>
 
-        <label class="input-label" for="fat">Saturated Fat (g)</label>
-        <input id="satFat" type="number" [(ngModel)]="nutrients.saturatedFat"/>
+        <label class="input-label" for="satFat">Saturated Fat (g)</label>
+        <input id="satFat" type="number" min="0" [(ngModel)]="nutrients.saturatedFat"/>
 
         <label class="input-label" for="protein">Protein (g)</label>
-        <input id="protein" type="number" [(ngModel)]="nutrients.protein"/>
+        <input id="protein" type="number" min="0" [(ngModel)]="nutrients.protein"/>
 
         <label class="input-label" for="fiber">Fiber (g)</label>
-        <input id="fiber" type="number" [(ngModel)]="nutrients.fiber"/>
+        <input id="fiber" type="number" min="0" [(ngModel)]="nutrients.fiber"/>
       </div>
     </div>
     <div class="submit-container">

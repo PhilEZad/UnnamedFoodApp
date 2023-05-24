@@ -73,6 +73,7 @@ import {
   StorageModule,
 } from '@angular/fire/storage';
 import { MaxNutrientsDialogComponent } from './components/max-nutrients-dialog/max-nutrients-dialog.component';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @NgModule({
   exports: [
@@ -175,7 +176,7 @@ import { MaxNutrientsDialogComponent } from './components/max-nutrients-dialog/m
       return functions;
     }),
   ],
-  providers: [],
+  providers: [MatSnackBar],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

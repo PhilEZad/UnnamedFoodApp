@@ -152,13 +152,16 @@ export class MealPlanScreenComponent {
     let mealPlans = this.findMealPlanForWeek(this.weekNumber)   //Generate empty meal plan
 
     this.dialog.open(MaxNutrientsDialogComponent, {  //Use MaxNutrientDialog
-        width: '250px',
+        width: '350px',
         height: '250px',
       }
     ).afterClosed().subscribe(maxNutrients => {     //Return number from dialog
       if (maxNutrients) {
 
         this.mealPlanService.generateMealPlan(maxNutrients, mealPlans)
+      }
+      else {
+        this.weekHasMealPlan = false //If user has cancelled, set weekHasMealPlan to false as findMealPlanForWeek sets it to true
       }
     });
 
