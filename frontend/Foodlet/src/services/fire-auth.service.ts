@@ -1,58 +1,52 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from "@angular/fire/compat/auth";
+import {
+  Auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FireAuthService {
+  lastError: string = '';
+  auth: Auth;
 
-  lastError: string = ""
-
-  constructor(
-    private fbAuth: AngularFireAuth
-  )
-  {}
-
-  logIn(email: string, password: string)
-  {
-    return this.fbAuth
-      .signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        //TODO: Route to default page
-      })
-      .catch((error) =>
-        {
-          this.lastError = error.code
-          console.log(error.message)
-        }
-      )
+  constructor(private fbAuth: Auth) {
+    this.auth = fbAuth;
   }
 
-  register(email: string, password: string)
-  {
-    return this.fbAuth
-      .createUserWithEmailAndPassword(email, password)
-      .then((result) =>
-      {
-        this.logIn(email, password)
-        //TODO: Route to usersetting page
+  logIn(email: string, password: string) {
+    signInWithEmailAndPassword(this.auth, email, password)
+      .then((result) => {
+        new Router().navigate(['/']);
       })
-      .catch((error) =>
-        {
-          this.lastError = error.code
-        }
-      )
+      .catch((error) => {
+        this.lastError = error.code;
+        console.log(error.message);
+      });
+  }
+
+  register(email: string, password: string) {
+    createUserWithEmailAndPassword(this.auth, email, password)
+      .then((result) => {
+        this.logIn(email, password);
+        new Router().navigate(['/']);
+      })
+      .catch((error) => {
+        this.lastError = error.code;
+        console.log(error.message);
+      });
   }
 
   signOut() {
-    return this.fbAuth.signOut()
-      .then((result) =>
-      {
-        //TODO: Route to default page
-      })
+    this.auth.signOut().then((result) => {
+      new Router().navigate(['/']);
+    });
   }
 
   getError(): any {
-    return this.lastError
+    return this.lastError;
   }
 }

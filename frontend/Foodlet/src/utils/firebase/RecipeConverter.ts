@@ -1,15 +1,13 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
+import {
+  DocumentData,
+  FirestoreDataConverter,
+  QueryDocumentSnapshot,
+  SnapshotOptions,
+} from '@angular/fire/firestore';
 import { FoodRestrictionCompatibility } from 'src/domain/EFoodRestrictionCompatibility';
-import { FoodItem } from 'src/domain/FoodItem';
 import { Recipe } from 'src/domain/Recipe';
 
-export type DataConverter<T> = firebase.firestore.FirestoreDataConverter<T>;
-type DocumentData = firebase.firestore.DocumentData;
-type QueryDocumentSnapshot<T> = firebase.firestore.QueryDocumentSnapshot<T>;
-type SnapshotOptions = firebase.firestore.SnapshotOptions;
-
-export class RecipeConverter implements DataConverter<Recipe> {
+export class RecipeConverter implements FirestoreDataConverter<Recipe> {
   toFirestore(model: Recipe): DocumentData {
     return {
       id: model.id,

@@ -1,3 +1,8 @@
+import {
+  connectFunctionsEmulator,
+  getFunctions,
+  provideFunctions,
+} from '@angular/fire/functions';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -40,28 +45,51 @@ import { RecipeCardCompactComponent } from './components/recipe-card-compact/rec
 import { RecipePickerComponent } from './components/recipe-picker/recipe-picker.component';
 import { LoginMenuComponent } from './components/login-menu/login-menu.component';
 import { CreateMenuComponent } from './components/create-menu/create-menu.component';
-import { MatRadioModule } from "@angular/material/radio";
-import { AngularFireModule } from "@angular/fire/compat";
-import { AngularFireAuthModule} from "@angular/fire/compat/auth";
-import { environment } from "../environments/firebaseConfig";
+import { MatRadioModule } from '@angular/material/radio';
+import { environment } from '../environments/firebaseConfig';
+
+import {
+  initializeApp,
+  provideFirebaseApp,
+  FirebaseAppModule,
+} from '@angular/fire/app';
+import {
+  connectFirestoreEmulator,
+  getFirestore,
+  provideFirestore,
+  FirestoreModule,
+} from '@angular/fire/firestore';
+
+import {
+  connectAuthEmulator,
+  getAuth,
+  provideAuth,
+  AuthModule,
+} from '@angular/fire/auth';
+import {
+  connectStorageEmulator,
+  getStorage,
+  provideStorage,
+  StorageModule,
+} from '@angular/fire/storage';
 
 @NgModule({
-    exports: [
-      MatCardModule,
-      MatButtonModule,
-      MatTableModule,
-      MatIconModule,
-      MatInputModule,
-      FormsModule,
-      ReactiveFormsModule,
-      MatFormFieldModule,
-      MatDialogModule,
-      MatListModule,
-      MatMenuModule,
-      MatToolbarModule,
-      MatAutocompleteModule,
-      MatOptionModule,
-    ],
+  exports: [
+    MatCardModule,
+    MatButtonModule,
+    MatTableModule,
+    MatIconModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatListModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatAutocompleteModule,
+    MatOptionModule,
+  ],
   declarations: [
     AppComponent,
     RecipeCardComponent,
@@ -111,9 +139,39 @@ import { environment } from "../environments/firebaseConfig";
     MatDialogModule,
     CdkAccordionModule,
     MatExpansionModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
     MatRadioModule,
+
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => {
+      const auth = getAuth();
+      if (!environment.production) {
+        connectAuthEmulator(auth, 'http://localhost:9099', {
+          disableWarnings: true,
+        });
+      }
+      return auth;
+    }),
+    provideFirestore(() => {
+      const firestore = getFirestore();
+      if (!environment.production) {
+        connectFirestoreEmulator(firestore, 'localhost', 8080);
+      }
+      return firestore;
+    }),
+    provideStorage(() => {
+      const storage = getStorage();
+      if (!environment.production) {
+        connectStorageEmulator(storage, 'localhost', 9199);
+      }
+      return storage;
+    }),
+    provideFunctions(() => {
+      const functions = getFunctions();
+      if (!environment.production) {
+        connectFunctionsEmulator(functions, 'localhost', 5001);
+      }
+      return functions;
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
