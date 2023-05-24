@@ -32,18 +32,11 @@
               "output": "index.html"
             },
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -97,34 +90,12 @@
             "karmaConfig": "karma.conf.js",
             "codeCoverage": true,
             "sourceMap": true,
-            "reporters": [
-              "progress",
-              "kjhtml",
-              "junit"
-            ],
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "reporters": ["progress", "kjhtml", "junit"],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ]
-          }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {
-            "prerender": false,
-            "ssr": false,
-            "browserTarget": "Foodlet:build:production",
-            "firebaseProject": "foodlet-a2c4b",
-            "firebaseHostingSite": "foodlet-a2c4b"
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"]
           }
         }
       }
