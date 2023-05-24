@@ -72,6 +72,7 @@ import {
   provideStorage,
   StorageModule,
 } from '@angular/fire/storage';
+import { MaxNutrientsDialogComponent } from './components/max-nutrients-dialog/max-nutrients-dialog.component';
 
 @NgModule({
   exports: [
@@ -113,6 +114,7 @@ import {
     RecipePickerComponent,
     LoginMenuComponent,
     CreateMenuComponent,
+    MaxNutrientsDialogComponent,
   ],
   imports: [
     MatSelectModule,

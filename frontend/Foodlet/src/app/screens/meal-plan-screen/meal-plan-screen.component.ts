@@ -141,6 +141,16 @@ export class MealPlanScreenComponent {
 
   generateMealPlan() {
 
+    let maxNutrients = 500;
+    this.mealPlanService.generateMealPlan(maxNutrients)
+    //Generate empty meal plan
+
+    //Use MaxNutrientDialog
+    //Return number from dialog
+    //Cloud Function to generate meal plan on
+      //Pass in number from dialog and empty meal plan objects.id
+
+    //Set in UI
   }
 
   createEmptyMealPlan() {
@@ -157,6 +167,8 @@ export class MealPlanScreenComponent {
     });
 
     this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
+
+    //TODO: Update meal plan in database
   }
 
   dayHasARecipe(mealPlanDays: MealPlan): boolean {
