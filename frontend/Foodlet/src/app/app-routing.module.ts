@@ -7,6 +7,7 @@ import { HomeComponent } from './screens/home/home.component';
 import { RecipeBookScreenComponent } from './screens/recipe-book-screen/recipe-book-screen.component';
 import { MealPlanScreenComponent } from './screens/meal-plan-screen/meal-plan-screen.component';
 import { CommonModule } from '@angular/common';
+import { IngredientFormComponent } from './components/ingredient-form/ingredient-form.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'plan',
     component: MealPlanScreenComponent,
+  },
+  {
+    path: 'fooditem',
+    component: IngredientFormComponent,
   },
 ];
 
