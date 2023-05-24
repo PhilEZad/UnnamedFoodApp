@@ -7,6 +7,7 @@ import {FoodRestrictionCompatibility} from "../../../domain/EFoodRestrictionComp
 import {MealPlanService} from "../../../services/meal-plan.service";
 import {MatDialog} from "@angular/material/dialog";
 import {RecipePickerComponent} from "../../components/recipe-picker/recipe-picker.component";
+import {MaxNutrientsDialogComponent} from "../../components/max-nutrients-dialog/max-nutrients-dialog.component";
 
 @Component({
   selector: 'app-meal-plan-screen',
@@ -27,7 +28,7 @@ export class MealPlanScreenComponent {
 
   currentWeekNumber: number = this.getWeekNumber(new Date()) //The current realtime week number
   weekNumber: number = this.getWeekNumber(new Date()) // The week number of the week that is currently being displayed
-  daysOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
   weekHasMealPlan: boolean = false
 
@@ -35,7 +36,7 @@ export class MealPlanScreenComponent {
   constructor(
     private mealPlanService: MealPlanService,
     private dialog: MatDialog,
-  ){
+  ) {
     this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
     this.mealPlan = mealPlanService.getMealPlans()
     this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
@@ -48,16 +49,13 @@ export class MealPlanScreenComponent {
     if (mealPlans.length == 7) { //if there are 7 meal plans for the week, return them
       this.weekHasMealPlan = true
       return mealPlans
-    }
-    else if (mealPlans.length > 7) { //if there are more than 7 meal plans for the week, return the first 7
+    } else if (mealPlans.length > 7) { //if there are more than 7 meal plans for the week, return the first 7
       this.weekHasMealPlan = true
       return mealPlans.slice(0, 7)
-    }
-    else if (mealPlans.length === 0) { //if there are no meal plans for the week, return an empty array
+    } else if (mealPlans.length === 0) { //if there are no meal plans for the week, return an empty array
       this.weekHasMealPlan = false
       return []
-    }
-    else { //else find the missing days
+    } else { //else find the missing days
       let missingDays: Date[] = []
       this.getDaysOfWeek(new Date().getFullYear(), weekNumber).forEach(day => {
         if (!mealPlans.find(mealPlan => mealPlan.date.getDay() === day.getDay())) {
@@ -83,7 +81,7 @@ export class MealPlanScreenComponent {
    * Returns the week number for a given date
    * @param date
    */
-  getWeekNumber(date: Date){
+  getWeekNumber(date: Date) {
     let tdt = new Date(date.valueOf()); //prevent mutation of original date
     let day = (date.getDay() + 6) % 7; //+6 to start the week on Monday instead of Sunday
 
@@ -138,9 +136,39 @@ export class MealPlanScreenComponent {
   }
 
 
-
   generateMealPlan() {
+    let days: Date[] = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
 
+    days.forEach(day => {
+      let mealPlanDay = {
+        id: "-1",
+        recipe: Recipe.emptyRecipe(), //sentinel value
+        date: day,
+      } as MealPlan
+
+      this.mealPlan.push(mealPlanDay)
+    });
+
+    let mealPlans = this.findMealPlanForWeek(this.weekNumber)   //Generate empty meal plan
+
+    this.dialog.open(MaxNutrientsDialogComponent, {  //Use MaxNutrientDialog
+        width: '350px',
+        height: '250px',
+      }
+    ).afterClosed().subscribe(maxNutrients => {     //Return number from dialog
+      if (maxNutrients) {
+
+        this.mealPlanService.generateMealPlan(maxNutrients, mealPlans)
+      }
+      else {
+        this.weekHasMealPlan = false //If user has cancelled, set weekHasMealPlan to false as findMealPlanForWeek sets it to true
+      }
+    });
+
+    //Cloud Function to generate meal plan on
+    //Pass in number from dialog and empty meal plan objects.id
+
+    //Update in UI
   }
 
   createEmptyMealPlan() {
@@ -157,6 +185,8 @@ export class MealPlanScreenComponent {
     });
 
     this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
+
+    //TODO: Update meal plan in database
   }
 
   dayHasARecipe(mealPlanDays: MealPlan): boolean {

@@ -46,7 +46,7 @@ import { RecipePickerComponent } from './components/recipe-picker/recipe-picker.
 import { LoginMenuComponent } from './components/login-menu/login-menu.component';
 import { CreateMenuComponent } from './components/create-menu/create-menu.component';
 import { MatRadioModule } from '@angular/material/radio';
-import { environment } from '../environments/firebaseConfig';
+import { environment } from '../environments/environment';
 
 import {
   initializeApp,
@@ -72,6 +72,8 @@ import {
   provideStorage,
   StorageModule,
 } from '@angular/fire/storage';
+import { MaxNutrientsDialogComponent } from './components/max-nutrients-dialog/max-nutrients-dialog.component';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @NgModule({
   exports: [
@@ -113,6 +115,7 @@ import {
     RecipePickerComponent,
     LoginMenuComponent,
     CreateMenuComponent,
+    MaxNutrientsDialogComponent,
   ],
   imports: [
     MatSelectModule,
@@ -173,7 +176,7 @@ import {
       return functions;
     }),
   ],
-  providers: [],
+  providers: [MatSnackBar],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

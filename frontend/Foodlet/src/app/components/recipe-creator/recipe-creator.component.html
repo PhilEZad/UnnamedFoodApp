@@ -57,6 +57,7 @@
         <input
           matInput
           disabled="true"
+          style="margin-right: 5px;"
           [name]="'ingredients_' + i"
           [(ngModel)]="ingredients[i].name"
           [ngModelOptions]="{ standalone: true }"
@@ -107,7 +108,7 @@
       >
         <mat-select
           style="width: 80%"
-          placeholder="please select at least one dietary category"
+          placeholder="Please select at least one dietary category"
         >
           <mat-option
             *ngFor="let enum_element of FoodRestrictionCompatibility | keyvalue"
@@ -120,7 +121,7 @@
           <mat-icon class="mat-18">remove_circle</mat-icon>
         </button>
       </div>
-      <button type="button" (click)="addRestriction()">
+      <button mat-button type="button" (click)="addRestriction()">
         + Add another category
       </button>
     </div>

@@ -1,3 +1,5 @@
+@import "src/assets/externalColorConstants";
+
 .container {
   padding-top: 50px;
   padding-bottom: 10px;
@@ -16,4 +18,64 @@
 
 .form-control::placeholder {
   font-family: FontAwesome;
+}
+
+.selectRecipe {
+  vertical-align: center;
+  align-items: center;
+  padding-top: 10px;
+  transform: scale(1.3);
+  margin: 10px;
+  align-self: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.selectRecipe:hover {
+  transform: scale(1.5);
+  color: $primary-colour;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.selectRecipe:active {
+  transform: scale(1.3);
+  color: $accent-colour;
+  transition: 0.3s;
+}
+
+.quantityInput {
+  width: 30px;
+}
+
+
+.addButton {
+  height: 60px;
+  :hover {
+    background-color: transparent;
+  }
+  :hover > span > mat-icon {
+    transform: scale(1.5);
+    color: $primary-colour;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  :active {
+    background-color: transparent;
+  }
+  :active > span > mat-icon {
+    transform: scale(1.3);
+    color: $accent-colour;
+    transition: 0.3s;
+  }
+
+
+}
+
+.addButton:hover > mat-icon {
+  transform: scale(1.5);
+  color: $primary-colour;
+  cursor: pointer;
+  transition: 0.3s;
 }
