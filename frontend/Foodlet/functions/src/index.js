@@ -10,7 +10,7 @@ export const test = https.onCall((data, context) => {
 // function to create a user in the database
 // this function is called by the onCreateUserAuto function
 // and by the frontend when a user is created
-export const onCreateUser = https.onCall((data, context) => {
+export const onCreateUser = functions.auth.user().onCreate((data) => {
   const obj = JSON.parse(data);
 
   logger.log(obj);
@@ -24,7 +24,7 @@ export const onCreateUser = https.onCall((data, context) => {
 
 /*
   obj = {
-    
+
   }
 */
 export const generateMealPlan = https.onCall((data, context) => {
