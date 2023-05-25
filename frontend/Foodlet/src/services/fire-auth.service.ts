@@ -16,7 +16,8 @@ export class FireAuthService {
     FirebaseStatic.auth()
       .signInWithEmailAndPassword(email, password)
       .then((_) => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/recipes']);
+        this.snack.open("Signed in!", 'Close', { duration: 2000 });
         return true;
       })
       .catch((error) => {
@@ -44,6 +45,7 @@ export class FireAuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.router.navigate(['/home']);
+        this.snack.open("Account created! You can login now 🎈", 'Close', { duration: 5000 });
         return true;
       })
       .catch((error) => {
