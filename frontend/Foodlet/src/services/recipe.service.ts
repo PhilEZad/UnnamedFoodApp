@@ -42,7 +42,9 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe) {
-    addDoc(collection(this.fire, 'recipes'), recipe);
+    addDoc(collection(this.fire, 'recipes').withConverter(
+      new RecipeConverter(),
+    ), recipe);
   }
 
   updateRecipe(recipe: Recipe) {

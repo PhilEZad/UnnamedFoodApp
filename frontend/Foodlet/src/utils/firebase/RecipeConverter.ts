@@ -6,6 +6,7 @@ import {
 } from '@angular/fire/firestore';
 import { FoodRestrictionCompatibility } from 'src/domain/EFoodRestrictionCompatibility';
 import { Recipe } from 'src/domain/Recipe';
+import {FoodItemConverter} from "./FoodItemConverter";
 
 export class RecipeConverter implements FirestoreDataConverter<Recipe> {
   toFirestore(model: Recipe): DocumentData {
@@ -14,8 +15,8 @@ export class RecipeConverter implements FirestoreDataConverter<Recipe> {
       title: model.title,
       description: model.description,
       servings: model.servings,
-      ingredients: model.ingredients,
-      instructions: model.instructions,
+      ingredients: model.ingredients, //TODO
+      instructions: model.instructions, //TODO
       diet: model.dietCompatibility,
       isPublic: model.isPublic,
       createdAt: model.dateAdded,
