@@ -13,7 +13,7 @@ service cloud.firestore {
     match /users/{id}/recipes/{idx} {
       allow read, write: if request.auth.uid == id;
     }
-    match /users/{id}/plan/{idx} {
+    match /users/{id}/plans/{idx} {
       allow read, write: if request.auth.uid == id;
     }
     match /{document=**} {
