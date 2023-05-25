@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
+import { FirebaseStatic } from 'src/utils/firebase/firebase.static';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +13,7 @@ export class FireAuthService {
 
   //TODO: Strange error here. Fix and consider routing in component
   logIn(email: string, password: string): boolean {
-    firebase
-      .auth()
+    FirebaseStatic.auth()
       .signInWithEmailAndPassword(email, password)
       .then((_) => {
         this.router.navigate(['/home']);
@@ -42,8 +40,7 @@ export class FireAuthService {
    https://stackoverflow.com/questions/62764264/error-inject-must-be-called-from-an-injection-context-but-cant-find-origin
    */
   register(email: string, password: string): boolean {
-    firebase
-      .auth()
+    FirebaseStatic.auth()
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.router.navigate(['/home']);
@@ -60,8 +57,7 @@ export class FireAuthService {
 
   signOut() {
     //TODO: Fix and consider routing in component. Does not redirect to home page
-    firebase
-      .auth()
+    FirebaseStatic.auth()
       .signOut()
       .then((result) => {
         this.router.navigate(['/home']);
@@ -73,6 +69,6 @@ export class FireAuthService {
   }
 
   userIsLoggedIn() {
-    return firebase.auth().currentUser != null;
+    return FirebaseStatic.auth().currentUser != null;
   }
 }

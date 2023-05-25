@@ -5,10 +5,8 @@ import { FoodItem } from '../domain/FoodItem';
 import { Nutrients } from '../domain/Nutrients';
 import { FoodRestrictionCompatibility } from '../domain/EFoodRestrictionCompatibility';
 import { Observable, of } from 'rxjs';
-
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
-import 'firebase/compat/auth';
+import { MealPlanConverter } from 'src/utils/firebase/MealPlanConverter';
+import { FirebaseStatic } from 'src/utils/firebase/firebase.static';
 
 @Injectable({
   providedIn: 'root',
@@ -17,10 +15,9 @@ export class MealPlanService {
   data: MealPlan[] = [];
 
   constructor() {
-    firebase
-      .firestore()
-      .collection(`users/${firebase.auth().currentUser?.uid}/plans`)
-      //.withConverter(new MealPlanConverter()) //todo: impl
+    FirebaseStatic.firestore()
+      .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/plans`)
+      .withConverter(new MealPlanConverter()) //todo: impl
       .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
           this.data.push(change.doc.data() as MealPlan);
@@ -37,10 +34,9 @@ export class MealPlanService {
   }
 
   addPlan(plan: MealPlan) {
-    firebase
-      .firestore()
-      .collection(`users/${firebase.auth().currentUser?.uid}/plans`)
-      //.withConverter(new MealPlanConverter()) //todo: impl
+    FirebaseStatic.firestore()
+      .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/plans`)
+      .withConverter(new MealPlanConverter()) //todo: impl
       .add(plan);
   }
 
@@ -49,19 +45,17 @@ export class MealPlanService {
   }
 
   updatePlan(plan: MealPlan) {
-    firebase
-      .firestore()
-      .collection(`users/${firebase.auth().currentUser?.uid}/plans`)
-      //.withConverter(new MealPlanConverter()) //todo: impl
+    FirebaseStatic.firestore()
+      .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/plans`)
+      .withConverter(new MealPlanConverter()) //todo: impl
       .doc(plan.id)
       .update(plan);
   }
 
   deletePlan(plan: MealPlan) {
-    firebase
-      .firestore()
-      .collection(`users/${firebase.auth().currentUser?.uid}/plans`)
-      //.withConverter(new MealPlanConverter()) //todo: impl
+    FirebaseStatic.firestore()
+      .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/plans`)
+      .withConverter(new MealPlanConverter()) //todo: impl
       .doc(plan.id)
       .delete();
   }

@@ -1,8 +1,3 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import 'firebase/compat/storage';
-
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -122,18 +117,4 @@ import { RecipeBookScreenComponent } from './screens/recipe-book-screen/recipe-b
   providers: [MatSnackBar],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-  constructor() {
-    const app = firebase.initializeApp(environment.firebaseConfig);
-
-    const store = firebase.firestore(app);
-    const auth = firebase.auth(app);
-    const functions = firebase.functions(app);
-
-    if (!environment.production) {
-      store.useEmulator('localhost', 8080);
-      auth.useEmulator('http://localhost:9099');
-      functions.useEmulator('localhost', 5001);
-    }
-  }
-}
+export class AppModule {}

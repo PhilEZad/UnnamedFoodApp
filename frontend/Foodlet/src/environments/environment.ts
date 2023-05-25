@@ -11,7 +11,7 @@ export const environment = {
     messagingSenderId: '574930730941',
     measurementId: 'G-92WP0BYW85',
   },
-  production: true,
+  production: false,
   firebaseConfig: {
     apiKey: 'AIzaSyC4VwRsZVj0u6Pgsbcsbp6AoXIRI-YIfP4',
     authDomain: 'foodlet-a2c4b.firebaseapp.com',

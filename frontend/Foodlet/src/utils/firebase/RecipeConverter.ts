@@ -1,14 +1,16 @@
-import {
-  DocumentData,
-  FirestoreDataConverter,
-  QueryDocumentSnapshot,
-  SnapshotOptions,
-} from '@angular/fire/firestore';
 import { FoodRestrictionCompatibility } from 'src/domain/EFoodRestrictionCompatibility';
 import { Recipe } from 'src/domain/Recipe';
-import {FoodItemConverter} from "./FoodItemConverter";
+import { FoodItemConverter } from './FoodItemConverter';
 
-export class RecipeConverter implements FirestoreDataConverter<Recipe> {
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+
+type DataConverter<T> = firebase.firestore.FirestoreDataConverter<T>;
+type DocumentData = firebase.firestore.DocumentData;
+type QueryDocumentSnapshot<T> = firebase.firestore.QueryDocumentSnapshot<T>;
+type SnapshotOptions = firebase.firestore.SnapshotOptions;
+
+export class RecipeConverter implements DataConverter<Recipe> {
   toFirestore(model: Recipe): DocumentData {
     return {
       id: model.id,
@@ -18,7 +20,7 @@ export class RecipeConverter implements FirestoreDataConverter<Recipe> {
       ingredients: {
         ...model.ingredients.map((item) => {
           return new FoodItemConverter().toFirestore(item);
-        })
+        }),
       },
       instructions: model.instructions, //TODO
       diet: model.dietCompatibility,

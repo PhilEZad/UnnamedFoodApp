@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { FoodItem } from 'src/domain/FoodItem';
 import { FoodItemConverter } from 'src/utils/firebase/FoodItemConverter';
-
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
-import 'firebase/compat/auth';
+import { FirebaseStatic } from 'src/utils/firebase/firebase.static';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +11,7 @@ export class IngredientService {
   data: FoodItem[] = [];
 
   constructor() {
-    firebase
-      .firestore()
+    FirebaseStatic.firestore()
       .collection('foodItems')
       .withConverter(new FoodItemConverter())
       .onSnapshot((snapshot) => {
@@ -34,16 +30,14 @@ export class IngredientService {
   }
 
   addIngredient(ingredient: FoodItem) {
-    firebase
-      .firestore()
+    FirebaseStatic.firestore()
       .collection('foodItems')
       .withConverter(new FoodItemConverter())
       .add(ingredient);
   }
 
   updateIngredient(ingredient: FoodItem) {
-    firebase
-      .firestore()
+    FirebaseStatic.firestore()
       .collection('foodItems')
       .withConverter(new FoodItemConverter())
       .doc(ingredient.id)
@@ -52,7 +46,10 @@ export class IngredientService {
 
   deleteIngredient(ingredient: FoodItem) {
     if (ingredient.isPublic == false) {
-      firebase.firestore().collection('foodItems').doc(ingredient.id).delete();
+      FirebaseStatic.firestore()
+        .collection('foodItems')
+        .doc(ingredient.id)
+        .delete();
     }
   }
 
