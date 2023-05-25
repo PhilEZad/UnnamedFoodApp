@@ -1,6 +1,6 @@
 {
   "name": "functions",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "tsc",

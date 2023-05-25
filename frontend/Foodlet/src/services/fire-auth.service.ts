@@ -51,6 +51,8 @@ export class FireAuthService {
     createUserWithEmailAndPassword(this.auth, email, password)
       .then((result) => {
         console.log(result);
+        const call = httpsCallable(getFunctions(), 'onCreateUser');
+        call(result);
         this.router.navigate(['/']);
         return true;
       })

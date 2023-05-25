@@ -57,7 +57,7 @@ export class MealPlanService {
     updateDoc(
       doc(
         this.firestore,
-        `users/${getAuth().currentUser?.uid}/plans${plan.id}`
+        `users/${getAuth().currentUser?.uid}/plans/${plan.id}`
       ),
       plan as any
     );
@@ -65,7 +65,7 @@ export class MealPlanService {
 
   deletePlan(plan: MealPlan) {
     deleteDoc(
-      doc(this.firestore, `users/${getAuth().currentUser?.uid}/plans${plan.id}`)
+      doc(this.firestore, `users/${getAuth().currentUser?.uid}/plans/${plan.id}`)
     );
   }
 
