@@ -24,13 +24,13 @@ Users are able to input their own items with common nutrition fields, which are 
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/PhilEZad/UnnamedFoodApp.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd UnnamedFoodApp
 ```
 
 Install dependencies
