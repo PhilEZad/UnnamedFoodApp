@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
 import { createUserWithEmailAndPassword, getAuth } from '@angular/fire/auth';
-import { getFunctions, httpsCallable } from '@angular/fire/functions';
+import {
+  connectFunctionsEmulator,
+  getFunctions,
+  httpsCallable,
+} from '@angular/fire/functions';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { FireAuthService } from 'src/services/fire-auth.service';
 
 @Component({
   selector: 'app-create-menu',
@@ -18,28 +23,18 @@ export class CreateMenuComponent {
   registerGender: string = 'Male';
   lastError: any;
 
-  constructor(private dialogRef: MatDialog) {}
+  constructor(
+    private dialogRef: MatDialog,
+    private authService: FireAuthService
+  ) {}
 
   createAccount() {
     if (this.registerPassword == this.registerPasswordConfirm) {
-      const create = createUserWithEmailAndPassword(
-        getAuth(),
+      let successful = this.authService.register(
         this.registerEmail,
         this.registerPassword
       );
-
-      create
-        .then(async (result) => {
-          const CreateDB = httpsCallable(getFunctions(), 'onCreateUser');
-          await CreateDB(result.user);
-        })
-        .catch((error) => {
-          this.lastError = error.code;
-          console.log(error.message);
-        })
-        .finally(() => {
-          this.dialogRef.closeAll();
-        });
+      if (successful) this.dialogRef.closeAll();
     }
   }
 }

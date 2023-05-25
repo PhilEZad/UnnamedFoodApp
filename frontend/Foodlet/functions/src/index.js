@@ -7,9 +7,9 @@ export const test = firebaseFunctions.https.onRequest(async (req, res) => {
   res.send("Hello from Firebase!");
 });
 
-/// function to create a user in the database
-/// this function is called by the onCreateUserAuto function
-/// and by the frontend when a user is created
+// function to create a user in the database
+// this function is called by the onCreateUserAuto function
+// and by the frontend when a user is created
 export const onCreateUser = firebaseFunctions.https.onCall(
   async (data, context) => {
     context.rawRequest.headers["Access-Control-Allow-Origin"] = "*";
