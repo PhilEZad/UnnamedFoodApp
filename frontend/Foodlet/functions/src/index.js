@@ -30,7 +30,7 @@ export const onCreateUser = functions.auth.user().onCreate((data) => {
 export const generateMealPlan = https.onCall((data, context) => {
   const obj = JSON.parse(data);
 
-  recipes = firebaseAdmin
+  let recipes = firebaseAdmin
     .firestore()
     .collection(`users/${context.auth.uid}/recipes`)
     .where((x) => x.calories < obj.calories);
