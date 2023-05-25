@@ -9,6 +9,7 @@ import { Observable, of } from 'rxjs';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
+import { MealPlanConverter } from 'src/utils/firebase/MealPlanConverter';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class MealPlanService {
     firebase
       .firestore()
       .collection(`users/${firebase.auth().currentUser?.uid}/plans`)
-      //.withConverter(new MealPlanConverter()) //todo: impl
+      .withConverter(new MealPlanConverter()) //todo: impl
       .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
           this.data.push(change.doc.data() as MealPlan);
@@ -40,7 +41,7 @@ export class MealPlanService {
     firebase
       .firestore()
       .collection(`users/${firebase.auth().currentUser?.uid}/plans`)
-      //.withConverter(new MealPlanConverter()) //todo: impl
+      .withConverter(new MealPlanConverter()) //todo: impl
       .add(plan);
   }
 
@@ -52,7 +53,7 @@ export class MealPlanService {
     firebase
       .firestore()
       .collection(`users/${firebase.auth().currentUser?.uid}/plans`)
-      //.withConverter(new MealPlanConverter()) //todo: impl
+      .withConverter(new MealPlanConverter()) //todo: impl
       .doc(plan.id)
       .update(plan);
   }
@@ -61,7 +62,7 @@ export class MealPlanService {
     firebase
       .firestore()
       .collection(`users/${firebase.auth().currentUser?.uid}/plans`)
-      //.withConverter(new MealPlanConverter()) //todo: impl
+      .withConverter(new MealPlanConverter()) //todo: impl
       .doc(plan.id)
       .delete();
   }
