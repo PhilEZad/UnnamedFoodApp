@@ -38,7 +38,10 @@ export class MealPlanScreenComponent {
     private dialog: MatDialog,
   ) {
     this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
-    this.mealPlan = mealPlanService.getMealPlans()
+    mealPlanService.getPlans().subscribe((mealPlans) => {
+      this.mealPlan = mealPlans
+
+    });
     this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
   }
 

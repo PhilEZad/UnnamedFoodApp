@@ -3,6 +3,7 @@ import { MealPlan } from 'src/domain/MealPlan';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import { RecipeConverter } from './RecipeConverter';
+import {Recipe} from "../../domain/Recipe";
 
 type DataConverter<T> = firebase.firestore.FirestoreDataConverter<T>;
 type DocumentData = firebase.firestore.DocumentData;
@@ -20,17 +21,13 @@ export class MealPlanConverter implements DataConverter<MealPlan> {
 
     model.id = snapshot.id;
     model.date = (data.date as firebase.firestore.Timestamp).toDate();
-    model.recipe.id = '';
-    model.recipe.title = data.recipe.title;
-    model.recipe.description = data.recipe.description;
-    model.recipe.dateAdded = (
-      data.recipe.dateAdded as firebase.firestore.Timestamp
-    ).toDate();
-    model.recipe.isPublic = data.recipe.isPublic;
-    model.recipe.servings = data.recipe.servings;
-    model.recipe.dietCompatibility = data.recipe.dietCompatibility as any[];
-    model.recipe.ingredients = data.recipe.ingredients as any[];
-    model.recipe.instructions = data.recipe.instructions as any[];
+    model.recipe = data.recipe as Recipe;
+
+    let dateData = model.recipe.dateAdded;
+    model.recipe.dateAdded = new Date(dateData);
+
+    console.log(model)
+
     return model;
   }
 

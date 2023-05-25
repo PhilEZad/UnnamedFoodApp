@@ -4,6 +4,7 @@ import { FoodItemConverter } from './FoodItemConverter';
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
+import {FoodItem} from "../../domain/FoodItem";
 
 type DataConverter<T> = firebase.firestore.FirestoreDataConverter<T>;
 type DocumentData = firebase.firestore.DocumentData;
@@ -16,11 +17,7 @@ export class RecipeConverter implements DataConverter<Recipe> {
       title: model.title,
       description: model.description,
       servings: model.servings,
-      ingredients: {
-        ...model.ingredients.map((item) => {
-          return new FoodItemConverter().toFirestore(item);
-        }),
-      },
+      ingredients: JSON.stringify(model.ingredients),
       instructions: model.instructions, //TODO
       diet: model.dietCompatibility,
       isPublic: model.isPublic,
@@ -39,7 +36,12 @@ export class RecipeConverter implements DataConverter<Recipe> {
     recipe.title = data.title as string;
     recipe.description = data.description as string;
     recipe.servings = data.servings as number;
-    recipe.ingredients = data.ingredients as any[];
+
+    let json = JSON.parse(data.ingredients) as FoodItem[];
+    console.log(data.ingredients)
+
+    recipe.ingredients = json
+
     recipe.instructions = data.instructions as string[];
     recipe.dietCompatibility = data.diet as FoodRestrictionCompatibility[];
     recipe.isPublic = data.isPublic as boolean;
@@ -49,4 +51,6 @@ export class RecipeConverter implements DataConverter<Recipe> {
 
     return recipe;
   }
+
+
 }
