@@ -1,3 +1,4 @@
+import { getAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 import { Recipe } from 'src/domain/Recipe';
 import { Observable, of } from 'rxjs';
@@ -17,13 +18,13 @@ import {
 })
 export class RecipeService {
   data: Recipe[] = [];
-  firestore: Firestore;
 
-  constructor(private fire: Firestore) {
-    this.firestore = fire;
-
+  constructor(private firestore: Firestore) {
     onSnapshot(
-      collection(this.fire, 'recipes').withConverter(new RecipeConverter()),
+      collection(
+        this.firestore,
+        `users/${getAuth().currentUser?.uid}/recipes`
+      ).withConverter(new RecipeConverter()),
       (snapshot) => {
         snapshot.docChanges().forEach((change) => {
           this.data.push(change.doc.data());
@@ -42,15 +43,19 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe) {
-    addDoc(collection(this.fire, 'recipes'), recipe);
+    addDoc(
+      collection(this.firestore, `users/${getAuth().currentUser?.uid}/recipes`),
+      recipe
+    );
   }
 
   updateRecipe(recipe: Recipe) {
     if (recipe.isPublic == false) {
       updateDoc(
-        doc(this.fire, 'recipes', recipe.id).withConverter(
-          new RecipeConverter()
-        ),
+        doc(
+          this.firestore,
+          `users/${getAuth().currentUser?.uid}/recipes/${recipe.id}`
+        ).withConverter(new RecipeConverter()),
         recipe
       );
     }
@@ -58,7 +63,12 @@ export class RecipeService {
 
   deleteRecipe(recipe: Recipe) {
     if (recipe.isPublic == false) {
-      deleteDoc(doc(this.fire, 'recipes', recipe.id));
+      deleteDoc(
+        doc(
+          this.firestore,
+          `users/${getAuth().currentUser?.uid}/recipes/${recipe.id}`
+        )
+      );
     }
   }
 

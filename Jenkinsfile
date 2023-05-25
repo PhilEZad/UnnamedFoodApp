@@ -9,17 +9,6 @@ pipeline {
                 sh "docker build -t foodlet frontend/Foodlet"
             }
         }
-        stage('verify firebase token') {
-            agent { 
-                docker {
-                    image 'foodlet'
-                    args '-u root:root -v /var/lib/jenkins/workspace/UnnamedFoodApp:/app/artifacts'
-                } 
-            }
-            steps {
-                sh "cd /app && ./entrypoint.sh firebase_check"
-            }
-        }
         stage('Build') {
             agent { 
                 docker {
@@ -42,9 +31,32 @@ pipeline {
                 sh "cd /app && ./entrypoint.sh test"
             }
         }
-        stage('Release') {
+        stage('verify firebase token') {
+            when {
+                branch 'release'
+            }
+            agent { 
+                docker {
+                    image 'foodlet'
+                    args '-u root:root -v /var/lib/jenkins/workspace/UnnamedFoodApp:/app/artifacts'
+                } 
+            }
             steps {
-                echo 'TBD'
+                sh "cd /app && ./entrypoint.sh firebase_check"
+            }
+        }
+        stage('Release') {
+            when {
+                branch 'release'
+            }
+            agent { 
+                docker {
+                    image 'foodlet'
+                    args '-u root:root -v /var/lib/jenkins/workspace/UnnamedFoodApp:/app/artifacts'
+                } 
+            } 
+            steps {
+                sh "cd /app && ./entrypoint.sh deploy"
             }
         }
     }

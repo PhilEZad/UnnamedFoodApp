@@ -64,6 +64,22 @@
         "command": "cd ${cwd}/frontend/Foodlet && sudo npm run test",
         "problemMatcher": ["$karma-jasmine2"]
       }
+    },
+    {
+      "presentation": {
+        "echo": false,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "label": "Kill foodlet",
+      "type": "shell",
+      "linux": {
+        "command": "ps aux|grep -v awk|awk '/foodlet/ {print $2}'| xargs -I {} kill {}",
+        "problemMatcher": []
+      }
     }
   ]
 }
