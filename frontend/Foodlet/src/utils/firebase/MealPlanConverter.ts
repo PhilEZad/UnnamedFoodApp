@@ -1,8 +1,8 @@
-import { Recipe } from '../../domain/Recipe';
-import { MealPlan } from '../../domain/MealPlan';
+import { MealPlan } from 'src/domain/MealPlan';
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
+import { RecipeConverter } from './RecipeConverter';
 
 type DataConverter<T> = firebase.firestore.FirestoreDataConverter<T>;
 type DocumentData = firebase.firestore.DocumentData;
@@ -15,11 +15,21 @@ export class MealPlanConverter implements DataConverter<MealPlan> {
     snapshot: QueryDocumentSnapshot<DocumentData>,
     _: SnapshotOptions
   ): MealPlan {
-    return {} as MealPlan;
+    let model: MealPlan = MealPlan.empty();
+    let data = snapshot.data() as any;
+
+    model.id = snapshot.id;
+    model.date = data.date;
+    model.recipe = new RecipeConverter().fromFirestore(data.recipe, _);
+
+    return model;
   }
 
   toFirestore(model: Partial<MealPlan>): DocumentData;
   toFirestore(model: MealPlan): DocumentData {
-    return {};
+    return {
+      date: model.date,
+      recipe: new RecipeConverter().toFirestore(model.recipe),
+    };
   }
 }

@@ -12,7 +12,7 @@ export class RecipeService {
 
   constructor() {
     FirebaseStatic.firestore()
-      .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/recipes}`)
+      .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/recipes`)
       .withConverter(new RecipeConverter())
       .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
@@ -31,7 +31,7 @@ export class RecipeService {
 
   addRecipe(recipe: Recipe) {
     FirebaseStatic.firestore()
-      .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/recipes}`)
+      .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/recipes`)
       .withConverter(new RecipeConverter())
       .add(recipe);
   }
@@ -39,7 +39,7 @@ export class RecipeService {
   updateRecipe(recipe: Recipe) {
     if (recipe.isPublic == false) {
       FirebaseStatic.firestore()
-        .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/recipes}`)
+        .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/recipes`)
         .withConverter(new RecipeConverter())
         .doc(recipe.id)
         .update(recipe);
@@ -48,7 +48,7 @@ export class RecipeService {
 
   deleteRecipe(recipe: Recipe) {
     FirebaseStatic.firestore()
-      .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/recipes}`)
+      .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/recipes`)
       .doc(recipe.id)
       .delete();
   }

@@ -21,6 +21,7 @@ export class FirebaseStatic {
     if (!this.init) {
       this.init = true; // prevent multiple initializations
       this.app = firebase.initializeApp(config);
+
       this.auth().useEmulator('http://localhost:9099');
       this.firestore().useEmulator('localhost', 8080);
       this.functions().useEmulator('localhost', 9199);

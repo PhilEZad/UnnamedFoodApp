@@ -17,6 +17,7 @@ export class IngredientService {
       .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
           this.data.push(change.doc.data());
+          console.log(change.doc.data());
         });
       }, console.error);
   }
