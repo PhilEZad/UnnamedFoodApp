@@ -43,8 +43,13 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe) {
+    const users = collection(this.firestore, 'users');
+    const user = doc(users, getAuth().currentUser?.uid);
+    const recipes = collection(user, 'recipes');
+
+    collection(users, 'recipes');
     addDoc(
-      collection(this.firestore, `users/${getAuth().currentUser?.uid}/recipes`),
+      recipes.withConverter(new RecipeConverter()),
       recipe
     );
   }

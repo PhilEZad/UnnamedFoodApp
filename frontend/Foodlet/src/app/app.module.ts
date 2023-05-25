@@ -68,7 +68,7 @@ import {
   StorageModule,
 } from '@angular/fire/storage';
 import { MaxNutrientsDialogComponent } from './components/max-nutrients-dialog/max-nutrients-dialog.component';
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import {
   connectFunctionsEmulator,
@@ -171,9 +171,7 @@ import {
     }),
     provideFunctions(() => {
       const functions = getFunctions();
-      if (!environment.production) {
-        connectFunctionsEmulator(functions, 'localhost', 5001);
-      }
+
       return functions;
     }),
   ],
