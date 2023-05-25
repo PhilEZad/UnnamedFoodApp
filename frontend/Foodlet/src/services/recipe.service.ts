@@ -16,7 +16,21 @@ export class RecipeService {
       .withConverter(new RecipeConverter())
       .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
-          this.data.push(change.doc.data() as Recipe);
+          if (change.type == 'added')
+            if (!this.data.find((recipe) => recipe.id == change.doc.id))
+              this.data.push(change.doc.data() as Recipe);
+          if (change.type == 'modified') {
+            let index = this.data.findIndex(
+              (recipe) => recipe.id == change.doc.id
+            );
+            this.data[index] = change.doc.data() as Recipe;
+          }
+          if (change.type == 'removed') {
+            let index = this.data.findIndex(
+              (recipe) => recipe.id == change.doc.id
+            );
+            this.data.splice(index, 1);
+          }
         });
       }, console.error);
   }

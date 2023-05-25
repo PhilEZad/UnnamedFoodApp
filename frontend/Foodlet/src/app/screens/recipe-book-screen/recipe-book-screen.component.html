@@ -40,9 +40,9 @@
     <div [@inOutAnimation] *ngFor="let recipe of recipes | recipeFilter : searchText | sorting : currentSorting">
       <app-recipe-card
         [recipe]="recipe"
+        (recipeDeleted)="onRecipeDeleted($event)"
       ></app-recipe-card>
     </div>
-    <!-- <button mat-fab class="fab-add-recipe-btn" (click)="newRecipe()">+</button> -->
   </div>
   <ng-template #noRecipes>
     <div class="flexContainer">

@@ -16,7 +16,21 @@ export class IngredientService {
       .withConverter(new FoodItemConverter())
       .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
-          this.data.push(change.doc.data());
+          if (change.type == 'added')
+            if (!this.data.find((ingredient) => ingredient.id == change.doc.id))
+              this.data.push(change.doc.data());
+          if (change.type == 'modified') {
+            let index = this.data.findIndex(
+              (ingredient) => ingredient.id == change.doc.id
+            );
+            this.data[index] = change.doc.data();
+          }
+          if (change.type == 'removed') {
+            let index = this.data.findIndex(
+              (ingredient) => ingredient.id == change.doc.id
+            );
+            this.data.splice(index, 1);
+          }
           console.log(change.doc.data());
         });
       }, console.error);
