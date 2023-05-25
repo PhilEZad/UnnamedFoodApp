@@ -2,35 +2,27 @@ import { Injectable } from '@angular/core';
 import { Recipe } from 'src/domain/Recipe';
 import { Observable, of } from 'rxjs';
 import { RecipeConverter } from 'src/utils/firebase/RecipeConverter';
-import {
-  Firestore,
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  updateDoc,
-} from '@angular/fire/firestore';
+
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import 'firebase/compat/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
   data: Recipe[] = [];
-  firestore: Firestore;
 
-  constructor(private fire: Firestore) {
-    this.firestore = fire;
-
-    onSnapshot(
-      collection(this.fire, 'recipes').withConverter(new RecipeConverter()),
-      (snapshot) => {
+  constructor() {
+    firebase
+      .firestore()
+      .collection(`users/${firebase.auth().currentUser?.uid}/recipes}`)
+      .withConverter(new RecipeConverter())
+      .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
-          this.data.push(change.doc.data());
+          this.data.push(change.doc.data() as Recipe);
         });
-      },
-      console.error
-    );
+      }, console.error);
   }
 
   getRecipes(): Observable<Recipe[]> {
@@ -42,26 +34,30 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe) {
-    addDoc(collection(this.fire, 'recipes').withConverter(
-      new RecipeConverter(),
-    ), recipe);
+    firebase
+      .firestore()
+      .collection(`users/${firebase.auth().currentUser?.uid}/recipes}`)
+      .withConverter(new RecipeConverter())
+      .add(recipe);
   }
 
   updateRecipe(recipe: Recipe) {
     if (recipe.isPublic == false) {
-      updateDoc(
-        doc(this.fire, 'recipes', recipe.id).withConverter(
-          new RecipeConverter()
-        ),
-        recipe
-      );
+      firebase
+        .firestore()
+        .collection(`users/${firebase.auth().currentUser?.uid}/recipes}`)
+        .withConverter(new RecipeConverter())
+        .doc(recipe.id)
+        .update(recipe);
     }
   }
 
   deleteRecipe(recipe: Recipe) {
-    if (recipe.isPublic == false) {
-      deleteDoc(doc(this.fire, 'recipes', recipe.id));
-    }
+    firebase
+      .firestore()
+      .collection(`users/${firebase.auth().currentUser?.uid}/recipes}`)
+      .doc(recipe.id)
+      .delete();
   }
 
   addEditRecipe(selected: Recipe) {

@@ -1,38 +1,28 @@
 import { Injectable } from '@angular/core';
-import {
-  Firestore,
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  updateDoc,
-} from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
 import { FoodItem } from 'src/domain/FoodItem';
 import { FoodItemConverter } from 'src/utils/firebase/FoodItemConverter';
+
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import 'firebase/compat/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IngredientService {
   data: FoodItem[] = [];
-  fire: Firestore;
 
-  constructor(firestore: Firestore) {
-    this.fire = firestore;
-
-    onSnapshot(
-      collection(this.fire, 'ingredients').withConverter(
-        new FoodItemConverter()
-      ),
-      (snapshot) => {
+  constructor() {
+    firebase
+      .firestore()
+      .collection('foodItems')
+      .withConverter(new FoodItemConverter())
+      .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
           this.data.push(change.doc.data());
         });
-      },
-      console.error
-    );
+      }, console.error);
   }
 
   getIngredients(): Observable<FoodItem[]> {
@@ -44,23 +34,25 @@ export class IngredientService {
   }
 
   addIngredient(ingredient: FoodItem) {
-    addDoc(collection(this.fire, 'ingredients').withConverter(
-      new FoodItemConverter(),
-    ), ingredient);
+    firebase
+      .firestore()
+      .collection('foodItems')
+      .withConverter(new FoodItemConverter())
+      .add(ingredient);
   }
 
   updateIngredient(ingredient: FoodItem) {
-    updateDoc(
-      doc(this.fire, 'ingredients', ingredient.id).withConverter(
-        new FoodItemConverter()
-      ),
-      ingredient
-    );
+    firebase
+      .firestore()
+      .collection('foodItems')
+      .withConverter(new FoodItemConverter())
+      .doc(ingredient.id)
+      .update(ingredient);
   }
 
   deleteIngredient(ingredient: FoodItem) {
     if (ingredient.isPublic == false) {
-      deleteDoc(doc(this.fire, 'ingredients', ingredient.id));
+      firebase.firestore().collection('foodItems').doc(ingredient.id).delete();
     }
   }
 
