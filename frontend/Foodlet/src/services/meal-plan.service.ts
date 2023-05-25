@@ -20,7 +20,21 @@ export class MealPlanService {
       .withConverter(new MealPlanConverter()) //todo: impl
       .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
-          this.data.push(change.doc.data() as MealPlan);
+          if (change.type == 'added')
+            if (!this.data.find((plan) => plan.id == change.doc.id))
+              this.data.push(change.doc.data() as MealPlan);
+          if (change.type == 'modified') {
+            let index = this.data.findIndex(
+              (plan) => plan.id == change.doc.id
+            );
+            this.data[index] = change.doc.data() as MealPlan;
+          }
+          if (change.type == 'removed') {
+            let index = this.data.findIndex(
+              (plan) => plan.id == change.doc.id
+            );
+            this.data.splice(index, 1);
+          }
         });
       }, console.error);
   }

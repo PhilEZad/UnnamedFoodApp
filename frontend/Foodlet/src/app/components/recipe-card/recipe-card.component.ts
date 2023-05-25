@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { Recipe } from '../../../domain/Recipe';
 import {RecipeViewComponent} from "../recipe-view/recipe-view.component";
 import {MatDialog} from "@angular/material/dialog";
 import { sum } from 'src/utils/math';
 import {RecipeService} from "../../../services/recipe.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-recipe-card',
@@ -11,6 +12,8 @@ import {RecipeService} from "../../../services/recipe.service";
   styleUrls: ['./recipe-card.component.scss'],
 })
 export class RecipeCardComponent {
+
+  @Output() recipeDeleted = new EventEmitter<Recipe>();
   @Input() recipe: Recipe = new Recipe(
     'Chicken and Rice',
     'A simple recipe for chicken and rice',
@@ -57,15 +60,19 @@ export class RecipeCardComponent {
   constructor(
     private dialog: MatDialog,
     private recipeService: RecipeService,
+    public snack: MatSnackBar
     )
   { }
 
   deleteRecipe() {
-    this.recipeService.deleteRecipe(this.recipe);
+    this.recipeDeleted.emit(this.recipe);
+    //this.recipeService.deleteRecipe(this.recipe);
   }
 
   editRecipe() {
-    const dialogRef = this.dialog.open(RecipeViewComponent, {
+    this.snack.open('Editing recipes is not yet supported. Coming soon!', 'OK', {duration: 3000});
+
+    /*const dialogRef = this.dialog.open(RecipeViewComponent, {
       data: {recipe: this.recipe},
       panelClass: 'recipe-view-dialog',
     }).afterClosed().subscribe(
@@ -75,6 +82,8 @@ export class RecipeCardComponent {
         }
       }
     );
+
+     */
 
   }
 

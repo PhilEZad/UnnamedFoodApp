@@ -62,17 +62,12 @@ export class RecipeBookScreenComponent {
   recipes: Recipe[] = [];
 
   constructor(private dialog: MatDialog, private recipeService: RecipeService) {
-    this.sortRecipes(ESortingTypes.Alphabetical);
     recipeService.getRecipes().subscribe((recipes) => {
       this.recipes = recipes;
     });
-
+    this.sortRecipes(ESortingTypes.Alphabetical);
   }
 
-
-  recipeIndex(recipe: Recipe): number {
-    return this.recipes.indexOf(recipe) + 1;
-  }
 
   newRecipe() {
     this.dialog.open(RecipeCreatorComponent, {
@@ -103,5 +98,10 @@ export class RecipeBookScreenComponent {
 
   get sortingTypes() {
     return ESortingTypes;
+  }
+
+  onRecipeDeleted($event: Recipe) {
+    this.recipes = this.recipes.filter((recipe) => recipe.id !== $event.id);
+    this.recipeService.deleteRecipe($event);
   }
 }
