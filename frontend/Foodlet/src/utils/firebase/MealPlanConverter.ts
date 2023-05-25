@@ -19,9 +19,18 @@ export class MealPlanConverter implements DataConverter<MealPlan> {
     let data = snapshot.data() as any;
 
     model.id = snapshot.id;
-    model.date = data.date;
-    model.recipe = new RecipeConverter().fromFirestore(data.recipe, _);
-
+    model.date = (data.date as firebase.firestore.Timestamp).toDate();
+    model.recipe.id = '';
+    model.recipe.title = data.recipe.title;
+    model.recipe.description = data.recipe.description;
+    model.recipe.dateAdded = (
+      data.recipe.dateAdded as firebase.firestore.Timestamp
+    ).toDate();
+    model.recipe.isPublic = data.recipe.isPublic;
+    model.recipe.servings = data.recipe.servings;
+    model.recipe.dietCompatibility = data.recipe.dietCompatibility as any[];
+    model.recipe.ingredients = data.recipe.ingredients as any[];
+    model.recipe.instructions = data.recipe.instructions as any[];
     return model;
   }
 
