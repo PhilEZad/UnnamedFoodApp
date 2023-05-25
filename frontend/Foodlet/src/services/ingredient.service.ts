@@ -44,7 +44,9 @@ export class IngredientService {
   }
 
   addIngredient(ingredient: FoodItem) {
-    addDoc(collection(this.fire, 'ingredients'), ingredient);
+    addDoc(collection(this.fire, 'ingredients').withConverter(
+      new FoodItemConverter(),
+    ), ingredient);
   }
 
   updateIngredient(ingredient: FoodItem) {

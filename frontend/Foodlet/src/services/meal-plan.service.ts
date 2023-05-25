@@ -108,5 +108,13 @@ export class MealPlanService {
   generateMealPlan(maxNutrients: number, mealPlans: MealPlan[]) {
 
   }
+
+  updateMealPlanRecipe(mealPlanDays: MealPlan) {
+
+  }
+
+  addMealPlanForWeek(mealPlanForWeek: MealPlan[]) { //Blank meal plan for a week
+
+  }
 }
 

@@ -159,6 +159,7 @@ export class MealPlanScreenComponent {
       if (maxNutrients) {
 
         this.mealPlanService.generateMealPlan(maxNutrients, mealPlans)
+        //Should update automatically in UI as we are subscribing to the meal plan observable
       }
       else {
         this.weekHasMealPlan = false //If user has cancelled, set weekHasMealPlan to false as findMealPlanForWeek sets it to true
@@ -186,7 +187,7 @@ export class MealPlanScreenComponent {
 
     this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
 
-    //TODO: Update meal plan in database
+    this.mealPlanService.addMealPlanForWeek(this.mealPlanForWeek)
   }
 
   dayHasARecipe(mealPlanDays: MealPlan): boolean {
@@ -202,7 +203,7 @@ export class MealPlanScreenComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         mealPlanDays.recipe = result
-        //TODO: Update meal plan in database
+        this.mealPlanService.updateMealPlanRecipe(mealPlanDays)
       }
     });
   }

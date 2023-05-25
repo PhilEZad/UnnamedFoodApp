@@ -14,7 +14,7 @@ export class IngredientFormComponent {
 
   title: string = '';
   category: string = '';
-  weight: number = 1;
+  weight: number = 100;
   nutrients: Nutrients = Nutrients.emptyNutrients();
   constructor(
     private service: IngredientService,
@@ -25,7 +25,10 @@ export class IngredientFormComponent {
   ngOnInit(): void {}
 
   onSubmit() {
-    if (!this.validateNameAndWeight()) {
+    this.title = this.title.trim();
+    this.category = this.category.trim();
+
+    if (this.title.length == 0 || this.weight < 1) { //if title is longer  than 0
       this.snack.open("Name is required and Weight must be 1 or more", "Ok", {duration: 2000});
       return;
     }
@@ -42,26 +45,19 @@ export class IngredientFormComponent {
       );
 
       this.selected.id = '';
-      console.log(this.selected);
       this.service.addEditIngredient(this.selected);
+      this.snack.open("Ingredient added", "Ok", {duration: 2000});
     }
   }
 
-  /**
-   * Checks if the weight is above 1 and the name is not empty.
-   */
-  validateNameAndWeight(): boolean {
-    return this.title.length > 0 && this.weight > 1;
-
-  }
 
   /**
    * Checks if the values of the nutrients are valid, meaning above 0.
    */
   validateNutrients(): boolean {
-    return  this.nutrients.calories > 0 && this.nutrients.carbohydrates > 0
-      && this.nutrients.fat > 0 && this.nutrients.protein > 0 && this.nutrients.saturatedFat > 0
-      && this.nutrients.fiber > 0;
+    return  this.nutrients.calories >= 0 && this.nutrients.carbohydrates >= 0
+      && this.nutrients.fat >= 0 && this.nutrients.protein >= 0 && this.nutrients.saturatedFat >= 0
+      && this.nutrients.fiber >= 0;
   }
 }
 

@@ -3,6 +3,7 @@ import { Recipe } from '../../../domain/Recipe';
 import {RecipeViewComponent} from "../recipe-view/recipe-view.component";
 import {MatDialog} from "@angular/material/dialog";
 import { sum } from 'src/utils/math';
+import {RecipeService} from "../../../services/recipe.service";
 
 @Component({
   selector: 'app-recipe-card',
@@ -55,11 +56,27 @@ export class RecipeCardComponent {
 
   constructor(
     private dialog: MatDialog,
+    private recipeService: RecipeService,
     )
   { }
 
-  deleteRecipe() {}
-  editRecipe() {}
+  deleteRecipe() {
+    this.recipeService.deleteRecipe(this.recipe);
+  }
+
+  editRecipe() {
+    const dialogRef = this.dialog.open(RecipeViewComponent, {
+      data: {recipe: this.recipe},
+      panelClass: 'recipe-view-dialog',
+    }).afterClosed().subscribe(
+      (result) => {
+        if (result) {
+          this.recipe = result;
+        }
+      }
+    );
+
+  }
 
   openRecipe(recipe: Recipe) {
     const dialogRef = this.dialog.open(RecipeViewComponent, {
