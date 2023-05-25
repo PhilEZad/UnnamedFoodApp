@@ -52,7 +52,7 @@ export class FireAuthService {
     createUserWithEmailAndPassword(this.auth, email, password)
       .then((result) => {
         this.logIn(email, password);
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
         return true;
       })
       .catch((error) => {
@@ -66,7 +66,7 @@ export class FireAuthService {
 
   signOut() { //TODO: Fix and consider routing in component. Does not redirect to home page
     this.auth.signOut().then((result) => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/home']);
     });
   }
 

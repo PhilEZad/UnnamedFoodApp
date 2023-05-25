@@ -5,6 +5,7 @@ export class Recipe {
   id: string = '';
   title: string = '';
   description: string = '';
+
   ingredients: FoodItem[] = [];
   servings: number = 0;
   instructions: string[] = [];

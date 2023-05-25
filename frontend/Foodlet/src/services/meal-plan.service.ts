@@ -272,13 +272,22 @@ export class MealPlanService {
     },
   ];
 
-  generateMealPlan(maxNutrients: number, mealPlans: MealPlan[]) {}
+  generateMealPlan(maxNutrients: number, mealPlans: MealPlan[]) {
+    let dates: String[] = mealPlans.map((mealPlan) => mealPlan.date.toDateString());
+
+    let dto = {
+      calories: maxNutrients,
+      dates: dates
+    }
+
+   // return this.http.post<MealPlan[]>(this.baseUrl + 'mealplan/generate', dto);
+  }
 
   updateMealPlanRecipe(mealPlanDays: MealPlan) {
-    
+
   }
 
   addMealPlanForWeek(mealPlanForWeek: MealPlan[]) {
-    
+
   }
 }

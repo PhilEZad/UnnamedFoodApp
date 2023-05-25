@@ -16,15 +16,15 @@ export class HomeComponent {
 
   registerMenu() {
     this.dialogRef.open(CreateMenuComponent, {
-      height: '55%',
-      width: '40%'
+      height: '550px',
+      width: '450px'
     })
   }
 
   loginMenu() {
     this.dialogRef.open(LoginMenuComponent, {
-      height: '40%',
-      width: '20%'
+      height: '350px',
+      width: '250px'
     })
   }
 

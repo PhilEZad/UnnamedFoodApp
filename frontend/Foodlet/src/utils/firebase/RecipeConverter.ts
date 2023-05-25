@@ -15,7 +15,11 @@ export class RecipeConverter implements FirestoreDataConverter<Recipe> {
       title: model.title,
       description: model.description,
       servings: model.servings,
-      ingredients: model.ingredients, //TODO
+      ingredients: {
+        ...model.ingredients.map((item) => {
+          return new FoodItemConverter().toFirestore(item);
+        })
+      },
       instructions: model.instructions, //TODO
       diet: model.dietCompatibility,
       isPublic: model.isPublic,

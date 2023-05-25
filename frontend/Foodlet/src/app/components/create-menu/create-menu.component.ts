@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FireAuthService } from "../../../services/fire-auth.service";
 import { MatDialog } from "@angular/material/dialog";
 import { FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-create-menu',
@@ -20,6 +21,7 @@ export class CreateMenuComponent {
   constructor(
     public authService: FireAuthService,
     private dialogRef: MatDialog,
+    public snack: MatSnackBar
   ) {
   }
 
@@ -28,7 +30,11 @@ export class CreateMenuComponent {
     if(this.registerPassword == this.registerPasswordConfirm) {
       let successful = this.authService.register(this.registerEmail, this.registerPassword)
       if (successful)
+        this.snack.open("Account created successfully!", 'Close', {duration: 5000});
         this.dialogRef.closeAll()
+    }
+    else {
+      this.snack.open("Account could not be created, try again.", 'Close', {duration: 5000});
     }
 
   }
