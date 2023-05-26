@@ -68,7 +68,7 @@ export class MealPlanScreenComponent {
 
       missingDays.map(day => {
         let mealPlan = {
-          id: "-1",
+          id: "",
           recipe: Recipe.emptyRecipe(), //sentinel value
           date: day,
         } as MealPlan
@@ -142,14 +142,14 @@ export class MealPlanScreenComponent {
   generateMealPlan() {
     let days: Date[] = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
 
+
     days.forEach(day => {
       let mealPlanDay = {
-        id: "-1",
+        id: "",
         recipe: Recipe.emptyRecipe(), //sentinel value
         date: day,
       } as MealPlan
 
-      this.mealPlan.push(mealPlanDay)
     });
 
     let mealPlans = this.findMealPlanForWeek(this.weekNumber)   //Generate empty meal plan
@@ -180,12 +180,11 @@ export class MealPlanScreenComponent {
 
     days.forEach(day => {
       let mealPlanDay = {
-        id: "-1",
+        id: "",
         recipe: Recipe.emptyRecipe(), //sentinel value
         date: day,
       } as MealPlan
 
-      this.mealPlan.push(mealPlanDay)
     });
 
     this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)

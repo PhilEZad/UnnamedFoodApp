@@ -13,13 +13,15 @@ type SnapshotOptions = firebase.firestore.SnapshotOptions;
 
 export class RecipeConverter implements DataConverter<Recipe> {
   toFirestore(model: Recipe): DocumentData {
+    console.log(model.dietCompatibility);
+    console.log(JSON.stringify(model.dietCompatibility))
     return {
       title: model.title,
       description: model.description,
       servings: model.servings,
       ingredients: JSON.stringify(model.ingredients),
       instructions: model.instructions, //TODO
-      diet: model.dietCompatibility,
+      diet: JSON.stringify(model.dietCompatibility),
       isPublic: model.isPublic,
       createdAt: firebase.firestore.Timestamp.fromDate(model.dateAdded),
     };
@@ -37,13 +39,15 @@ export class RecipeConverter implements DataConverter<Recipe> {
     recipe.description = data.description as string;
     recipe.servings = data.servings as number;
 
-    let json = JSON.parse(data.ingredients) as FoodItem[];
-    console.log(data.ingredients)
-
-    recipe.ingredients = json
-
+    recipe.ingredients = JSON.parse(data.ingredients as string) as FoodItem[];
     recipe.instructions = data.instructions as string[];
-    recipe.dietCompatibility = data.diet as FoodRestrictionCompatibility[];
+
+    console.log(data.diet as string);
+
+    let json = JSON.parse(data.diet as string) as FoodRestrictionCompatibility[];
+    console.log(json);
+    recipe.dietCompatibility = json;
+
     recipe.isPublic = data.isPublic as boolean;
     recipe.dateAdded = (
       data.createdAt as firebase.firestore.Timestamp

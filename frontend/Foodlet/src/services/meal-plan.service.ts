@@ -20,19 +20,26 @@ export class MealPlanService {
       .withConverter(new MealPlanConverter()) //todo: impl
       .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
-          if (change.type == 'added')
-            if (!this.data.find((plan) => plan.id == change.doc.id))
+          if (change.type == 'added'){
+            if (!this.data.find((plan) => plan.id == change.doc.id)) {
+              console.log(change.doc.data());
               this.data.push(change.doc.data() as MealPlan);
+            }
+          }
           if (change.type == 'modified') {
             let index = this.data.findIndex(
               (plan) => plan.id == change.doc.id
             );
+            console.log('edit');
+            console.log(change.doc.data());
             this.data[index] = change.doc.data() as MealPlan;
           }
           if (change.type == 'removed') {
             let index = this.data.findIndex(
               (plan) => plan.id == change.doc.id
             );
+            console.log('delete');
+            console.log(change.doc.data());
             this.data.splice(index, 1);
           }
         });
@@ -50,7 +57,7 @@ export class MealPlanService {
   addPlan(plan: MealPlan) {
     FirebaseStatic.firestore()
       .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/plans`)
-      .withConverter(new MealPlanConverter()) //todo: impl
+      .withConverter(new MealPlanConverter())
       .add(plan);
   }
 
@@ -290,7 +297,13 @@ export class MealPlanService {
     // return this.http.post<MealPlan[]>(this.baseUrl + 'mealplan/generate', dto);
   }
 
-  updateMealPlanRecipe(mealPlanDays: MealPlan) {}
+  updateMealPlanRecipe(mealPlanDays: MealPlan) {
+    this.updatePlan(mealPlanDays);
+  }
 
-  addMealPlanForWeek(mealPlanForWeek: MealPlan[]) {}
+  addMealPlanForWeek(mealPlanForWeek: MealPlan[]) {
+    mealPlanForWeek.forEach(
+      (mealPlan) => (this.addPlan(mealPlan), console.log(mealPlan))
+    );
+  }
 }

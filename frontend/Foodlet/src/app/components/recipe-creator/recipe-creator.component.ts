@@ -100,4 +100,8 @@ export class RecipeCreatorComponent {
     this.recipeService.addEditRecipe(this.selected);
     this.dialogRef.close(this.selected);
   }
+
+  onSelectRestriction(i: number, key: FoodRestrictionCompatibility) {
+    this.dietCompatibility[i] = key;
+  }
 }
