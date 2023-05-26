@@ -287,7 +287,7 @@ export class MealPlanService {
       dates: dates,
     };
 
-    FirebaseStatic.functions().httpsCallable()
+    FirebaseStatic.functions().httpsCallable('generateMealPlan')(dto)
   }
 
   updateMealPlanRecipe(mealPlanDays: MealPlan) {
