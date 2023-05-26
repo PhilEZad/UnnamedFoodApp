@@ -1,37 +1,49 @@
 import { https, logger } from "firebase-functions";
 import firebaseAdmin from "firebase-admin";
+import { forEach, random } from "lodash";
 firebaseAdmin.initializeApp();
 
-export const test = https.onRequest(async (req, res) => {
-  res.set("Access-Control-Allow-Origin", "*");
-  res.send("Hello from Firebase!");
+export const test = https.onCall((data, context) => {
+  logger.log("Hello from Firebase!");
 });
 
 // function to create a user in the database
 // this function is called by the onCreateUserAuto function
 // and by the frontend when a user is created
-export const onCreateUser = https.onCall(async (data, context) => {
-  context.rawRequest.headers["Access-Control-Allow-Origin"] = "*";
+export const onCreateUser = functions.auth.user().onCreate((data) => {
   const obj = JSON.parse(data);
 
   logger.log(obj);
 
-  return await firebaseAdmin
+  return firebaseAdmin
     .firestore()
     .collection("users")
     .doc(obj)
     .set({ email: obj.email });
 });
 
-export const generateMealPlan = https.onCall(async (data, context) => {
-  context.rawRequest.headers["Access-Control-Allow-Origin"] = "*";
+/*
+  obj = {
+
+  }
+*/
+export const generateMealPlan = https.onCall((data, context) => {
   const obj = JSON.parse(data);
 
-  logger.log(obj);
-
-  return await firebaseAdmin
+  let recipes = firebaseAdmin
     .firestore()
-    .collection(`users/${context.auth.uid}/`)
-    .doc(obj)
-    .set({ email: obj.email });
+    .collection(`users/${context.auth.uid}/recipes`)
+    .where((x) => x.calories < obj.calories);
+
+  forEach(obj.dates, (date) => {
+    const index = random(0, recipes.length);
+    const recipe = recipes[index];
+    firebaseAdmin
+      .firestore()
+      .collection(`users/${context.auth.uid}/plan`)
+      .add({
+        date: new Date(date),
+        recipe: recipe,
+      });
+  });
 });

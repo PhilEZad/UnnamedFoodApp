@@ -79,7 +79,8 @@
       "linux": {
         "command": "ps aux|grep -v awk|awk '/foodlet/ {print $2}'| xargs -I {} kill {}",
         "problemMatcher": []
-      }
+      },
+      "problemMatcher": []
     }
   ]
 }
