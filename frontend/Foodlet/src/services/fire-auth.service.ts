@@ -29,7 +29,6 @@ export class FireAuthService {
     return false;
   }
 
-
   register(email: string, password: string): boolean {
     FirebaseStatic.auth()
       .createUserWithEmailAndPassword(email, password)

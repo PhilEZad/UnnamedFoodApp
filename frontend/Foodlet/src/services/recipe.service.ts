@@ -1,3 +1,4 @@
+import { getAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 import { Recipe } from 'src/domain/Recipe';
 import { Observable, of } from 'rxjs';

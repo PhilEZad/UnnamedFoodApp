@@ -10,7 +10,6 @@ export class MealPlan {
     this.date = date;
     this.recipe = recipe;
   }
-
   static empty(): MealPlan {
     return new MealPlan('', new Date(), Recipe.emptyRecipe());
   }
