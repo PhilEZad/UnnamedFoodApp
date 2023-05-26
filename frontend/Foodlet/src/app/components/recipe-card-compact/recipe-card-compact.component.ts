@@ -26,6 +26,7 @@ export class RecipeCardCompactComponent {
   }
 
   getCalories() {
+    console.log(this.recipe);
     let calories = sum(this.recipe).calories;
     if (calories < 0) calories = 0;
     return calories;

@@ -4,17 +4,9 @@ import { Recipe } from '../domain/Recipe';
 import { FoodItem } from '../domain/FoodItem';
 import { Nutrients } from '../domain/Nutrients';
 import { FoodRestrictionCompatibility } from '../domain/EFoodRestrictionCompatibility';
-import {
-  Firestore,
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  updateDoc,
-} from '@angular/fire/firestore';
-import { getAuth } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
+import { MealPlanConverter } from 'src/utils/firebase/MealPlanConverter';
+import { FirebaseStatic } from 'src/utils/firebase/firebase.static';
 
 @Injectable({
   providedIn: 'root',
@@ -22,16 +14,29 @@ import { Observable, of } from 'rxjs';
 export class MealPlanService {
   data: MealPlan[] = [];
 
-  constructor(private firestore: Firestore) {
-    onSnapshot(
-      collection(this.firestore, `users/${getAuth().currentUser?.uid}/plans`),
-      (snapshot) => {
+  constructor() {
+    FirebaseStatic.firestore()
+      .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/plans`)
+      .withConverter(new MealPlanConverter()) //todo: impl
+      .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
-          this.data.push(change.doc.data() as MealPlan);
+          if (change.type == 'added'){
+            this.data.push(change.doc.data() as MealPlan);
+          }
+          if (change.type == 'modified') {
+            let index = this.data.findIndex(
+              (plan) => plan.id == change.doc.id
+            );
+            this.data[index] = change.doc.data() as MealPlan;
+          }
+          if (change.type == 'removed') {
+            let index = this.data.findIndex(
+              (plan) => plan.id == change.doc.id
+            );
+            this.data.splice(index, 1);
+          }
         });
-      },
-      console.error
-    );
+      }, console.error);
   }
 
   getPlans(): Observable<MealPlan[]> {
@@ -43,10 +48,10 @@ export class MealPlanService {
   }
 
   addPlan(plan: MealPlan) {
-    addDoc(
-      collection(this.firestore, `users/${getAuth().currentUser?.uid}/plans`),
-      plan
-    );
+    FirebaseStatic.firestore()
+      .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/plans`)
+      .withConverter(new MealPlanConverter())
+      .add(plan);
   }
 
   getMealPlans(): MealPlan[] {
@@ -54,19 +59,19 @@ export class MealPlanService {
   }
 
   updatePlan(plan: MealPlan) {
-    updateDoc(
-      doc(
-        this.firestore,
-        `users/${getAuth().currentUser?.uid}/plans/${plan.id}`
-      ),
-      plan as any
-    );
+    FirebaseStatic.firestore()
+      .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/plans`)
+      .withConverter(new MealPlanConverter()) //todo: impl
+      .doc(plan.id)
+      .set(plan);
   }
 
   deletePlan(plan: MealPlan) {
-    deleteDoc(
-      doc(this.firestore, `users/${getAuth().currentUser?.uid}/plans/${plan.id}`)
-    );
+    FirebaseStatic.firestore()
+      .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/plans`)
+      .withConverter(new MealPlanConverter()) //todo: impl
+      .doc(plan.id)
+      .delete();
   }
 
   addEditPlan(selected: MealPlan) {
@@ -272,5 +277,26 @@ export class MealPlanService {
     },
   ];
 
-  generateMealPlan(maxNutrients: number, mealPlans: MealPlan[]) {}
+  generateMealPlan(maxNutrients: number, mealPlans: MealPlan[]) {
+    let dates: String[] = mealPlans.map((mealPlan) =>
+      mealPlan.date.toDateString()
+    );
+
+    let dto = {
+      calories: maxNutrients,
+      dates: dates,
+    };
+
+    FirebaseStatic.functions().httpsCallable()
+  }
+
+  updateMealPlanRecipe(mealPlanDays: MealPlan) {
+    this.updatePlan(mealPlanDays);
+  }
+
+  addMealPlanForWeek(mealPlanForWeek: MealPlan[]) {
+    mealPlanForWeek.forEach(
+      (mealPlan) => (this.addPlan(mealPlan), console.log(mealPlan))
+    );
+  }
 }

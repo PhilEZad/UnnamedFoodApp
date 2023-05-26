@@ -47,3 +47,5 @@ export const generateMealPlan = https.onCall((data, context) => {
       });
   });
 });
+
+

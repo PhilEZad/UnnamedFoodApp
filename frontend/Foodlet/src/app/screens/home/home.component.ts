@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {CreateMenuComponent} from "../../components/create-menu/create-menu.component";
 import {MatDialog} from "@angular/material/dialog";
 import {LoginMenuComponent} from "../../components/login-menu/login-menu.component";
+import {FireAuthService} from "../../../services/fire-auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -10,23 +12,33 @@ import {LoginMenuComponent} from "../../components/login-menu/login-menu.compone
 })
 export class HomeComponent {
 
-  constructor(private dialogRef: MatDialog) {
+  constructor(private dialogRef: MatDialog, private authService: FireAuthService, private router: Router) {
 
   }
 
   registerMenu() {
     this.dialogRef.open(CreateMenuComponent, {
-      height: '55%',
-      width: '40%'
+      height: '550px',
+      width: '450px'
     })
   }
 
   loginMenu() {
     this.dialogRef.open(LoginMenuComponent, {
-      height: '40%',
-      width: '20%'
+      height: '350px',
+      width: '250px'
     })
   }
 
+  userNotLoggedIn(): boolean {
+    return !this.authService.userIsLoggedIn();
+  }
 
+  goToMealPlanner() {
+    this.router.navigate(['/plan']);
+  }
+
+  goToRecipes() {
+    this.router.navigate(['/recipes']);
+  }
 }

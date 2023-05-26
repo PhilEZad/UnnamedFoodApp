@@ -113,6 +113,7 @@
           <mat-option
             *ngFor="let enum_element of FoodRestrictionCompatibility | keyvalue"
             [value]="enum_element.key"
+            (click)="onSelectRestriction(i, enum_element.value)"
           >
             {{ enum_element.value }}
           </mat-option>

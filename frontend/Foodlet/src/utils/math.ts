@@ -19,7 +19,11 @@ export function sumNutrients(nutrients: Nutrients[]): Nutrients {
 }
 
 export function sumFoodItems(items: FoodItem[]): Nutrients {
-  return sumNutrients(items.map((item) => item.nutrients));
+  let array: Nutrients[] = [];
+  Array.from(items).forEach((item) => {
+    array.push(item.nutrients);
+  });
+  return sumNutrients(array);
 }
 
 export function withinLimit(nutrients: Nutrients, limit: Nutrients): boolean {
@@ -47,11 +51,10 @@ export function filterFoodItems(
   return items.filter((item) => withinLimit(item.nutrients, limit));
 }
 
-export function sum(Recipe : Recipe): Nutrients {
+export function sum(Recipe: Recipe): Nutrients {
   return sumFoodItems(Recipe.ingredients);
 }
 
 export function filterRecipes(recipes: Recipe[], limit: Nutrients): Recipe[] {
   return recipes.filter((recipe) => withinLimit(sum(recipe), limit));
 }
-

@@ -43,9 +43,11 @@ export class MealPlanScreenComponent {
     private mealPlanService: MealPlanService,
     private dialog: MatDialog
   ) {
-    this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber);
-    this.mealPlan = mealPlanService.getMealPlans();
-    this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber);
+    this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
+    mealPlanService.getPlans().subscribe((mealPlans) => {
+      this.mealPlan = mealPlans
+    });
+    this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
   }
 
   findMealPlanForWeek(weekNumber: number): MealPlan[] {
@@ -82,7 +84,7 @@ export class MealPlanScreenComponent {
 
       missingDays.map((day) => {
         let mealPlan = {
-          id: '-1',
+          id: "",
           recipe: Recipe.emptyRecipe(), //sentinel value
           date: day,
         } as MealPlan;
@@ -159,14 +161,12 @@ export class MealPlanScreenComponent {
       this.weekNumber
     );
 
-    days.forEach((day) => {
+    days.forEach(day => {
       let mealPlanDay = {
-        id: '-1',
+        id: "",
         recipe: Recipe.emptyRecipe(), //sentinel value
         date: day,
       } as MealPlan;
-
-      this.mealPlan.push(mealPlanDay);
     });
 
     let mealPlans = this.findMealPlanForWeek(this.weekNumber); //Generate empty meal plan
@@ -176,16 +176,17 @@ export class MealPlanScreenComponent {
         //Use MaxNutrientDialog
         width: '350px',
         height: '250px',
-      })
-      .afterClosed()
-      .subscribe((maxNutrients) => {
-        //Return number from dialog
-        if (maxNutrients) {
-          this.mealPlanService.generateMealPlan(maxNutrients, mealPlans);
-        } else {
-          this.weekHasMealPlan = false; //If user has cancelled, set weekHasMealPlan to false as findMealPlanForWeek sets it to true
-        }
-      });
+      }
+    ).afterClosed().subscribe(maxNutrients => {     //Return number from dialog
+      if (maxNutrients) {
+
+        this.mealPlanService.generateMealPlan(maxNutrients, mealPlans)
+        //Should update automatically in UI as we are subscribing to the meal plan observable
+      }
+      else {
+        this.weekHasMealPlan = false //If user has cancelled, set weekHasMealPlan to false as findMealPlanForWeek sets it to true
+      }
+    });
 
     //Cloud Function to generate meal plan on
     //Pass in number from dialog and empty meal plan objects.id
@@ -198,23 +199,26 @@ export class MealPlanScreenComponent {
       new Date().getFullYear(),
       this.weekNumber
     );
-
-    days.forEach((day) => {
+    let weekPlan: MealPlan[] = []
+    days.forEach(day => {
       let mealPlanDay = {
-        id: '-1',
-        recipe: Recipe.emptyRecipe(), //sentinel value
+        id: "",
+        recipe: new Recipe(
+          "",
+          "",
+          [],
+          0,
+          [],
+          [FoodRestrictionCompatibility.NO_RESTRICTION],
+          false,
+        ), //sentinel value
         date: day,
-      } as MealPlan;
-
-      this.mealPlan.push(mealPlanDay);
+      } as MealPlan
+      weekPlan.push(mealPlanDay)
     });
 
-    this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber);
 
-    this.mealPlanForWeek.forEach((element) => {
-      //TODO: Update meal plan in database
-      this.mealPlanService.addEditPlan(element);
-    });
+    this.mealPlanService.addMealPlanForWeek(weekPlan)
   }
 
   dayHasARecipe(mealPlanDays: MealPlan): boolean {
@@ -229,9 +233,8 @@ export class MealPlanScreenComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        mealPlanDays.recipe = result;
-        //TODO: Update meal plan in database
-        this.mealPlanService.addEditPlan(mealPlanDays);
+        mealPlanDays.recipe = result
+        this.mealPlanService.updateMealPlanRecipe(mealPlanDays)
       }
     });
   }

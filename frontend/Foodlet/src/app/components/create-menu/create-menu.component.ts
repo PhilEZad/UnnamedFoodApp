@@ -1,13 +1,8 @@
-import { Component } from '@angular/core';
-import { createUserWithEmailAndPassword, getAuth } from '@angular/fire/auth';
-import {
-  connectFunctionsEmulator,
-  getFunctions,
-  httpsCallable,
-} from '@angular/fire/functions';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { FireAuthService } from 'src/services/fire-auth.service';
+import { Component, OnInit } from '@angular/core';
+import { FireAuthService } from "../../../services/fire-auth.service";
+import { MatDialog } from "@angular/material/dialog";
+import { FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-create-menu',
@@ -25,16 +20,20 @@ export class CreateMenuComponent {
 
   constructor(
     private dialogRef: MatDialog,
-    private authService: FireAuthService
-  ) {}
+    public snack: MatSnackBar
+  ) {
+  }
 
   createAccount() {
-    if (this.registerPassword == this.registerPasswordConfirm) {
-      let successful = this.authService.register(
-        this.registerEmail,
-        this.registerPassword
-      );
-      if (successful) this.dialogRef.closeAll();
+
+    if(this.registerPassword == this.registerPasswordConfirm) {
+      let successful = this.authService.register(this.registerEmail, this.registerPassword)
+      if (successful)
+        this.snack.open("Account created successfully!", 'Close', {duration: 5000});
+        this.dialogRef.closeAll()
+    }
+    else {
+      this.snack.open("Account could not be created, try again.", 'Close', {duration: 5000});
     }
   }
 }

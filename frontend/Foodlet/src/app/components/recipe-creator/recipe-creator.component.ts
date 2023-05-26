@@ -44,8 +44,12 @@ export class RecipeCreatorComponent {
   constructor(
     public dialogRef: MatDialogRef<RecipeCreatorComponent>,
     private dialog: MatDialog,
-    private recipeService: RecipeService
-  ) {}
+    private recipeService: RecipeService,
+    @Inject(MAT_DIALOG_DATA) public data: Recipe
+  ) {
+    if (data)
+      this.selected = data;
+  }
 
   ngOnInit(): void {}
 
@@ -95,5 +99,9 @@ export class RecipeCreatorComponent {
 
     this.recipeService.addEditRecipe(this.selected);
     this.dialogRef.close(this.selected);
+  }
+
+  onSelectRestriction(i: number, key: FoodRestrictionCompatibility) {
+    this.dietCompatibility[i] = key;
   }
 }

@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
-import {
-  Auth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from '@angular/fire/auth';
-import { getFunctions, httpsCallable } from '@angular/fire/functions';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FirebaseStatic } from 'src/utils/firebase/firebase.static';
 
 @Injectable({
   providedIn: 'root',
@@ -14,17 +9,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class FireAuthService {
   lastError: string = '';
 
-  constructor(
-    private auth: Auth,
-    public snack: MatSnackBar,
-    private router: Router
-  ) {}
+  constructor(public snack: MatSnackBar, private router: Router) {}
 
   logIn(email: string, password: string): boolean {
-    //TODO: Strange error here. Fix and consider routing in component
-    signInWithEmailAndPassword(this.auth, email, password)
-      .then((result) => {
-        this.router.navigate(['/']);
+    FirebaseStatic.auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((_) => {
+        this.router.navigate(['/recipes']);
+        this.snack.open("Signed in!", 'Close', { duration: 2000 });
         return true;
       })
       .catch((error) => {
@@ -33,28 +25,16 @@ export class FireAuthService {
         console.log(error.message);
         return false;
       });
+
     return false;
   }
 
-  //TODO: Strange error here. Fix and consider routing in component
-  /*
-   inject() must be called from an injection context such as a constructor,
-   a factory function, a field initializer, or
-   a function used with `EnvironmentInjector#runInContext`.
-   Find more at https://angular.io/errors/NG0203
-
-   https://stackoverflow.com/questions/60685286/inject-must-be-called-from-an-injection-context-when-using-angular-library-in
-   https://stackoverflow.com/questions/62764264/error-inject-must-be-called-from-an-injection-context-but-cant-find-origin
-   */
   register(email: string, password: string): boolean {
-    //Error (auth/network-request-failed) when trying to register
-    createUserWithEmailAndPassword(this.auth, email, password)
+    FirebaseStatic.auth()
+      .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log(result);
-        
-        const call = httpsCallable(getFunctions(), 'test', { });
-        call();
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
+        this.snack.open("Account created! You can login now 🎈", 'Close', { duration: 5000 });
         return true;
       })
       .catch((error) => {
@@ -67,10 +47,11 @@ export class FireAuthService {
   }
 
   signOut() {
-    //TODO: Fix and consider routing in component. Does not redirect to home page
-    this.auth.signOut().then((result) => {
-      this.router.navigate(['/']);
-    });
+    FirebaseStatic.auth()
+      .signOut()
+      .then((result) => {
+        this.router.navigate(['/home']);
+      });
   }
 
   getError(): any {
@@ -78,6 +59,6 @@ export class FireAuthService {
   }
 
   userIsLoggedIn() {
-    return this.auth.currentUser != null;
+    return FirebaseStatic.auth().currentUser != null;
   }
 }
