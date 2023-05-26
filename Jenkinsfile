@@ -1,33 +1,71 @@
 pipeline {
     agent any
+
     stages {
-        stage('Verify Toolset') {
+        stage('build image')
+        {
+            agent any
             steps {
-                sh '''
-                docker version
-                docker info
-                docker compose version
-                curl --version
-                jq --version
-                '''
+                sh "docker build -t foodlet frontend/Foodlet"
             }
         }
-        stage('Purge') {
+        stage('Build') {
+            agent { 
+                docker {
+                    image 'foodlet'
+                    args '-u root:root -v /var/lib/jenkins/workspace/UnnamedFoodApp:/app/artifacts'
+                } 
+            }
             steps {
-                sh 'docker system prune -a --volumes -f'
+                sh "cd /app && ./entrypoint.sh build"
             }
         }
-        stage('Boot Container') {
+        stage('Test') {
+            agent { 
+                docker {
+                    image 'foodlet'
+                    args '-u root:root -v /var/lib/jenkins/workspace/UnnamedFoodApp:/app/artifacts'
+                } 
+            }
             steps {
-                sh 'docker compose up -d --no-color --wait'
-                sh 'docker compose ps'
+                sh "cd /app && ./entrypoint.sh test"
             }
         }
-       
+        stage('verify firebase token') {
+            when {
+                branch 'release'
+            }
+            agent { 
+                docker {
+                    image 'foodlet'
+                    args '-u root:root -v /var/lib/jenkins/workspace/UnnamedFoodApp:/app/artifacts'
+                } 
+            }
+            steps {
+                sh "cd /app && ./entrypoint.sh firebase_check"
+            }
+        }
+        stage('Release') {
+            when {
+                branch 'release'
+            }
+            agent { 
+                docker {
+                    image 'foodlet'
+                    args '-u root:root -v /var/lib/jenkins/workspace/UnnamedFoodApp:/app/artifacts'
+                } 
+            } 
+            steps {
+                sh "cd /app && ./entrypoint.sh deploy"
+            }
+        }
     }
     post {
         always {
             echo 'Post Actions'
+            junit "tests/**/junit-test-results.xml"
+            cobertura coberturaReportFile: 'coverage/cobertura.txt'
         }
     }
 }
+

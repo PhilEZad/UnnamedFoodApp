@@ -1,0 +1,183 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@import "src/styles.scss";
+@import "/src/assets/externalColorConstants";
+@import "src/app/screens/pageMenuStylesheet.scss";
+
+$grid-template: 3em 10px repeat(7, 1fr);
+
+@mixin color($theme) {
+  $color-config: mat.get-color-config($theme);
+
+  // Get the primary color palette from the color-config.
+  $primary-palette: map.get($color-config, 'primary');
+
+  // Get the hue from the primary color palette.
+  $primary-colour: map.get($primary-palette, 500);
+
+  .fab-add-recipe-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100;
+    color: #ECEFF1;
+  }
+
+
+  .crudActionsContainer > * {
+    margin: 0 8px;
+  }
+
+  .matFabAddBtn {
+    position: relative;
+    vertical-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    background-color: map.get($primary-palette, 500);
+    color: map.get($primary-palette, 100);
+    transition: 0.3s;
+  }
+
+  .icon-display {
+    transform: scale(1.5);
+  }
+
+  .matFabAddBtn:hover {
+    background-color: map.get($primary-palette, 500);
+  }
+
+  .matFabAddBtn:active {
+    background-color: map.get($primary-palette, 100);
+    color: map.get($primary-palette, 500);
+  }
+
+  @keyframes leaveToBottom {
+    from {
+      transform: translate(0);
+    }
+    to {
+      transform: translateY(50%);
+    }
+  }
+
+  @keyframes returnFromBottom {
+    from {
+      transform: translateY(50%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .animateOutOfFrame {
+    animation: leaveToBottom 0.5s ease-in-out;
+    transition: 0.5s;
+    opacity: 0;
+  }
+
+  .animateIntoFrame {
+    animation: returnFromBottom 0.5s ease-in-out;
+    transition: 0.5s;
+    opacity: 1;
+  }
+
+  .hidden {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+  }
+
+
+}
+
+
+
+
+.dayCard {
+  background-color: $background-colour-light;
+  border-radius: 8px;
+  border-color: map.get($primary-palette, 200);
+  border-width: 2px;
+  margin: 8px;
+  padding: 8px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.parentContainer {
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.parentContainer > * {
+  font-family: Helvetica, serif;
+}
+
+.weekContainer {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: inherit;
+  width: 100%;
+  height: 100%;
+  word-wrap: break-word;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.emptyDayCard {
+  height: 30em;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.createMealPlanContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.createMealPlanContainer > * {
+  margin: 8px;
+}
+
+.createMealPlanContainer > label {
+  font-family: Helvetica, serif;
+  font-size: 1.5em;
+
+}
+
+.createMealPlanContainer > button {
+  background-color: $primary-colour;
+  color: $background-colour-light;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.createMealPlanContainer > button > * {
+  cursor: pointer;
+}
+
+
+.createMealPlanContainer > button:hover {
+  background-color: map.get($primary-palette, 200);
+  color: map.get($primary-palette, 900);
+}

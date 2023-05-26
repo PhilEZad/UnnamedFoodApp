@@ -1,0 +1,52 @@
+<div *ngIf="userIsLoggedIn(); then isUser; else anonymous" class="toolbar">
+</div>
+
+<ng-template #isUser>
+  <div class="toolbar">
+    <div class="toolbar__logo">
+      <a [routerLink]="['/']">
+        <img src="./assets/logo.png" class="logo" alt="logo"/>
+      </a>
+    </div>
+    <span class="small-spacer"></span>
+    <button mat-button class="navigation-button" [routerLink]="['/recipes']">
+    <span>
+      <mat-icon class="mat-18">book</mat-icon>
+      <label>Recipe Book</label>
+    </span>
+    </button>
+    <button mat-button class="navigation-button" [routerLink]="['/plan']">
+    <span>
+      <mat-icon class="mat-18">restaurant_menu</mat-icon>
+      <label>Meal Plan</label>
+    </span>
+    </button>
+    <button mat-button class="navigation-button" [routerLink]="['/fooditem']">
+    <span>
+      <mat-icon class="mat-18">fastfood</mat-icon>
+      <label>Ingredients</label>
+    </span>
+    </button>
+    <span class="spacer"></span>
+    <button mat-button class="navigation-button" (click)="signOut()">
+    <span>
+      <mat-icon class="mat-18">logout</mat-icon>
+      <label style="margin-left: 10px">Sign out</label>
+    </span>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #anonymous>
+  <div class="toolbar">
+    <div class="toolbar__logo">
+      <a [routerLink]="['/']">
+        <img src="./assets/logo.png" class="logo" alt="logo"/>
+      </a>
+    </div>
+    <span class="small-spacer"></span>
+    <label>
+      Sign in to use the app
+    </label>
+  </div>
+</ng-template>

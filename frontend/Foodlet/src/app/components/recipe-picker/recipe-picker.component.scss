@@ -1,0 +1,157 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@import "src/styles.scss";
+@import "/src/assets/externalColorConstants";
+@import "src/app/screens/pageMenuStylesheet.scss";
+
+.centered {
+  top: 50%;
+  left: 50%;
+  overflow-y: scroll;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  max-height: 100%;
+}
+
+.flexContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  flex-grow: 4; /* default 0 */
+}
+
+
+
+
+
+  // Get the hue from the primary color palette.
+  $primary-colour: map.get($primary-palette, 500);
+
+  .fab-add-recipe-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100;
+    color: #ECEFF1;
+  }
+
+
+  .crudActionsContainer > * {
+    margin: 0 8px;
+  }
+
+  .matFabAddBtn {
+    position: relative;
+    vertical-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    background-color: map.get($accent-palette, 500);
+    color: map.get($accent-palette, 100);
+    transition: 0.3s;
+  }
+
+  .icon-display {
+    transform: scale(1.5);
+  }
+
+  .matFabAddBtn:hover {
+    background-color: map.get($accent-palette, 500);
+  }
+
+  .matFabAddBtn:active {
+    background-color: map.get($accent-palette, 100);
+    color: map.get($accent-palette, 500);
+  }
+
+  @keyframes leaveToBottom {
+    from {
+      transform: translate(0);
+    }
+    to {
+      transform: translateY(50%);
+    }
+  }
+
+  @keyframes returnFromBottom {
+    from {
+      transform: translateY(50%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .animateOutOfFrame {
+    animation: leaveToBottom 0.5s ease-in-out;
+    transition: 0.5s;
+    opacity: 0;
+  }
+
+  .animateIntoFrame {
+    animation: returnFromBottom 0.5s ease-in-out;
+    transition: 0.5s;
+    opacity: 1;
+  }
+
+  .hidden {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+  }
+
+
+
+
+
+.selected-recipe {
+  border-color: map.get($accent-palette, 500);
+  border-width: -2px;
+  border-style: solid;
+  border-radius: 10px;
+  transition: 0.3s;
+  background-color: darken($background-colour-light, 5%);
+}
+
+.unselected-recipe {
+  border-color: transparent;
+  border-width: -2px;
+  border-style: solid;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+
+.floatingSearchContainer {
+  @extend .searchContainer;
+  position: fixed;
+  background-color: $background-colour-light;
+  border: $primary-colour solid 2px;
+  border-radius: 10px;
+  z-index: 100;
+  margin: 10px;
+}
+
+.dockToPage {
+  position: fixed;
+  right: 10%;
+  bottom: 0;
+  z-index: 110;
+  margin: 0;
+  height: 5em;
+}
+
+.dockToPage > * {
+  margin: 0 8px;
+  color: #ECEFF1;
+}
+
+

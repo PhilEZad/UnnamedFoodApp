@@ -1,0 +1,99 @@
+
+<div class="menuContainer" xmlns="http://www.w3.org/1999/html">
+  <div class="menuContents">
+    <div class="pageTitle">
+      <span>
+        <mat-icon class="recipeIcon">restaurant_menu</mat-icon>
+        <label class="menuLabel">Meal Plan </label>
+      </span>
+    </div>
+
+    <div class="searchContainer">
+
+      <button mat-button class="sort-button" (click)="previousWeek()">
+        <mat-icon> chevron_left</mat-icon>
+      </button>
+      <label class="sortLabel">Week {{weekNumber}}</label>
+      <button mat-button class="sort-button" (click)="nextWeek()">
+        <mat-icon> chevron_right</mat-icon>
+      </button>
+    </div>
+
+
+  </div>
+</div>
+
+
+<div class="parentContainer">
+  <div class="weekContainer" *ngIf="weekHasMealPlan; else createMealPlan">
+
+    <mat-card class="dayCard" *ngFor="let mealPlanDays of mealPlanForWeek">
+
+
+
+      <mat-card-title *ngIf="weekNumber == currentWeekNumber; else altDateDisplay">
+        <label class="menuLabel"> {{daysOfWeek[mealPlanDays.date.getDay()]}} </label>
+      </mat-card-title>
+      <ng-template #altDateDisplay>
+        <mat-card-title>
+        <label class="menuLabel"> {{daysOfWeek[mealPlanDays.date.getDay()]}} </label>
+        <label class="menuLabel"> {{mealPlanDays.date.getDate()}}/{{mealPlanDays.date.getMonth() + 1}} </label>
+        </mat-card-title>
+      </ng-template>
+
+      <mat-divider class=""></mat-divider>
+
+
+      <mat-card-content *ngIf="dayHasARecipe(mealPlanDays); else emptyRecipe">
+        <app-recipe-card-compact [recipe]="mealPlanDays.recipe">
+        </app-recipe-card-compact>
+      </mat-card-content>
+
+      <ng-template #emptyRecipe>
+        <mat-card-content class="emptyDayCard">
+          <label class="menuLabel"> No recipe for this day </label>
+          <mat-icon class="recipeIcon"></mat-icon>
+        </mat-card-content>
+      </ng-template>
+
+
+      <mat-card-actions>
+
+        <button (click)="setRecipeForMealPlanDay(mealPlanDays)"
+                *ngIf="dayHasARecipe(mealPlanDays); else addRecipeButton"
+                mat-button
+        >
+          Replace
+        </button>
+
+        <ng-template #addRecipeButton>
+          <button mat-button (click)="setRecipeForMealPlanDay(mealPlanDays)">
+            Add Recipe
+          </button>
+        </ng-template>
+      </mat-card-actions>
+    </mat-card>
+
+  </div>
+
+  <ng-template #createMealPlan>
+    <div class="createMealPlanContainer">
+      <label> No meal plan for this week </label>
+      <br>
+      <button mat-button class="sort-button" (click)="generateMealPlan()">
+        <span>
+          <mat-icon> loop </mat-icon>
+          <label class="menuLabel"> Generate a meal plan </label>
+        </span>
+      </button>
+      <button mat-button class="sort-button" (click)="createEmptyMealPlan()">
+        <span>
+          <mat-icon> add_circle_outline</mat-icon>
+          <label class="menuLabel"> Create a blank meal plan </label>
+        </span>
+      </button>
+    </div>
+  </ng-template>
+
+</div>
+

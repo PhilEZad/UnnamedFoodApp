@@ -1,0 +1,119 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@import "src/styles.scss";
+@import "/src/assets/externalColorConstants";
+@import "src/app/screens/pageMenuStylesheet.scss";
+
+$inputSize: 200px;
+
+.flexContainer {
+  font-family: Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  flex-grow: 4; /* default 0 */
+}
+
+.registerTitle > * {
+  font-size: 2em;
+  margin: 1em;
+  font-family: Helvetica, sans-serif;
+}
+
+
+.registerCard
+{
+
+  max-width: 600px;
+  max-height: 600px;
+}
+
+.defaultContainer
+{
+  //margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.flexColumn {
+  width: $inputSize;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.defaultContainer > *
+{
+  margin: 10px;
+}
+
+.buttonContainer
+{
+  margin: auto;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+
+.mat-radio-label {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.errorText
+{
+  color: red;
+  font-size: 0.8rem;
+}
+
+
+.input-sizer {
+  width: $inputSize;
+}
+
+
+.register-button {
+  margin: 20px;
+  background-color: $primary-colour !important;
+  color: $background-colour-light !important;
+}
+
+.register-button > label {
+  font-size: 1.5em;
+  font-family: Helvetica, sans-serif;
+  color: $background-colour-light !important;
+}
+
+.register-button:hover {
+  background-color: $accent-colour !important;
+  color: $background-colour-light !important;
+}
+
+.register-button:hover > label {
+  font-size: 1.5em;
+  font-family: Helvetica, sans-serif;
+  color: $background-colour-light !important;
+}
+
+.register-button:active {
+  background-color: $background-colour-light !important;
+  color: $primary-colour;
+}
+
+.register-button:active > label {
+  font-size: 1.5em;
+  font-family: Helvetica, sans-serif;
+  color: $primary-colour !important;
+}
+

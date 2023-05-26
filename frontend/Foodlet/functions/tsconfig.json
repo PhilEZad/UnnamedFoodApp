@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "Node16",
+    "noImplicitReturns": true,
+    "noUnusedParameters": true,
+    "allowJs": true,
+    "noUnusedLocals": true,
+    "outDir": "lib",
+    "sourceMap": true,
+    "strict": false,
+    "moduleResolution": "node",
+    "target": "ES2018"
+  },
+  "compileOnSave": true,
+  "include": ["src"]
+}

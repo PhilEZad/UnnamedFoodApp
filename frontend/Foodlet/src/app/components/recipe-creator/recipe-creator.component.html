@@ -1,0 +1,134 @@
+<h2 mat-dialog-title>New Recipe</h2>
+<div mat-dialog-content id="content">
+  <form class="full-width">
+    <div>
+      <table class="full-width" cellspacing="5">
+        <tr>
+          <td>
+            <mat-form-field class="full-width" floatPlaceholder="auto">
+              <mat-label>Title</mat-label>
+              <input
+                required
+                matInput
+                [(ngModel)]="title"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="Ex. Chicken Parmesan"
+              />
+              <mat-error *ngIf="title == ''">
+                Title is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="full-width" floatPlaceholder="auto">
+              <mat-label for="servings">Servings</mat-label>
+              <input
+                required
+                matInput
+                type="number"
+                [(ngModel)]="servings"
+                [ngModelOptions]="{ standalone: true }"
+              />
+              <mat-error *ngIf="servings <= 0">
+                Servings size must be
+                <strong> greater than or equal to 1 </strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+      <mat-form-field class="full-width" floatPlaceholder="auto">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          placeholder="Ex. A delicious Italian dish"
+          [(ngModel)]="description"
+          [ngModelOptions]="{ standalone: true }"
+        ></textarea>
+      </mat-form-field>
+    </div>
+
+    <h2>Ingredients</h2>
+    <div
+      *ngFor="let _ of ' '.repeat(ingredients.length).split(''); let i = index"
+    >
+      <mat-form-field>
+        <input
+          matInput
+          disabled="true"
+          style="margin-right: 5px;"
+          [name]="'ingredients_' + i"
+          [(ngModel)]="ingredients[i].name"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </mat-form-field>
+      <small>Quantity: {{ ingredients[i].quantityGrams }}g</small>
+      <mat-icon class="space-right2" (click)="removeIngredient(i)"
+        >remove_circle</mat-icon
+      >
+    </div>
+
+    <ingredient-autocomplete (selected)="addIngredient($event)" />
+
+    <div>
+      <h2>Instructions</h2>
+      <div
+        *ngFor="
+          let _ of ' '.repeat(instructions.length).split('');
+          let i = index
+        "
+      >
+        <mat-form-field>
+          <textarea
+            required
+            matInput
+            placeholder="step ({{ i + 1 }})"
+            [name]="'instruction_' + i"
+            [(ngModel)]="instructions[i]"
+            [ngModelOptions]="{ standalone: true }"
+          ></textarea>
+        </mat-form-field>
+        <button mat-icon-button (click)="removeInstruction(i)">
+          <mat-icon class="mat-18">remove_circle</mat-icon>
+        </button>
+      </div>
+      <button mat-icon-button (click)="addInstruction()">
+        <mat-icon class="mat-18">add</mat-icon>
+      </button>
+    </div>
+
+    <div>
+      <h2>Diet restrictions</h2>
+      <div
+        *ngFor="
+          let _ of ' '.repeat(dietCompatibility.length).split('');
+          let i = index
+        "
+      >
+        <mat-select
+          style="width: 80%"
+          placeholder="Please select at least one dietary category"
+        >
+          <mat-option
+            *ngFor="let enum_element of FoodRestrictionCompatibility | keyvalue"
+            [value]="enum_element.key"
+            (click)="onSelectRestriction(i, enum_element.value)"
+          >
+            {{ enum_element.value }}
+          </mat-option>
+        </mat-select>
+        <button mat-icon-button (click)="removeRestriction(i)">
+          <mat-icon class="mat-18">remove_circle</mat-icon>
+        </button>
+      </div>
+      <button mat-button type="button" (click)="addRestriction()">
+        + Add another category
+      </button>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button (click)="onSubmit()">OK</button>
+</div>

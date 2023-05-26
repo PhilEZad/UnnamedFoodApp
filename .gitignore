@@ -5,6 +5,7 @@
 ## Angular ##
 # compiled output
 dist/
+public/
 tmp/
 app/**/*.js
 app/**/*.js.map
@@ -439,3 +440,5 @@ FodyWeavers.xsd
 .firebase/
 
 # End of https://www.toptal.com/developers/gitignore/api/angular,firebase,csharp
+frontend/Foodlet/src/firebaseConfig.ts
+frontend/Foodlet/src/firebaseConfig.js

@@ -1,0 +1,28 @@
+<div class="flexContainer">
+  <div style="margin: 20px">
+    <h2 mat-dialog-title>Login</h2>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="Example@email.com" [(ngModel)]="loginMail"/>
+      <mat-hint *ngIf="authService.getError() == 'auth/missing-email'">*Field can not be empty</mat-hint>
+      <mat-hint *ngIf="authService.getError() == 'auth/invalid-email'">*Invalid Email</mat-hint>
+      <mat-hint *ngIf="authService.getError() == 'auth/user-not-found'">*User does not exist</mat-hint>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [(ngModel)]="loginPassword"/>
+      <mat-hint *ngIf="authService.getError() == 'auth/missing-password'">*Invalid Password</mat-hint>
+    </mat-form-field>
+  </div>
+  <div>
+    <button mat-button  name="buttonLogin" class="login-button" (click)="loginAccount()">
+      <label style="color: #ECEFF1">
+        Login
+      </label>
+    </button>
+  </div>
+</div>

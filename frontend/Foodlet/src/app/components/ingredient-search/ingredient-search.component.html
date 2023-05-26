@@ -1,0 +1,46 @@
+<form>
+  <mat-form-field>
+    <input
+      matInput
+      type="text"
+      class="input"
+      placeholder="Search for an ingredient"
+      [formControl]="searchBar"
+      [matAutocomplete]="auto"
+      forceSelection="name"
+      #text
+    />
+    <mat-autocomplete
+      class="searchContainer"
+      #auto="matAutocomplete"
+      [displayWith]="displayFn"
+    >
+      <mat-option
+        *ngFor="let option of filteredOptions | async"
+        [value]="option"
+      >
+        {{ option.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field style="width: 180px">
+    <input
+      matInput
+      style="margin-right: 5px;"
+      type="number"
+      placeholder="Quantity (grams)"
+      class="input"
+      [formControl]="quantity"
+      #text
+    />
+  </mat-form-field>
+
+  <button mat-button (click)="update()" class="addButton">
+    <span>
+         <mat-icon class="selectRecipe">check_box</mat-icon>
+      <label>
+        Add
+      </label>
+    </span>
+  </button>
+</form>

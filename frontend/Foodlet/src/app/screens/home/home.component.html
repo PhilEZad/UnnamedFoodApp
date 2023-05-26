@@ -1,0 +1,74 @@
+<div class="context">
+  <h1 class="title">
+    Foodlet, your meal planner and recipe tracker
+  </h1>
+  <div *ngIf="userNotLoggedIn; else signedIn" class="flexContainer">
+
+    <mat-card (click)="loginMenu()" class="homeActionCardLeft">
+      <mat-card-content class="cardContent">
+        <label class="cardLabel">
+          Login
+        </label>
+        <mat-icon class="largeIcon">
+          login
+        </mat-icon>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card (click)="registerMenu()" class="homeActionCardRight">
+      <mat-card-content class="cardContent">
+        <label class="cardLabel">
+          Register
+        </label>
+
+        <mat-icon class="largeIcon">
+          arrow_forward
+        </mat-icon>
+      </mat-card-content>
+    </mat-card>
+
+
+  </div>
+
+  <ng-template #signedIn >
+    <div class="flexContainer">
+      <mat-card (click)="goToMealPlanner()" class="homeActionCardLeft">
+        <mat-card-content class="cardContent">
+          <label class="cardLabel">
+            Meal Planner
+          </label>
+          <mat-icon class="largeIcon">
+            restaurant_menu
+          </mat-icon>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card (click)="goToRecipes()" class="homeActionCardRight">
+        <mat-card-content class="cardContent">
+          <label class="cardLabel">
+            Recipe Tracker
+          </label>
+
+          <mat-icon class="largeIcon">
+            book
+          </mat-icon>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </ng-template>
+
+</div>
+<div class="area" >
+  <ul class="circles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div >
