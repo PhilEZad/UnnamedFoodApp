@@ -40,7 +40,6 @@ export class MealPlanScreenComponent {
     this.week = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
     mealPlanService.getPlans().subscribe((mealPlans) => {
       this.mealPlan = mealPlans
-
     });
     this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
   }
@@ -178,18 +177,27 @@ export class MealPlanScreenComponent {
   createEmptyMealPlan() {
     let days: Date[] = this.getDaysOfWeek(new Date().getFullYear(), this.weekNumber)
 
+
+    let weekPlan: MealPlan[] = []
     days.forEach(day => {
       let mealPlanDay = {
         id: "",
-        recipe: Recipe.emptyRecipe(), //sentinel value
+        recipe: new Recipe(
+          "",
+          "",
+          [],
+          0,
+          [],
+          [FoodRestrictionCompatibility.NO_RESTRICTION],
+          false,
+        ), //sentinel value
         date: day,
       } as MealPlan
-
+      weekPlan.push(mealPlanDay)
     });
 
-    this.mealPlanForWeek = this.findMealPlanForWeek(this.weekNumber)
 
-    this.mealPlanService.addMealPlanForWeek(this.mealPlanForWeek)
+    this.mealPlanService.addMealPlanForWeek(weekPlan)
   }
 
   dayHasARecipe(mealPlanDays: MealPlan): boolean {

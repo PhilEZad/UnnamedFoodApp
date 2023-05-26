@@ -21,7 +21,7 @@ export class RecipeConverter implements DataConverter<Recipe> {
       servings: model.servings,
       ingredients: JSON.stringify(model.ingredients),
       instructions: model.instructions, //TODO
-      diet: JSON.stringify(model.dietCompatibility),
+      diet: JSON.stringify(model.dietCompatibility) as string,
       isPublic: model.isPublic,
       createdAt: firebase.firestore.Timestamp.fromDate(model.dateAdded),
     };

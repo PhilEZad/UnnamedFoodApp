@@ -1,5 +1,5 @@
-import { FoodItem } from './FoodItem';
-import { FoodRestrictionCompatibility } from './EFoodRestrictionCompatibility';
+import {FoodItem} from './FoodItem';
+import {FoodRestrictionCompatibility} from './EFoodRestrictionCompatibility';
 
 export class Recipe {
   id: string = '';
@@ -56,6 +56,6 @@ export class Recipe {
   }
 
   static emptyRecipe(): Recipe {
-    return new Recipe('', '', [], 0, [], [], false);
+    return new Recipe('', '', [], 0, [], [FoodRestrictionCompatibility.NO_RESTRICTION], false);
   }
 }

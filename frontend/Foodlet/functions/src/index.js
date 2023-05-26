@@ -27,3 +27,5 @@ export const userRecordOnRegister = auth.user().onCreate((user, context) => {
   //  uid: user.uid,
   //});
 });
+
+

@@ -21,25 +21,18 @@ export class MealPlanService {
       .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
           if (change.type == 'added'){
-            if (!this.data.find((plan) => plan.id == change.doc.id)) {
-              console.log(change.doc.data());
-              this.data.push(change.doc.data() as MealPlan);
-            }
+            this.data.push(change.doc.data() as MealPlan);
           }
           if (change.type == 'modified') {
             let index = this.data.findIndex(
               (plan) => plan.id == change.doc.id
             );
-            console.log('edit');
-            console.log(change.doc.data());
             this.data[index] = change.doc.data() as MealPlan;
           }
           if (change.type == 'removed') {
             let index = this.data.findIndex(
               (plan) => plan.id == change.doc.id
             );
-            console.log('delete');
-            console.log(change.doc.data());
             this.data.splice(index, 1);
           }
         });
@@ -70,7 +63,7 @@ export class MealPlanService {
       .collection(`users/${FirebaseStatic.auth().currentUser?.uid}/plans`)
       .withConverter(new MealPlanConverter()) //todo: impl
       .doc(plan.id)
-      .update(plan);
+      .set(plan);
   }
 
   deletePlan(plan: MealPlan) {
@@ -294,7 +287,7 @@ export class MealPlanService {
       dates: dates,
     };
 
-    // return this.http.post<MealPlan[]>(this.baseUrl + 'mealplan/generate', dto);
+    FirebaseStatic.functions().httpsCallable()
   }
 
   updateMealPlanRecipe(mealPlanDays: MealPlan) {
